@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Guess Me</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--  login  -->
+    <string name="login_id"><b>아이디</b></string>
+    <string name="login_pw"><b>패스워드</b></string>
+    <string name="btn_login"><b>로그인</b></string>
+    <string name="btn_sign_in"><b>회원가입</b></string>
+    <string name="login_or"><b>또는</b></string>
 </resources>
