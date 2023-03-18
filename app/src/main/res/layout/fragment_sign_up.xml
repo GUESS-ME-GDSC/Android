@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/base_green"
+    tools:context=".ui.view.SignUpFragment">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_sign_up_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_logo"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="@id/line_sign_up_right"
+        app:layout_constraintBottom_toTopOf="@id/txt_sign_up_welcome"/>
+
+    <View
+        android:id="@+id/line_sign_up_left"
+        android:layout_width="120dp"
+        android:layout_height="10dp"
+        android:background="@drawable/base_white_line"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintRight_toLeftOf="@id/txt_sign_up_welcome"
+        app:layout_constraintTop_toTopOf="@id/txt_sign_up_welcome"
+        app:layout_constraintBottom_toBottomOf="@id/txt_sign_up_welcome"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:id="@+id/txt_sign_up_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="@string/sign_up_welcome"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@id/edit_sign_up_id"
+        app:layout_constraintTop_toBottomOf="@id/image_sign_up_logo"
+        app:layout_constraintRight_toLeftOf="@id/line_sign_up_right"
+        app:layout_constraintLeft_toRightOf="@id/line_sign_up_left"/>
+
+    <View
+        android:id="@+id/line_sign_up_right"
+        android:layout_width="120dp"
+        android:layout_height="10dp"
+        android:background="@drawable/base_white_line"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/txt_sign_up_welcome"
+        app:layout_constraintBottom_toBottomOf="@id/txt_sign_up_welcome"
+        app:layout_constraintLeft_toRightOf="@id/txt_sign_up_welcome"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edit_sign_up_id"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/base_white_round_btn"
+        android:hint="@string/login_id"
+        android:padding="11dp"
+        app:layout_constraintBottom_toTopOf="@id/edit_sign_up_pw"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_sign_up_welcome" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edit_sign_up_pw"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/base_white_round_btn"
+        android:hint="@string/login_pw"
+        android:padding="12dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_sign_up"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_sign_up_id" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_sign_up"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/base_yellow_round_btn"
+        android:padding="12dp"
+        android:text="@string/btn_sign_in"
+        app:layout_constraintTop_toBottomOf="@id/edit_sign_up_pw"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
