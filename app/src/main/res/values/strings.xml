@@ -15,4 +15,5 @@
 
     <!--  sign up   -->
     <string name="sign_up_welcome"><b>환영합니다!</b></string>
+    <string name="sign_up_cancel"><b>취소</b></string>
 </resources>
