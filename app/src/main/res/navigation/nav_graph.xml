@@ -12,24 +12,23 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_fragment_login_to_signUpFragment"
-            app:destination="@id/signUpFragment"
+            app:destination="@id/fragment_sign_up"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_fragment_login_to_homeFragment"
-            app:destination="@id/homeFragment"
+            app:destination="@id/fragment_home"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
-        android:id="@+id/signUpFragment"
+        android:id="@+id/fragment_sign_up"
         android:name="com.example.guessme.ui.view.SignUpFragment"
-        android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" >
+        tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/action_signUpFragment_to_fragment_login"
             app:destination="@id/fragment_login"
@@ -39,8 +38,8 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/fragment_home"
         android:name="com.example.guessme.ui.view.HomeFragment"
-        android:label="fragment_home"
+        android:label="@string/fragment_home"
         tools:layout="@layout/fragment_home" />
 </navigation>
