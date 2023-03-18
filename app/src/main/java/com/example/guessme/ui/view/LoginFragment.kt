@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.databinding.FragmentLoginBinding
@@ -18,14 +19,17 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
         return FragmentLoginBinding.inflate(inflater, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.btnLoginSignIn.setOnClickListener {
+            findNavController().navigate(R.id.action_fragment_login_to_signUpFragment)
+        }
+    }
+
     override fun onStart() {
         super.onStart()
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
-    }
-
-    override fun onStop() {
-        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-        super.onStop()
     }
 
 }
