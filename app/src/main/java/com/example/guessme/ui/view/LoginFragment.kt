@@ -25,6 +25,11 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
         binding.btnLoginSignIn.setOnClickListener {
             findNavController().navigate(R.id.action_fragment_login_to_signUpFragment)
         }
+
+        binding.btnLogin.setOnClickListener {
+            //user 정보 전달 필요
+            findNavController().navigate(R.id.action_fragment_login_to_homeFragment)
+        }
     }
 
     override fun onStart() {
