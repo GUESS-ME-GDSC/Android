@@ -3,6 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!--  nav  -->
+    <string name="fragment_login">로그인</string>
+
     <!--  login  -->
     <string name="login_id"><b>아이디</b></string>
     <string name="login_pw"><b>패스워드</b></string>
