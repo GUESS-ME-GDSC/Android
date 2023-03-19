@@ -9,9 +9,9 @@
 
     <EditText
         android:id="@+id/edit_list_search"
-        android:layout_width="330dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:padding="12dp"
+        android:padding="15dp"
         android:background="@drawable/base_gray_round_shape"
         android:hint="@string/people_list_search"
         android:layout_marginTop="20dp"
