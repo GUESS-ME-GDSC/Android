@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.databinding.FragmentHomeBinding
@@ -16,6 +17,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         container: ViewGroup?
     ): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(inflater, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.btnHomePeopleList.setOnClickListener {
+            findNavController().navigate(R.id.action_fragment_home_to_peopleListFragment)
+        }
     }
 
     override fun onStart() {
