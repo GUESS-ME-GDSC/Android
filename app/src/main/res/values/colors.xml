@@ -9,8 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     
     <color name="base_green">#4F7670</color>
+    <color name="floating_green">#CC4F7670</color>
     <color name="base_yellow">#F9F1E6</color>
-    <color name="transparent">#000000</color>
+    <color name="transparent">#00000000</color>
     <color name="base_gray">#CCCCCC</color>
     <color name="base_score_yellow">#FFE86C</color>
 </resources>

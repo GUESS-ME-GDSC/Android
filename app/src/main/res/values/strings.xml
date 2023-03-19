@@ -26,4 +26,5 @@
     
     <!--  list  -->
     <string name="people_list_search"><b>검색</b></string>
+    <string name="people_list_floating">add person</string>
 </resources>
