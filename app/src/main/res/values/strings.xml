@@ -7,6 +7,7 @@
     <string name="fragment_login"><b>로그인</b></string>
     <string name="fragment_home"><b>홈</b></string>
     <string name="fragment_sign_up"><b>회원가입</b></string>
+    <string name="fragment_people_list"><b>인물</b></string>
 
     <!--  login  -->
     <string name="login_id"><b>아이디</b></string>
@@ -18,8 +19,12 @@
     <!--  sign up   -->
     <string name="sign_up_welcome"><b>환영합니다!</b></string>
     <string name="sign_up_cancel"><b>취소</b></string>
-    
+
     <!--  home  -->
     <string name="home_person_list"><b>인물</b></string>
     <string name="home_quiz"><b>퀴즈</b></string>
+    
+    <!--  list  -->
+    <string name="people_list_search"><b>검색</b></string>
+    <string name="people_list_floating">add person</string>
 </resources>

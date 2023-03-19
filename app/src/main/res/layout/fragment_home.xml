@@ -8,13 +8,13 @@
     tools:context=".ui.view.HomeFragment">
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_home_person_list"
+        android:id="@+id/btn_home_people_list"
         android:layout_width="300dp"
         android:layout_height="230dp"
         android:text="@string/home_person_list"
         android:textColor="@color/white"
         android:textSize="28dp"
-        android:background="@drawable/base_green_round_btn"
+        android:background="@drawable/base_green_round_shape"
         android:gravity="center"
         app:layout_constraintBottom_toTopOf="@id/btn_home_quiz"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,9 +29,9 @@
         android:text="@string/home_quiz"
         android:textColor="@color/white"
         android:textSize="28dp"
-        android:background="@drawable/base_green_round_btn"
+        android:background="@drawable/base_green_round_shape"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/btn_home_person_list"
+        app:layout_constraintTop_toBottomOf="@id/btn_home_people_list"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
