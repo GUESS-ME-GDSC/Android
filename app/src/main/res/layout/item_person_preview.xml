@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/base_green_round_shape"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_preview_favorite_true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_favorite_true"
+        android:layout_marginStart="10dp"
+        android:visibility="gone"
+        app:layout_constraintRight_toLeftOf="@id/image_preview_favorite_false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_preview_favorite_false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_favorite_false"
+        android:layout_marginStart="10dp"
+        android:visibility="gone"
+        app:layout_constraintRight_toLeftOf="@id/image_preview_person"
+        app:layout_constraintTop_toTopOf="@id/image_preview_favorite_true"
+        app:layout_constraintLeft_toRightOf="@id/image_preview_favorite_true"
+        app:layout_constraintBottom_toBottomOf="@id/image_preview_favorite_true"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_preview_person"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/base_person_profile"
+        android:layout_marginStart="20dp"
+        app:layout_constraintRight_toLeftOf="@id/txt_preview_relation"
+        app:layout_constraintTop_toTopOf="@id/image_preview_favorite_false"
+        app:layout_constraintBottom_toBottomOf="@id/image_preview_favorite_false"
+        app:layout_constraintLeft_toRightOf="@id/image_preview_favorite_false"/>
+
+    <TextView
+        android:id="@+id/txt_preview_relation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginStart="20dp"
+        app:layout_constraintRight_toLeftOf="@id/txt_preview_name"
+        app:layout_constraintTop_toTopOf="@id/image_preview_person"
+        app:layout_constraintBottom_toBottomOf="@id/image_preview_person"
+        app:layout_constraintLeft_toRightOf="@id/image_preview_person"/>
+
+    <TextView
+        android:id="@+id/txt_preview_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toTopOf="@id/txt_preview_relation"
+        app:layout_constraintBottom_toBottomOf="@id/txt_preview_relation"
+        app:layout_constraintLeft_toRightOf="@id/txt_preview_relation"/>
+
+    <ProgressBar
+        android:id="@+id/progress_preview_score"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintTop_toTopOf="@id/txt_preview_name"
+        app:layout_constraintBottom_toBottomOf="@id/txt_preview_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/txt_preview_name"/>
+
+    <TextView
+        android:id="@+id/txt_preview_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/progress_preview_score"
+        app:layout_constraintLeft_toLeftOf="@id/progress_preview_score"
+        app:layout_constraintRight_toRightOf="@id/progress_preview_score"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
