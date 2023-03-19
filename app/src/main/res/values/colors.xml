@@ -12,4 +12,5 @@
     <color name="base_yellow">#F9F1E6</color>
     <color name="transparent">#000000</color>
     <color name="base_gray">#CCCCCC</color>
+    <color name="base_score_yellow">#FFE86C</color>
 </resources>
