@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.guessme.R
@@ -31,6 +32,10 @@ class PeopleListFragment : BaseFragment<FragmentPeopleListBinding>(R.layout.frag
         setupRecyclerView()
 
         peopleListAdapter.submitList(getTempPeopleData())
+
+        binding.fabListAddPerson.setOnClickListener {
+            findNavController().navigate(R.id.action_fragment_people_list_to_fragment_add_person)
+        }
 
     }
 
