@@ -34,7 +34,7 @@
         android:id="@+id/image_preview_person"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/base_person_profile"
+        android:src="@drawable/base_person_preview_profile"
         android:padding="7dp"
         android:layout_margin="10dp"
         app:layout_constraintRight_toLeftOf="@id/txt_preview_relation"
