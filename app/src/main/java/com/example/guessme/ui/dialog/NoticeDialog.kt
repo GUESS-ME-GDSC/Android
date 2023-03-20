@@ -8,7 +8,7 @@ import com.example.guessme.R
 import com.example.guessme.common.base.BaseDialog
 import com.example.guessme.databinding.DialogBaseBinding
 
-class PermissionDialog: BaseDialog<DialogBaseBinding>(R.layout.dialog_base) {
+class NoticeDialog(private val res: Int): BaseDialog<DialogBaseBinding>(R.layout.dialog_base) {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -17,7 +17,7 @@ class PermissionDialog: BaseDialog<DialogBaseBinding>(R.layout.dialog_base) {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
 
-        binding.txtPermission.setText(R.string.dialog_permission)
+        binding.txtPermission.setText(res)
         binding.btnPermission.setOnClickListener {
             dismiss()
         }
