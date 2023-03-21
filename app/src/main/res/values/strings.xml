@@ -9,6 +9,7 @@
     <string name="fragment_sign_up"><b>회원가입</b></string>
     <string name="fragment_people_list"><b>인물</b></string>
     <string name="fragment_add_person"><b>추가</b></string>
+    <string name="fragment_person_detail"><b>정보</b></string>
 
     <!--  login  -->
     <string name="login_id"><b>아이디</b></string>
@@ -43,6 +44,7 @@
     <string name="add_person_edit_hint"><b>✏️</b></string>
 
     <!--  detail   -->
+    <string name="detail_quiz"><b>퀴즈✏️</b></string>
     <string name="detail_modify"><b>수정</b></string>
     <string name="detail_info_add"><b>+ 추가</b></string>
     <string name="detail_info_delete"><b>- 삭제</b></string>

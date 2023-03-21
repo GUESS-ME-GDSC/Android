@@ -33,6 +33,11 @@ class PeopleListFragment : BaseFragment<FragmentPeopleListBinding>(R.layout.frag
 
         peopleListAdapter.submitList(getTempPeopleData())
 
+        peopleListAdapter.setOnItemClickListener { person ->
+            val action = PeopleListFragmentDirections.actionFragmentPeopleListToFragmentPersonDetail(person)
+            findNavController().navigate(action)
+        }
+
         binding.fabListAddPerson.setOnClickListener {
             findNavController().navigate(R.id.action_fragment_people_list_to_fragment_add_person)
         }
