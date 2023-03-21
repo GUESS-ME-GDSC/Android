@@ -105,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_gravity="center_vertical"
                 android:text="@string/add_person_name"
                 android:layout_marginEnd="10dp"
@@ -118,7 +118,8 @@
                 android:layout_height="48dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginEnd="10dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
+                android:padding="5dp"
                 android:gravity="center"/>
         </LinearLayout>
 
@@ -138,7 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_gravity="center_vertical"
                 android:text="@string/add_person_relation"
                 android:layout_marginEnd="10dp"
@@ -149,8 +150,9 @@
                 android:id="@+id/txt_detail_relation"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:gravity="center"
+                android:padding="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginEnd="10dp"/>
         </LinearLayout>
@@ -171,7 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_gravity="center_vertical"
                 android:text="@string/add_person_birth"
                 android:layout_marginEnd="10dp"
@@ -182,8 +184,9 @@
                 android:id="@+id/txt_detail_birth"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:gravity="center"
+                android:padding="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginEnd="10dp"/>
         </LinearLayout>
@@ -204,7 +207,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_gravity="center_vertical"
                 android:text="@string/add_person_address"
                 android:layout_marginEnd="10dp"
@@ -215,8 +218,9 @@
                 android:id="@+id/txt_detail_address"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:gravity="center"
+                android:padding="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginEnd="10dp"/>
         </LinearLayout>
@@ -238,7 +242,7 @@
             android:background="@drawable/base_green_round_shape"
             android:gravity="center"
             android:textColor="@color/white"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="50dp"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintTop_toBottomOf="@id/recycler_detail_info"
             app:layout_constraintLeft_toLeftOf="parent"
