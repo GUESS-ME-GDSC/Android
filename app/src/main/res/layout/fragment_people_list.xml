@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:src="@drawable/ic_floating_btn"
+        android:src="@drawable/ic_fab_add_person"
         app:tint="@color/white"
         app:elevation="0dp"
         app:pressedTranslationZ="10dp"
