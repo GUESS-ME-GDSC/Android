@@ -46,8 +46,10 @@
     <!--  detail   -->
     <string name="detail_quiz"><b>퀴즈✏️</b></string>
     <string name="detail_modify"><b>수정</b></string>
-    <string name="detail_info_add"><b>+ 추가</b></string>
-    <string name="detail_info_delete"><b>- 삭제</b></string>
+    <string name="detail_info_add"><b>정보 추가</b></string>
+    <string name="detail_info_delete"><b>정보 삭제</b></string>
+    <string name="detail_info_delete_complete"><b>완료</b></string>
+    <string name="detail_info_floating">modify info</string>
 
     <!--  dialog  -->
     <string name="dialog_ok"><b>확인</b></string>
