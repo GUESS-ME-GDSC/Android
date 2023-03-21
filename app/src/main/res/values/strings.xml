@@ -39,8 +39,13 @@
     <string name="add_person_name"><b>이름</b></string>
     <string name="add_person_relation"><b>관계</b></string>
     <string name="add_person_birth"><b>생일</b></string>
-    <string name="add_person_address"><b>주소</b></string>름
+    <string name="add_person_address"><b>주소</b></string>
     <string name="add_person_edit_hint"><b>✏️</b></string>
+
+    <!--  detail   -->
+    <string name="detail_modify"><b>수정</b></string>
+    <string name="detail_info_add"><b>+ 추가</b></string>
+    <string name="detail_info_delete"><b>- 삭제</b></string>
 
     <!--  dialog  -->
     <string name="dialog_ok"><b>확인</b></string>
