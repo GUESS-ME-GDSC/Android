@@ -1,40 +1,62 @@
 package com.example.guessme.ui.viewmodel
 
+import android.content.Context
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.io.File
+import com.example.guessme.common.base.BasePlayer
+import com.example.guessme.common.base.BaseRecorder
 
 class AddPersonViewModel: ViewModel() {
     private var _imageUri: Uri? = null
-    val imageUri get() = _imageUri!!
-    val audioUri get() = Uri.fromFile(File(fileName))
-    private var _player: MediaPlayer? = null
-    val player get() = _player!!
-    private var _recorder: MediaRecorder? = null
-    val recorder get() = _recorder!!
+    private var _basePlayer: BasePlayer? = null
+    private val basePlayer get() = _basePlayer!!
+    private var _baseRecorder: BaseRecorder? = null
+    private val baseRecorder get() = _baseRecorder!!
     private var _recordStatus = MutableLiveData<Boolean>()
-    val recordStatus: LiveData<Boolean> get() = _recordStatus!!
+    val recordStatus: LiveData<Boolean> get() = _recordStatus
     private var _fileName: String? = null
-    val fileName get() = _fileName!!
+    val fileName get() = _fileName
 
     fun setImage(image: Uri) {
         _imageUri = image
     }
 
-    fun setPlayer(player: MediaPlayer?) {
-        _player = player
+    fun setPlayer(player: BasePlayer) {
+        _basePlayer = player
+        basePlayer.setPlayer(MediaPlayer())
     }
 
-    fun setRecorder(recorder: MediaRecorder?) {
-        _recorder = recorder
+    fun startPlaying(name: String?) {
+        basePlayer.startPlaying(name)
     }
 
-    fun setRecordStatus(status: Boolean) {
-        _recordStatus.postValue(status)
+    fun setRecorder(data: BaseRecorder?, context: Context) {
+        _baseRecorder = data
+
+        val recorder: MediaRecorder = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            MediaRecorder(context)
+        } else {
+            MediaRecorder()
+        }
+
+        baseRecorder.setRecorder(recorder)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    fun startRecording(name: String) {
+        _recordStatus.postValue(true)
+        baseRecorder.startRecording(name)
+    }
+
+    fun stopRecording() {
+        baseRecorder.stopRecording()
+        _recordStatus.postValue(false)
     }
 
     fun setFileName(name: String) {
