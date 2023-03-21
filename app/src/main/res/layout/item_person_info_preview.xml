@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/base_green_stroke_shape"
+    android:layout_marginTop="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -12,6 +13,7 @@
         android:textStyle="bold"
         android:textSize="18sp"
         android:layout_gravity="center_vertical"
+        android:gravity="center"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
         android:textColor="@color/black"
