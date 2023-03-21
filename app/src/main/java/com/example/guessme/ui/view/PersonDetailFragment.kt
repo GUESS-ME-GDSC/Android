@@ -10,9 +10,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
+import com.example.guessme.common.base.BasePlayer
 import com.example.guessme.databinding.FragmentPersonDetailBinding
 import com.example.guessme.ui.dialog.AddInfoDialog
 import com.example.guessme.ui.viewmodel.PersonDetailViewModel
+import java.io.File
 import java.time.format.DateTimeFormatter
 
 class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.fragment_person_detail) {
@@ -35,14 +37,29 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        personDetailViewModel.person.let {
+        personDetailViewModel.person.let { person ->
             val dateFormat = DateTimeFormatter.ofPattern("yyyy.MM.dd")
-            binding.txtDetailName.text = it.name
-            binding.txtDetailRelation.text = it.relation
-            binding.txtDetailBirth.text = it.birth.format(dateFormat)
-            binding.txtDetailAddress.text = it.residence
+            val fileName = if (person.voice == null) {
+                null
+            } else {
+                File(person.voice.path!!).path
+            }
 
-            if (it.favorite) {
+            binding.txtDetailName.text = person.name
+            binding.txtDetailRelation.text = person.relation
+            binding.txtDetailBirth.text = person.birth.format(dateFormat)
+            binding.txtDetailAddress.text = person.residence
+
+            binding.btnDetailSpeaker.setOnClickListener {
+                personDetailViewModel.setPlayer(BasePlayer(requireActivity().supportFragmentManager))
+                personDetailViewModel.startPlaying(fileName)
+            }
+
+            if (person.image != null) {
+                binding.imageDetailProfile.setImageURI(person.image)
+            }
+
+            if (person.favorite) {
                 binding.imageDetailFavoriteTrue.visibility = View.VISIBLE
             }
 
