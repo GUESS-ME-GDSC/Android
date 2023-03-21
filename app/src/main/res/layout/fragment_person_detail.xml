@@ -128,10 +128,11 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:text="@string/add_person_name"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
@@ -140,9 +141,9 @@
             <TextView
                 android:id="@+id/txt_detail_name"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="5dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
+                android:layout_gravity="center_vertical"
                 android:textSize="18sp"
                 android:padding="5dp"
                 android:gravity="center"/>
@@ -162,10 +163,11 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:text="@string/add_person_relation"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
@@ -174,11 +176,11 @@
             <TextView
                 android:id="@+id/txt_detail_relation"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:gravity="center"
                 android:padding="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginEnd="10dp"/>
         </LinearLayout>
 
@@ -196,10 +198,11 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:text="@string/add_person_birth"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
@@ -208,11 +211,11 @@
             <TextView
                 android:id="@+id/txt_detail_birth"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:gravity="center"
                 android:padding="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginEnd="10dp"/>
         </LinearLayout>
 
@@ -230,10 +233,11 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:text="@string/add_person_address"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
@@ -242,11 +246,11 @@
             <TextView
                 android:id="@+id/txt_detail_address"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:gravity="center"
                 android:padding="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginEnd="10dp"/>
         </LinearLayout>
 

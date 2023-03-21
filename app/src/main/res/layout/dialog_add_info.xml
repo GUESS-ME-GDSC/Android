@@ -21,22 +21,23 @@
 
     <LinearLayout
         android:id="@+id/layout_add_info_key"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:orientation="horizontal"
         android:padding="5dp"
-        android:background="@drawable/base_green_stroke_shape"
+        android:background="@drawable/base_white_round_shape"
         app:layout_constraintBottom_toTopOf="@id/layout_add_info_value"
         app:layout_constraintTop_toBottomOf="@id/txt_add_info"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
         <TextView
-            android:layout_width="48dp"
+            android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:textSize="18sp"
             android:gravity="center"
+            android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:text="@string/dialog_add_info_key"
@@ -44,32 +45,35 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edit_add_info_key"
-            android:layout_width="280dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="@string/add_person_edit_hint"
+            android:layout_marginEnd="10dp"
+            android:padding="12dp"
             android:maxLines="1"
+            android:layout_gravity="center_vertical"
+            android:hint="@string/add_person_edit_hint"
             android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout_add_info_value"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:padding="5dp"
         android:orientation="horizontal"
-        android:background="@drawable/base_green_stroke_shape"
+        android:background="@drawable/base_white_round_shape"
         app:layout_constraintBottom_toTopOf="@id/btn_add_info_save"
         app:layout_constraintTop_toBottomOf="@id/layout_add_info_key"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
         <TextView
-            android:layout_width="48dp"
+            android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:textSize="18sp"
+            android:layout_gravity="center"
             android:gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
@@ -78,11 +82,13 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edit_add_info_value"
-            android:layout_width="280dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:padding="12dp"
             android:maxLines="1"
-            android:gravity="center_vertical"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="center_vertical"
             android:hint="@string/add_person_edit_hint"
             android:background="@null"/>
     </LinearLayout>

@@ -41,7 +41,7 @@
     <string name="add_person_relation"><b>관계</b></string>
     <string name="add_person_birth"><b>생일</b></string>
     <string name="add_person_address"><b>주소</b></string>
-    <string name="add_person_edit_hint"><b>✏️</b></string>
+    <string name="add_person_edit_hint"><b>✎️</b></string>
 
     <!--  detail   -->
     <string name="detail_quiz"><b>퀴즈✏️</b></string>
