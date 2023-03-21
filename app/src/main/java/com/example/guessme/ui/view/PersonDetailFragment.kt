@@ -11,12 +11,12 @@ import androidx.navigation.fragment.navArgs
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.databinding.FragmentPersonDetailBinding
+import com.example.guessme.ui.dialog.AddInfoDialog
 import com.example.guessme.ui.viewmodel.PersonDetailViewModel
-import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 
 class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.fragment_person_detail) {
-    private val args: PersonDetailFragmentArgs by navArgs<PersonDetailFragmentArgs>()
+    private val args: PersonDetailFragmentArgs by navArgs()
     private val personDetailViewModel by viewModels<PersonDetailViewModel>()
 
     override fun getFragmentBinding(
@@ -35,12 +35,17 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        personDetailViewModel.person?.let {
+        personDetailViewModel.person.let {
             val dateFormat = DateTimeFormatter.ofPattern("yyyy.MM.dd")
             binding.txtDetailName.text = it.name
             binding.txtDetailRelation.text = it.relation
             binding.txtDetailBirth.text = it.birth.format(dateFormat)
             binding.txtDetailAddress.text = it.residence
+        }
+
+        binding.btnDetailInfoAdd.setOnClickListener {
+            val dialog = AddInfoDialog()
+            dialog.show(requireActivity().supportFragmentManager, "AddInfoDialog")
         }
     }
 
