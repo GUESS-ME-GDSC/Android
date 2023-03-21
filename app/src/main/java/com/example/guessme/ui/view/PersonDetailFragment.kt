@@ -41,6 +41,11 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             binding.txtDetailRelation.text = it.relation
             binding.txtDetailBirth.text = it.birth.format(dateFormat)
             binding.txtDetailAddress.text = it.residence
+
+            if (it.favorite) {
+                binding.imageDetailFavoriteTrue.visibility = View.VISIBLE
+            }
+
         }
 
         binding.btnDetailInfoAdd.setOnClickListener {
