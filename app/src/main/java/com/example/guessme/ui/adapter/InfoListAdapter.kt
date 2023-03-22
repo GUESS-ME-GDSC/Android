@@ -1,5 +1,6 @@
 package com.example.guessme.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,8 +33,8 @@ class InfoListAdapter: ListAdapter<Info, InfoHolder>(diffCallback) {
             onItemClickListener?.let { it(info) }
         }
 
+        val checkBox = holder.itemView.findViewById<TextView>(R.id.checkbox_info_delete)
         if (delete) {
-            val checkBox = holder.itemView.findViewById<TextView>(R.id.checkbox_info_delete)
             checkBox.visibility = View.VISIBLE
             checkBox.setOnClickListener {
                 if ((it as CheckBox).isChecked) {
@@ -42,6 +43,8 @@ class InfoListAdapter: ListAdapter<Info, InfoHolder>(diffCallback) {
                     _deleteSet.remove(info.uuid!!)
                 }
             }
+        } else {
+            checkBox.visibility = View.GONE
         }
 
     }

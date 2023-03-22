@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,7 +44,11 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        init()
+    }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun init() {
         personDetailViewModel.person.let { person ->
             val dateFormat = DateTimeFormatter.ofPattern("yyyy.MM.dd")
             val fileName = if (person.voice == null) {
@@ -67,7 +72,9 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             }
 
             if (person.favorite) {
-                binding.imageDetailFavoriteTrue.visibility = View.VISIBLE
+                binding.imageDetailFavoriteTrue.setImageResource(R.drawable.ic_favorite_true)
+            } else {
+                binding.imageDetailFavoriteTrue.setImageResource(R.drawable.ic_favorite_false)
             }
 
         }
@@ -90,11 +97,21 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             Log.d("list", infoListAdapter.deleteSet.toString())
             binding.btnDetailDeleteComplete.visibility = View.GONE
             binding.btnDetailInfoAdd.visibility = View.VISIBLE
+            binding.btnDetailInfoDelete.visibility = View.VISIBLE
+            infoListAdapter.setDelete(false)
+        }
+
+        binding.fabDetailPersonModify.setOnClickListener {
+            val person = personDetailViewModel.person
+            val infoList = personDetailViewModel.infoList
+
+            val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToModifyPersonFragment(person = person, infoList = infoList.value)
+            findNavController().navigate(action)
         }
 
         personDetailViewModel.infoList.observe(viewLifecycleOwner) {
-            infoListAdapter.submitList(it)
-            if (it.size > 0) {
+            infoListAdapter.submitList(it.data)
+            if (it.data.size > 0) {
                 binding.btnDetailInfoDelete.visibility = View.VISIBLE
             }
         }
@@ -103,7 +120,6 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             infoListAdapter.setDelete(it)
             infoListAdapter.notifyDataSetChanged()
         }
-
     }
 
     private fun setupRecyclerView() {

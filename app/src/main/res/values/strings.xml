@@ -10,6 +10,7 @@
     <string name="fragment_people_list"><b>인물</b></string>
     <string name="fragment_add_person"><b>추가</b></string>
     <string name="fragment_person_detail"><b>정보</b></string>
+    <string name="fragment_modify_person"><b>수정</b></string>
 
     <!--  login  -->
     <string name="login_id"><b>아이디</b></string>
@@ -30,18 +31,19 @@
     <string name="people_list_search"><b>검색</b></string>
     <string name="people_list_floating">add person</string>
 
-    <!--  add person  -->
-    <string name="add_person_record_start"><b>녹음👂🏻</b></string>
-    <string name="add_person_record_finish"><b>완료👂🏻</b></string>
-    <string name="add_person_profile_description">image_profile</string>
-    <string name="add_person_speaker"><b>스피커🔊</b></string>
+    <!--  add/modify person  -->
+    <string name="person_record_start"><b>녹음👂🏻</b></string>
+    <string name="person_record_finish"><b>완료👂🏻</b></string>
+    <string name="person_profile_description">image_profile</string>
+    <string name="person_speaker"><b>스피커🔊</b></string>
     <string name="people_list_info"><b>정보</b></string>
-    <string name="add_person_btn_save"><b>저장</b></string>
-    <string name="add_person_name"><b>이름</b></string>
-    <string name="add_person_relation"><b>관계</b></string>
-    <string name="add_person_birth"><b>생일</b></string>
-    <string name="add_person_address"><b>주소</b></string>
-    <string name="add_person_edit_hint"><b>✎️</b></string>
+    <string name="person_btn_save"><b>저장</b></string>
+    <string name="person_name"><b>이름</b></string>
+    <string name="person_relation"><b>관계</b></string>
+    <string name="person_birth"><b>생일</b></string>
+    <string name="person_address"><b>주소</b></string>
+    <string name="person_btn_delete"><b>삭제</b></string>
+    <string name="person_edit_hint"><b>✎</b></string>
 
     <!--  detail   -->
     <string name="detail_quiz"><b>퀴즈✏️</b></string>
