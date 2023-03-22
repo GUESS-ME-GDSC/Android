@@ -95,6 +95,8 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             Log.d("list", infoListAdapter.deleteSet.toString())
             binding.btnDetailDeleteComplete.visibility = View.GONE
             binding.btnDetailInfoAdd.visibility = View.VISIBLE
+            binding.btnDetailInfoDelete.visibility = View.VISIBLE
+            infoListAdapter.setDelete(false)
         }
 
         binding.fabDetailPersonModify.setOnClickListener {
