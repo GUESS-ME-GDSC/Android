@@ -14,18 +14,18 @@ import com.example.guessme.common.base.BasePlayer
 import com.example.guessme.common.base.BaseRecorder
 import com.example.guessme.common.util.Constants.REQUIRED_GALLERY_PERMISSION
 import com.example.guessme.common.util.Constants.REQUIRED_RECORD_AUDIO
-import com.example.guessme.databinding.FragmentAddPersonBinding
+import com.example.guessme.databinding.FragmentAddModifyPersonBinding
 import com.example.guessme.ui.dialog.NoticeDialog
 import com.example.guessme.ui.viewmodel.AddPersonViewModel
 
-class AddPersonFragment : BaseFragment<FragmentAddPersonBinding>(R.layout.fragment_add_person) {
+class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.fragment_add_modify_person) {
     private val addPersonViewModel by viewModels<AddPersonViewModel>()
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): FragmentAddPersonBinding {
-        return FragmentAddPersonBinding.inflate(inflater, container, false)
+    ): FragmentAddModifyPersonBinding {
+        return FragmentAddModifyPersonBinding.inflate(inflater, container, false)
     }
 
     @RequiresApi(Build.VERSION_CODES.S)

@@ -28,7 +28,7 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/base_green_stroke_shape"
-                android:contentDescription="@string/add_person_profile_description"
+                android:contentDescription="@string/person_profile_description"
                 android:padding="5dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_base_profile"
@@ -66,7 +66,7 @@
                 android:layout_marginStart="20dp"
                 android:background="@drawable/base_green_round_shape"
                 android:gravity="center"
-                android:text="@string/add_person_speaker"
+                android:text="@string/person_speaker"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toTopOf="@id/btn_detail_quiz"
@@ -143,7 +143,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:gravity="center"
-                    android:text="@string/add_person_name"
+                    android:text="@string/person_name"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -178,7 +178,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:gravity="center"
-                    android:text="@string/add_person_relation"
+                    android:text="@string/person_relation"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -213,7 +213,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:gravity="center"
-                    android:text="@string/add_person_birth"
+                    android:text="@string/person_birth"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -248,7 +248,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:gravity="center"
-                    android:text="@string/add_person_address"
+                    android:text="@string/person_address"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />

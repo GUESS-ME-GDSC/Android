@@ -74,7 +74,7 @@
         android:id="@+id/fragment_add_person"
         android:name="com.example.guessme.ui.view.AddPersonFragment"
         android:label="@string/fragment_add_person"
-        tools:layout="@layout/fragment_add_person" />
+        tools:layout="@layout/fragment_add_modify_person" />
     <fragment
         android:id="@+id/fragment_person_detail"
         android:name="com.example.guessme.ui.view.PersonDetailFragment"
