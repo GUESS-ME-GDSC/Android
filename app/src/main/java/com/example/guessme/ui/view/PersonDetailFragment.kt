@@ -2,6 +2,7 @@ package com.example.guessme.ui.view
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.common.base.BasePlayer
-import com.example.guessme.data.model.Info
 import com.example.guessme.databinding.FragmentPersonDetailBinding
 import com.example.guessme.ui.adapter.InfoListAdapter
 import com.example.guessme.ui.dialog.AddInfoDialog
@@ -36,14 +36,13 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         personDetailViewModel.setPerson(args.person)
+        personDetailViewModel.getInfoList()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-
-        infoListAdapter.submitList(getTempInfoData())
 
         personDetailViewModel.person.let { person ->
             val dateFormat = DateTimeFormatter.ofPattern("yyyy.MM.dd")
@@ -77,6 +76,34 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             val dialog = AddInfoDialog()
             dialog.show(requireActivity().supportFragmentManager, "AddInfoDialog")
         }
+
+        binding.btnDetailInfoDelete.setOnClickListener {
+            binding.btnDetailInfoAdd.visibility = View.GONE
+            binding.btnDetailInfoDelete.visibility = View.GONE
+            binding.btnDetailDeleteComplete.visibility = View.VISIBLE
+            personDetailViewModel.setDelete(true)
+        }
+
+        binding.btnDetailDeleteComplete.setOnClickListener {
+            personDetailViewModel.setDelete(false)
+            //delete 값 서버에 전달 처리
+            Log.d("list", infoListAdapter.deleteSet.toString())
+            binding.btnDetailDeleteComplete.visibility = View.GONE
+            binding.btnDetailInfoAdd.visibility = View.VISIBLE
+        }
+
+        personDetailViewModel.infoList.observe(viewLifecycleOwner) {
+            infoListAdapter.submitList(it)
+            if (it.size > 0) {
+                binding.btnDetailInfoDelete.visibility = View.VISIBLE
+            }
+        }
+
+        personDetailViewModel.isDelete.observe(viewLifecycleOwner) {
+            infoListAdapter.setDelete(it)
+            infoListAdapter.notifyDataSetChanged()
+        }
+
     }
 
     private fun setupRecyclerView() {
@@ -93,15 +120,6 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             )
             adapter = infoListAdapter
         }
-    }
-
-    private fun getTempInfoData(): ArrayList<Info> {
-        val data = ArrayList<Info>()
-
-        data.add(Info(null, 1, "취미", "운동"))
-        data.add(Info(null, 1, "나이", "24"))
-
-        return data
     }
 
 }
