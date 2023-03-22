@@ -82,8 +82,7 @@
         tools:layout="@layout/fragment_person_detail">
         <argument
             android:name="person"
-            app:argType="com.example.guessme.data.model.Person"
-            app:nullable="true" />
+            app:argType="com.example.guessme.data.model.Person" />
         <action
             android:id="@+id/action_fragment_person_detail_to_modifyPersonFragment"
             app:destination="@id/fragment_modify_person"
@@ -99,5 +98,10 @@
         <argument
             android:name="person"
             app:argType="com.example.guessme.data.model.Person" />
+        <argument
+            android:name="infoList"
+            app:argType="com.example.guessme.data.model.InfoList"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>
