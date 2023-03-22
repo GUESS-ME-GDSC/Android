@@ -54,8 +54,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:src="@drawable/ic_favorite_true"
-                android:visibility="gone"
                 app:layout_constraintRight_toRightOf="@id/view_detail_for_image"
                 app:layout_constraintTop_toTopOf="@id/view_detail_for_image" />
 

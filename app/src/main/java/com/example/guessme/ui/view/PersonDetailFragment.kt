@@ -72,7 +72,9 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             }
 
             if (person.favorite) {
-                binding.imageDetailFavoriteTrue.visibility = View.VISIBLE
+                binding.imageDetailFavoriteTrue.setImageResource(R.drawable.ic_favorite_true)
+            } else {
+                binding.imageDetailFavoriteTrue.setImageResource(R.drawable.ic_favorite_false)
             }
 
         }
