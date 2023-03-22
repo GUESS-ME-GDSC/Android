@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 @Parcelize
 data class Person(
     val uuid: Int?,
-    val favorite: Boolean,
+    var favorite: Boolean,
     val image: Uri?,
     val voice: Uri?,
     val info: ArrayList<Info>?,

@@ -28,6 +28,8 @@ class ModifyPersonViewModel: ViewModel() {
     val person get() = _person!!
     private var _infoList = MutableLiveData<InfoList?>()
     val infoList: LiveData<InfoList?> = _infoList
+    private var _favorite = MutableLiveData<Boolean>()
+    val favorite: LiveData<Boolean> = _favorite
 
     fun setImage(image: Uri) {
         _imageUri = image
@@ -39,6 +41,11 @@ class ModifyPersonViewModel: ViewModel() {
 
     fun setInfoList(data: InfoList?) {
         _infoList.postValue(data)
+    }
+
+    fun setFavorite(data: Boolean) {
+        _person?.favorite = data
+        _favorite.postValue(data)
     }
 
     fun setPlayer(player: BasePlayer) {

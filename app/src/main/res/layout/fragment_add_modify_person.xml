@@ -38,6 +38,14 @@
             app:layout_constraintLeft_toLeftOf="@id/image_add_person_profile"
             app:layout_constraintRight_toRightOf="@id/image_add_person_profile"/>
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_modify_favorite_true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            app:layout_constraintRight_toRightOf="@id/view_add_person_for_image"
+            app:layout_constraintTop_toTopOf="@id/view_add_person_for_image" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_add_person_record_start"
             android:layout_width="90dp"

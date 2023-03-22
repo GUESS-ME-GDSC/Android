@@ -2,7 +2,6 @@ package com.example.guessme.ui.view
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +38,7 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
         super.onCreate(savedInstanceState)
         modifyPersonViewModel.setPerson(args.person)
         modifyPersonViewModel.setInfoList(args.infoList)
+        modifyPersonViewModel.setFavorite(args.person.favorite)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -98,8 +98,20 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
             }
         }
 
+        binding.imageModifyFavoriteTrue.setOnClickListener {
+            modifyPersonViewModel.setFavorite(!modifyPersonViewModel.favorite.value!!)
+        }
+
         modifyPersonViewModel.infoList.observe(viewLifecycleOwner) { infoList ->
             infoModifyAdapter.submitList(infoList?.data)
+        }
+
+        modifyPersonViewModel.favorite.observe(viewLifecycleOwner) { favorite ->
+            if (favorite) {
+                binding.imageModifyFavoriteTrue.setImageResource(R.drawable.ic_favorite_true)
+            } else {
+                binding.imageModifyFavoriteTrue.setImageResource(R.drawable.ic_favorite_false)
+            }
         }
 
     }
