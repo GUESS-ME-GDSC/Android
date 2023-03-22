@@ -44,7 +44,11 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        init()
+    }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun init() {
         personDetailViewModel.person.let { person ->
             val dateFormat = DateTimeFormatter.ofPattern("yyyy.MM.dd")
             val fileName = if (person.voice == null) {
@@ -112,7 +116,6 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             infoListAdapter.setDelete(it)
             infoListAdapter.notifyDataSetChanged()
         }
-
     }
 
     private fun setupRecyclerView() {

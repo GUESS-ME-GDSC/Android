@@ -38,7 +38,6 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         modifyPersonViewModel.setPerson(args.person)
-        Log.d("checkcheck", args.infoList?.data.toString())
         modifyPersonViewModel.setInfoList(args.infoList)
     }
 
@@ -100,7 +99,6 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
         }
 
         modifyPersonViewModel.infoList.observe(viewLifecycleOwner) { infoList ->
-            Log.d("dfdfdfdfdf", infoList?.data.toString())
             infoModifyAdapter.submitList(infoList?.data)
         }
 
