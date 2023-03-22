@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -92,9 +93,15 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             binding.btnDetailInfoAdd.visibility = View.VISIBLE
         }
 
+        binding.fabDetailPersonModify.setOnClickListener {
+            val person = personDetailViewModel.person
+            val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToModifyPersonFragment(person)
+            findNavController().navigate(action)
+        }
+
         personDetailViewModel.infoList.observe(viewLifecycleOwner) {
-            infoListAdapter.submitList(it)
-            if (it.size > 0) {
+            infoListAdapter.submitList(it.data)
+            if (it.data.size > 0) {
                 binding.btnDetailInfoDelete.visibility = View.VISIBLE
             }
         }
