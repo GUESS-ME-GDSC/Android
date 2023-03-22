@@ -62,10 +62,27 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_fragment_people_list_to_fragment_person_detail"
+            app:destination="@id/fragment_person_detail"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/fragment_add_person"
         android:name="com.example.guessme.ui.view.AddPersonFragment"
         android:label="@string/fragment_add_person"
         tools:layout="@layout/fragment_add_person" />
+    <fragment
+        android:id="@+id/fragment_person_detail"
+        android:name="com.example.guessme.ui.view.PersonDetailFragment"
+        android:label="@string/fragment_person_detail"
+        tools:layout="@layout/fragment_person_detail">
+        <argument
+            android:name="person"
+            app:argType="com.example.guessme.data.model.Person"
+            app:nullable="true" />
+    </fragment>
 </navigation>

@@ -129,9 +129,10 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
             android:layout_gravity="center_vertical"
             android:text="@string/add_person_name"
             android:layout_marginEnd="10dp"
@@ -139,12 +140,13 @@
             android:textColor="@color/black"/>
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edit_add_person_name"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginBottom="5dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:textSize="20sp"
-            android:gravity="center"
+            android:padding="12dp"
+            android:textSize="18sp"
+            android:layout_gravity="center_vertical"
             android:background="@null"
             android:hint="@string/add_person_edit_hint"/>
     </LinearLayout>
@@ -163,9 +165,10 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
             android:layout_gravity="center_vertical"
             android:text="@string/add_person_relation"
             android:layout_marginEnd="10dp"
@@ -173,11 +176,12 @@
             android:textColor="@color/black"/>
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edit_add_person_relation"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:layout_marginBottom="5dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginEnd="10dp"
             android:background="@null"
             android:hint="@string/add_person_edit_hint"/>
@@ -197,21 +201,23 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:text="@string/add_person_birth"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             android:textColor="@color/black"/>
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edit_add_person_birth"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:layout_marginBottom="5dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_gravity="center_vertical"
+            android:padding="12dp"
             android:layout_marginEnd="10dp"
             android:hint="@string/add_person_edit_hint"
             android:background="@null"/>
@@ -231,21 +237,24 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:text="@string/add_person_address"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             android:textColor="@color/black"/>
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edit_add_person_address"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:layout_marginBottom="5dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:maxLines="1"
+            android:layout_gravity="center_vertical"
+            android:padding="12dp"
             android:layout_marginEnd="10dp"
             android:background="@null"
             android:hint="@string/add_person_edit_hint"/>

@@ -1,17 +1,20 @@
 package com.example.guessme.data.model
 
-import okhttp3.MultipartBody
+import android.net.Uri
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import java.time.LocalDateTime
 
+@Parcelize
 data class Person(
     val uuid: Int?,
     val favorite: Boolean,
-    val image: MultipartBody.Part?,
-    val voice: MultipartBody.Part?,
-    val info: List<Info>?,
+    val image: Uri?,
+    val voice: Uri?,
+    val info: ArrayList<Info>?,
     val name: String,
     val relation: String,
     val birth: LocalDateTime,
     val residence: String,
     val score: Int?
-)
+): Parcelable
