@@ -71,5 +71,11 @@
     <string name="quiz_start"><b>당신의 소중한 기억을 잊지마세요!😊</b></string>
     <string name="quiz_btn_start"><b>시작</b></string>
     <string name="quiz_btn_cancel"><b>취소</b></string>
+    <string name="quiz_btn_before"><b>◀︎</b></string>
+    <string name="quiz_btn_next"><b>▶︎</b></string>
+    <string name="quiz_info"><b>퀴즈！</b></string>
+    <string name="quiz_answer"><b>정답 촬영</b></string>
+    <string name="quiz_stop"><b>퀴즈 종료</b></string>
+    <string name="quiz_voice"><b>voice speaker</b></string>
 
 </resources>

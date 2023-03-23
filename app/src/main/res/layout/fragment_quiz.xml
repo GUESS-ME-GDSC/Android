@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/base_yellow"
+    tools:context=".ui.view.QuizFragment">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_quiz_step_before"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/quiz_btn_before"
+        android:textColor="@color/white"
+        android:padding="15dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/base_green_round_shape"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/image_quiz_step_profile"
+        app:layout_constraintRight_toLeftOf="@id/image_quiz_step_profile"
+        app:layout_constraintBottom_toBottomOf="@id/image_quiz_step_profile"/>
+
+    <ImageView
+        android:id="@+id/image_quiz_step_profile"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/base_green_stroke_shape"
+        android:contentDescription="@string/person_profile_description"
+        android:padding="5dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_base_profile"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@id/txt_quiz_step_info"
+        app:layout_constraintLeft_toRightOf="@id/btn_quiz_step_before"
+        app:layout_constraintRight_toLeftOf="@id/btn_quiz_step_next"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
+        android:id="@+id/view_quiz_tep_for_profile"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@drawable/base_green_stroke_image"
+        app:layout_constraintBottom_toBottomOf="@id/image_quiz_step_profile"
+        app:layout_constraintLeft_toLeftOf="@id/image_quiz_step_profile"
+        app:layout_constraintRight_toRightOf="@id/image_quiz_step_profile"
+        app:layout_constraintTop_toTopOf="@id/image_quiz_step_profile" />
+
+    <ImageButton
+        android:id="@+id/btn_quiz_step_voice"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_voice"
+        android:layout_margin="5dp"
+        android:contentDescription="@string/quiz_voice"
+        android:background="@color/transparent"
+        app:layout_constraintTop_toTopOf="@id/image_quiz_step_profile"
+        app:layout_constraintRight_toRightOf="@id/image_quiz_step_profile"/>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_quiz_step_next"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/quiz_btn_next"
+        android:textColor="@color/white"
+        android:padding="15dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/base_green_round_shape"
+        app:layout_constraintTop_toTopOf="@id/image_quiz_step_profile"
+        app:layout_constraintLeft_toRightOf="@id/image_quiz_step_profile"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/image_quiz_step_profile"/>
+
+    <View
+        android:id="@+id/line_quiz_step_left"
+        android:layout_width="120dp"
+        android:layout_height="10dp"
+        android:background="@drawable/base_black_line"
+        app:layout_constraintBottom_toBottomOf="@id/txt_quiz_step_info"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="@id/btn_quiz_step_before"
+        app:layout_constraintRight_toLeftOf="@id/txt_quiz_step_info"
+        app:layout_constraintTop_toTopOf="@id/txt_quiz_step_info" />
+
+    <TextView
+        android:id="@+id/txt_quiz_step_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/quiz_info"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/txt_quiz_step_key"
+        app:layout_constraintLeft_toRightOf="@id/line_quiz_step_left"
+        app:layout_constraintRight_toLeftOf="@id/line_quiz_step_right"
+        app:layout_constraintTop_toBottomOf="@id/image_quiz_step_profile" />
+
+    <View
+        android:id="@+id/line_quiz_step_right"
+        android:layout_width="120dp"
+        android:layout_height="10dp"
+        android:background="@drawable/base_black_line"
+        app:layout_constraintBottom_toBottomOf="@id/txt_quiz_step_info"
+        app:layout_constraintLeft_toRightOf="@id/txt_quiz_step_info"
+        app:layout_constraintRight_toRightOf="@id/btn_quiz_step_next"
+        app:layout_constraintTop_toTopOf="@id/txt_quiz_step_info" />
+
+
+    <TextView
+        android:id="@+id/txt_quiz_step_key"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/base_green_stroke_shape"
+        android:textSize="22sp"
+        android:gravity="center"
+        android:padding="20dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_quiz_step_answer"
+        app:layout_constraintTop_toBottomOf="@id/txt_quiz_step_info"
+        app:layout_constraintLeft_toLeftOf="@id/line_quiz_step_left"
+        app:layout_constraintRight_toRightOf="@id/line_quiz_step_right"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_quiz_step_answer"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/base_green_round_shape"
+        android:padding="15dp"
+        android:text="@string/quiz_answer"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_goneMarginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/txt_quiz_step_key"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_quiz_step_stop"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_quiz_step_stop"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/base_green_round_shape"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:padding="15dp"
+        android:text="@string/quiz_stop"
+        android:gravity="center"
+        app:layout_goneMarginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_quiz_step_answer"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
