@@ -3,6 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- describe  -->
+    <string name="quiz_voice"><b>voice speaker</b></string>
+
     <!--  nav  -->
     <string name="fragment_login"><b>로그인</b></string>
     <string name="fragment_home"><b>홈</b></string>
@@ -74,8 +77,10 @@
     <string name="quiz_btn_before"><b>◀︎</b></string>
     <string name="quiz_btn_next"><b>▶︎</b></string>
     <string name="quiz_info"><b>퀴즈！</b></string>
-    <string name="quiz_answer"><b>정답 촬영</b></string>
-    <string name="quiz_stop"><b>퀴즈 종료</b></string>
-    <string name="quiz_voice"><b>voice speaker</b></string>
+    <string name="quiz_btn_answer"><b>정답 촬영</b></string>
+    <string name="quiz_btn_stop"><b>퀴즈 종료</b></string>
+    <string name="quiz_result_correct"><b>정답입니다!⭕️</b></string>
+    <string name="quiz_result_wrong"><b>오답입니다!❌</b></string>
+    <string name="quiz_answer_next"><b>다음</b></string>
 
 </resources>
