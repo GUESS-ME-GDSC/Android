@@ -126,5 +126,21 @@
         <argument
             android:name="person"
             app:argType="com.example.guessme.data.model.Person" />
+        <action
+            android:id="@+id/action_fragment_start_quiz_to_quizFragment"
+            app:destination="@id/fragment_quiz"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_quiz"
+        android:name="com.example.guessme.ui.view.QuizFragment"
+        android:label="@string/fragment_start_quiz"
+        tools:layout="@layout/fragment_quiz" >
+        <argument
+            android:name="person"
+            app:argType="com.example.guessme.data.model.Person" />
     </fragment>
 </navigation>
