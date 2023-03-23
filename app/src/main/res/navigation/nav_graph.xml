@@ -49,6 +49,13 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_fragment_home_to_startQuizFragment"
+            app:destination="@id/fragment_start_quiz"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/fragment_people_list"
@@ -90,6 +97,13 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_fragment_person_detail_to_startQuizFragment"
+            app:destination="@id/fragment_start_quiz"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/fragment_modify_person"
@@ -103,5 +117,14 @@
             app:argType="com.example.guessme.data.model.InfoList"
             app:nullable="true"
             android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_start_quiz"
+        android:name="com.example.guessme.ui.view.StartQuizFragment"
+        android:label="startqu"
+        tools:layout="@layout/fragment_start_quiz">
+        <argument
+            android:name="person"
+            app:argType="com.example.guessme.data.model.Person" />
     </fragment>
 </navigation>

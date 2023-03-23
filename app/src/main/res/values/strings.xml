@@ -11,6 +11,7 @@
     <string name="fragment_add_person"><b>추가</b></string>
     <string name="fragment_person_detail"><b>정보</b></string>
     <string name="fragment_modify_person"><b>수정</b></string>
+    <string name="fragment_start_quiz"><b>퀴즈</b></string>
 
     <!--  login  -->
     <string name="login_id"><b>아이디</b></string>

@@ -21,9 +21,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        init()
+    }
 
+    private fun init() {
         binding.btnHomePeopleList.setOnClickListener {
             findNavController().navigate(R.id.action_fragment_home_to_peopleListFragment)
+        }
+
+        binding.btnHomeQuiz.setOnClickListener {
+            //랜덤 인물 서버에 요청후
+            //safe args로 전달 처리
+            findNavController().navigate(R.id.action_fragment_home_to_startQuizFragment)
         }
     }
 
