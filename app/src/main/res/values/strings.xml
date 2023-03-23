@@ -82,5 +82,9 @@
     <string name="quiz_result_correct"><b>정답입니다!⭕️</b></string>
     <string name="quiz_result_wrong"><b>오답입니다!❌</b></string>
     <string name="quiz_answer_next"><b>다음</b></string>
+    <string name="quiz_result_up"><b>▲</b></string>
+    <string name="quiz_result_down"><b>▼</b></string>
+    <string name="quiz_result_info"><b>정보</b></string>
+    <string name="quiz_result_finish"><b>종료</b></string>
 
 </resources>
