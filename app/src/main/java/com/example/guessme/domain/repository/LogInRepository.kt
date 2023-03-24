@@ -1,10 +1,9 @@
-package com.example.guessme.data.repository
+package com.example.guessme.domain.repository
 
 import com.example.guessme.data.model.User
-import okhttp3.ResponseBody
+import com.example.guessme.data.response.LoginResponseBody
 import retrofit2.Response
 
 interface LogInRepository {
-    suspend fun logIn(user: User): Response<ResponseBody>
-    suspend fun signUp(user: User): Response<ResponseBody>
+    suspend fun logIn(user: User): Response<LoginResponseBody>
 }
