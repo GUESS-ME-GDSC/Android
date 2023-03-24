@@ -83,7 +83,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintBottom_toTopOf="@id/btn_login_sign_in"
+        app:layout_constraintBottom_toTopOf="@id/btn_login_sign_up"
         app:layout_constraintTop_toBottomOf="@id/btn_login"
         app:layout_constraintRight_toLeftOf="@id/line_login_right"
         app:layout_constraintLeft_toRightOf="@id/line_login_left"/>
@@ -99,7 +99,7 @@
         app:layout_constraintLeft_toRightOf="@id/txt_login_or"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_login_sign_in"
+        android:id="@+id/btn_login_sign_up"
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
