@@ -1,3 +1,10 @@
-package com.example.guessme.data.model
+package com.example.guessme.data.response
 
-data class LoginResponseBody()
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
+data class LoginResponseBody(
+    val status: Int,
+    val message: String,
+    val data: String
+)
