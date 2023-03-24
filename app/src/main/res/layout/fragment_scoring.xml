@@ -48,6 +48,7 @@
         app:layout_constraintRight_toRightOf="parent">
 
         <TextView
+            android:id="@+id/txt_quiz_answer_key"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:textStyle="bold"
@@ -59,7 +60,7 @@
             android:textColor="@color/black"/>
 
         <TextView
-            android:id="@+id/txt_quiz_answer_data"
+            android:id="@+id/txt_quiz_answer_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
