@@ -3,6 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- describe  -->
+    <string name="quiz_voice"><b>voice speaker</b></string>
+
     <!--  nav  -->
     <string name="fragment_login"><b>로그인</b></string>
     <string name="fragment_home"><b>홈</b></string>
@@ -11,6 +14,8 @@
     <string name="fragment_add_person"><b>추가</b></string>
     <string name="fragment_person_detail"><b>정보</b></string>
     <string name="fragment_modify_person"><b>수정</b></string>
+    <string name="fragment_start_quiz"><b>퀴즈</b></string>
+    <string name="fragment_quiz_result"><b>결과</b></string>
 
     <!--  login  -->
     <string name="login_id"><b>아이디</b></string>
@@ -65,5 +70,22 @@
     <string name="dialog_add_info_value"><b>값 </b></string>
     <string name="dialog_add_info_save"><b>저장</b></string>
     <string name="dialog_add_info_cancel"><b>취소</b></string>
+
+    <!--  quiz  -->
+    <string name="quiz_start"><b>당신의 소중한 기억을 잊지마세요!😊</b></string>
+    <string name="quiz_btn_start"><b>시작</b></string>
+    <string name="quiz_btn_cancel"><b>취소</b></string>
+    <string name="quiz_btn_before"><b>◀︎</b></string>
+    <string name="quiz_btn_next"><b>▶︎</b></string>
+    <string name="quiz_info"><b>퀴즈！</b></string>
+    <string name="quiz_btn_answer"><b>정답 촬영</b></string>
+    <string name="quiz_btn_stop"><b>퀴즈 종료</b></string>
+    <string name="quiz_result_correct"><b>정답입니다!⭕️</b></string>
+    <string name="quiz_result_wrong"><b>오답입니다!❌</b></string>
+    <string name="quiz_answer_next"><b>다음</b></string>
+    <string name="quiz_result_up"><b>▲</b></string>
+    <string name="quiz_result_down"><b>▼</b></string>
+    <string name="quiz_result_info"><b>정보</b></string>
+    <string name="quiz_result_finish"><b>종료</b></string>
 
 </resources>

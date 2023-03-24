@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_yellow"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.view.StartQuizFragment">
+
+    <ImageView
+        android:id="@+id/image_quiz_profile"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/base_green_stroke_shape"
+        android:contentDescription="@string/person_profile_description"
+        android:padding="5dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_base_profile"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@id/txt_quiz_start_notice"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
+        android:id="@+id/view_quiz_for_profile"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@drawable/base_green_stroke_image"
+        app:layout_constraintBottom_toBottomOf="@id/image_quiz_profile"
+        app:layout_constraintLeft_toLeftOf="@id/image_quiz_profile"
+        app:layout_constraintRight_toRightOf="@id/image_quiz_profile"
+        app:layout_constraintTop_toTopOf="@id/image_quiz_profile" />
+
+    <TextView
+        android:id="@+id/txt_quiz_start_notice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="@string/quiz_start"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/btn_quiz_start"
+        app:layout_constraintTop_toBottomOf="@id/image_quiz_profile"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_quiz_start"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="@drawable/base_green_oval_shape"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:text="@string/quiz_btn_start"
+        app:layout_constraintTop_toBottomOf="@id/txt_quiz_start_notice"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

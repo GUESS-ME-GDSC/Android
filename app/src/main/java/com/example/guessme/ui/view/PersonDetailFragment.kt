@@ -109,6 +109,14 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             findNavController().navigate(action)
         }
 
+        binding.btnDetailQuiz.setOnClickListener {
+            //서버에 해당 인물 퀴즈 요청
+            //넘겨받은 값을 전달해야 함(추후 수정)
+            val person = personDetailViewModel.person
+            val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToStartQuizFragment(person)
+            findNavController().navigate(action)
+        }
+
         personDetailViewModel.infoList.observe(viewLifecycleOwner) {
             infoListAdapter.submitList(it.data)
             if (it.data.size > 0) {
