@@ -1,10 +1,16 @@
 package com.example.guessme.data.di
 
-import com.example.guessme.BuildConfig
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStoreFile
+import com.example.guessme.common.util.Constants.DATASTORE_NAME
 import com.example.guessme.data.api.RetrofitApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -27,7 +33,7 @@ object AppModule {
         return Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create())
             .client(okHttpClient)
-            .baseUrl(BuildConfig.baseUrl)
+            .baseUrl("http://34.22.67.105:8080")
             .build()
     }
 
@@ -35,5 +41,13 @@ object AppModule {
     @Provides
     fun provideApiService(retrofit: Retrofit): RetrofitApi {
         return retrofit.create(RetrofitApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun providePreferencesDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
+        return PreferenceDataStoreFactory.create(
+            produceFile = {context.preferencesDataStoreFile(DATASTORE_NAME)}
+        )
     }
 }

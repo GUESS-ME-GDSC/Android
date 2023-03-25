@@ -1,7 +1,9 @@
 package com.example.guessme.data.di
 
+import com.example.guessme.data.repository.LocalRepositoryImpl
 import com.example.guessme.data.repository.LogInRepositoryImpl
 import com.example.guessme.data.repository.SignUpRepositoryImpl
+import com.example.guessme.domain.repository.LocalRepository
 import com.example.guessme.domain.repository.LogInRepository
 import com.example.guessme.domain.repository.SignUpRepository
 import dagger.Binds
@@ -25,4 +27,10 @@ abstract class RepositoryModule {
     abstract fun bindSignUpRepository(
         signupRepositoryImpl: SignUpRepositoryImpl
     ): SignUpRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindLocalRepository(
+        localRepositoryImpl: LocalRepositoryImpl
+    ): LocalRepository
 }
