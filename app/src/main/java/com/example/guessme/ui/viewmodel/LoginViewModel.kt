@@ -8,11 +8,16 @@ import com.example.guessme.R
 import com.example.guessme.data.model.User
 import com.example.guessme.data.repository.LogInRepositoryImpl
 import com.example.guessme.data.response.LoginResponseBody
+import com.example.guessme.domain.repository.LogInRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Response
 import java.lang.Exception
+import javax.inject.Inject
 
-class LoginViewModel: ViewModel() {
-    private val repository: LogInRepositoryImpl = LogInRepositoryImpl()
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val repository: LogInRepository
+): ViewModel() {
     private val _errorMsg = MutableLiveData<String>()
     val errorMsg: LiveData<String> get() = _errorMsg
     private val _errorState = MutableLiveData<Boolean>(false)

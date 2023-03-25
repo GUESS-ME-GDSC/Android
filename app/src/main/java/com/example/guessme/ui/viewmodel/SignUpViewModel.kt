@@ -5,13 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.guessme.R
 import com.example.guessme.data.model.User
-import com.example.guessme.data.repository.SignUpRepositoryImpl
 import com.example.guessme.data.response.LoginResponseBody
+import com.example.guessme.domain.repository.SignUpRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Response
 import java.lang.Exception
+import javax.inject.Inject
 
-class SignUpViewModel: ViewModel(){
-    private val repository: SignUpRepositoryImpl = SignUpRepositoryImpl()
+@HiltViewModel
+class SignUpViewModel @Inject constructor(
+    private val repository: SignUpRepository
+): ViewModel() {
     private val _isSignUp: MutableLiveData<Boolean> = MutableLiveData(false)
     val isSignUp: LiveData<Boolean> = _isSignUp
     private val _errorState: MutableLiveData<Int> = MutableLiveData<Int>()
