@@ -1,11 +1,16 @@
 package com.example.guessme.data.repository
 
-import com.example.guessme.common.util.RetrofitInstance.api
+import com.example.guessme.data.api.RetrofitApi
 import com.example.guessme.data.model.User
 import com.example.guessme.data.response.LoginResponseBody
 import com.example.guessme.domain.repository.LogInRepository
 import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class LogInRepositoryImpl: LogInRepository {
+@Singleton
+class LogInRepositoryImpl @Inject constructor(
+    private val api: RetrofitApi
+): LogInRepository {
     override suspend fun logIn(user: User): Response<LoginResponseBody> = api.logIn(user)
 }

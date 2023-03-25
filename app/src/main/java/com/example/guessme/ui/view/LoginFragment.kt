@@ -14,11 +14,13 @@ import com.example.guessme.databinding.FragmentLoginBinding
 import com.example.guessme.ui.dialog.ErrorDialog
 import com.example.guessme.ui.dialog.NoticeDialog
 import com.example.guessme.ui.viewmodel.LoginViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
+@AndroidEntryPoint
 class LoginFragment: BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
     private val logInViewModel: LoginViewModel by viewModels()
 
