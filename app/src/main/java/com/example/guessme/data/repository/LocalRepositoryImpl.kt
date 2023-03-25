@@ -13,8 +13,9 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Inject
+import javax.inject.Singleton
 
-@AndroidEntryPoint
+@Singleton
 class LocalRepositoryImpl @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ): LocalRepository {
