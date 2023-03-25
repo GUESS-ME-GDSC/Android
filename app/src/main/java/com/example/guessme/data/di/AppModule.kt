@@ -1,6 +1,5 @@
 package com.example.guessme.data.di
 
-import com.example.guessme.BuildConfig
 import com.example.guessme.data.api.RetrofitApi
 import dagger.Module
 import dagger.Provides
@@ -27,7 +26,7 @@ object AppModule {
         return Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create())
             .client(okHttpClient)
-            .baseUrl(BuildConfig.baseUrl)
+            .baseUrl("http://34.22.67.105:8080")
             .build()
     }
 
