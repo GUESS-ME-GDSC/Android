@@ -1,8 +1,10 @@
 package com.example.guessme.data.di
 
+import com.example.guessme.data.repository.AddPersonRepositoryImpl
 import com.example.guessme.data.repository.LocalRepositoryImpl
 import com.example.guessme.data.repository.LogInRepositoryImpl
 import com.example.guessme.data.repository.SignUpRepositoryImpl
+import com.example.guessme.domain.repository.AddPersonRepository
 import com.example.guessme.domain.repository.LocalRepository
 import com.example.guessme.domain.repository.LogInRepository
 import com.example.guessme.domain.repository.SignUpRepository
@@ -33,4 +35,10 @@ abstract class RepositoryModule {
     abstract fun bindLocalRepository(
         localRepositoryImpl: LocalRepositoryImpl
     ): LocalRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindAddPersonRepository(
+        addPersonRepositoryImpl: AddPersonRepositoryImpl
+    ): AddPersonRepository
 }
