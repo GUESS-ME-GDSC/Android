@@ -49,6 +49,7 @@
     <string name="person_address"><b>주소</b></string>
     <string name="person_btn_delete"><b>삭제</b></string>
     <string name="person_edit_hint"><b>✎</b></string>
+    <string name="person_birth_hint"><b>ex) 2023-01-01</b></string>
 
     <!--  detail   -->
     <string name="detail_quiz"><b>퀴즈✏️</b></string>
