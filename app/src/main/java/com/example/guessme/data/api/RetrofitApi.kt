@@ -3,10 +3,12 @@ package com.example.guessme.data.api
 import com.example.guessme.data.model.InfoList
 import com.example.guessme.data.model.User
 import com.example.guessme.data.response.BaseResponseBody
+import com.example.guessme.data.response.GetPersonResponseBody
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -42,4 +44,10 @@ interface RetrofitApi {
         @Path("id") id: Int,
         @Body info: InfoList
     ): Response<BaseResponseBody>
+
+    @GET("/person/{id}")
+    suspend fun getPerson(
+        @Header("Authorization") authorization: String,
+        @Path("id") id: Int
+    ): Response<GetPersonResponseBody>
 }
