@@ -1,5 +1,6 @@
 package com.example.guessme.data.api
 
+import com.example.guessme.data.model.InfoList
 import com.example.guessme.data.model.User
 import com.example.guessme.data.response.BaseResponseBody
 import okhttp3.MultipartBody
@@ -10,6 +11,7 @@ import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Path
 
 interface RetrofitApi {
     @POST("/auth/login")
@@ -32,5 +34,12 @@ interface RetrofitApi {
         @Part("relation") relation: RequestBody,
         @Part("birth") birth: RequestBody,
         @Part("residence") residence: RequestBody
+    ): Response<BaseResponseBody>
+
+    @POST("/person/{id}/newinfo")
+    suspend fun addInfo(
+        @Header("Authorization") authorization: String,
+        @Path("id") id: Int,
+        @Body info: InfoList
     ): Response<BaseResponseBody>
 }
