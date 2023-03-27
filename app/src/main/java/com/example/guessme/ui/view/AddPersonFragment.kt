@@ -28,9 +28,11 @@ class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.
         return FragmentAddModifyPersonBinding.inflate(inflater, container, false)
     }
 
+
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.recyclerModifyInfo.visibility = View.GONE
 
         binding.viewAddPersonForImage.setOnClickListener {
             requestGalleryLauncher.launch(REQUIRED_GALLERY_PERMISSION)
