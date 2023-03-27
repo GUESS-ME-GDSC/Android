@@ -1,19 +1,36 @@
 package com.example.guessme.data.api
 
 import com.example.guessme.data.model.User
-import com.example.guessme.data.response.LoginResponseBody
+import com.example.guessme.data.response.BaseResponseBody
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.Header
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 
 interface RetrofitApi {
     @POST("/auth/login")
     suspend fun logIn(
         @Body user: User
-    ): Response<LoginResponseBody>
+    ): Response<BaseResponseBody>
 
     @POST("/auth/join")
     suspend fun signUp(
         @Body user: User
-    ): Response<LoginResponseBody>
+    ): Response<BaseResponseBody>
+
+    @Multipart
+    @POST("/person/")
+    suspend fun addPerson(
+        @Header("Authorization") authorization: String,
+        @Part image: MultipartBody.Part?,
+        @Part voice: MultipartBody.Part?,
+        @Part("name") name: RequestBody,
+        @Part("relation") relation: RequestBody,
+        @Part("birth") birth: RequestBody,
+        @Part("residence") residence: RequestBody
+    ): Response<BaseResponseBody>
 }
