@@ -61,7 +61,9 @@
 
     <!--  dialog  -->
     <string name="dialog_ok"><b>확인</b></string>
+    <string name="dialog_add_person">필수 정보를 모두 입력해주세요!🙂</string>
     <string name="dialog_msg_error">오류가 발생했습니다. \n 나중에 다시 시도해주세요!🥲</string>
+    <string name="dialog_token_request">만료된 토큰입니다. \n 로그인을 다시 해주세요!🥲</string>
     <string name="dialog_existed_user">이미 존재하는 유저입니다. \n 다시 시도해주세요!🥲</string>
     <string name="dialog_sign_up_success">가입되었습니다.\n 로그인을 진행해주세요!😀</string>
     <string name="dialog_permission"><b>권한</b>이 필요합니다!🥲</string>
