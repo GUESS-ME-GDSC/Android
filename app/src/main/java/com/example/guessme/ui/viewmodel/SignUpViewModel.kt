@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.guessme.R
 import com.example.guessme.data.model.User
-import com.example.guessme.data.response.LoginResponseBody
+import com.example.guessme.data.response.BaseResponseBody
 import com.example.guessme.domain.repository.SignUpRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Response
@@ -23,10 +23,10 @@ class SignUpViewModel @Inject constructor(
 
     suspend fun signUp(user: User) {
         try {
-            val response: Response<LoginResponseBody> = repository.signUp(user)
+            val response: Response<BaseResponseBody> = repository.signUp(user)
             val status = response.body()?.status
 
-            if (response.isSuccessful and (status == 200)) {
+            if (response.isSuccessful and (status == 201)) {
                 _isSignUp.postValue(true)
             } else if (status == 500) {
                 _errorState.postValue(R.string.dialog_existed_user)

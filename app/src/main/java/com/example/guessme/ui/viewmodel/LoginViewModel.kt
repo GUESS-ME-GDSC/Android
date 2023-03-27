@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.guessme.data.model.User
-import com.example.guessme.data.response.LoginResponseBody
+import com.example.guessme.data.response.BaseResponseBody
 import com.example.guessme.domain.repository.LocalRepository
 import com.example.guessme.domain.repository.LogInRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,11 +27,12 @@ class LoginViewModel @Inject constructor(
 
     suspend fun login(user: User) {
         try {
-            val response: Response<LoginResponseBody> = loginRepository.logIn(user)
+            val response: Response<BaseResponseBody> = loginRepository.logIn(user)
             val status = response.body()?.status
+            Log.d("status", status.toString())
             val token = response.body()?.data
 
-            if ((status == 200) and response.isSuccessful) {
+            if ((status == 201) and response.isSuccessful) {
                 //토큰 처리
                 Log.d("token", token!!)
                 saveToken(token!!)
@@ -41,6 +42,7 @@ class LoginViewModel @Inject constructor(
             }
 
         }catch (e: Exception) {
+            Log.d("e", e.toString())
             _errorState.postValue(true)
         }
     }

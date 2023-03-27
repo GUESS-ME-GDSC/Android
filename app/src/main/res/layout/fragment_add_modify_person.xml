@@ -231,7 +231,7 @@
                 android:layout_gravity="center_vertical"
                 android:padding="12dp"
                 android:layout_marginEnd="10dp"
-                android:hint="@string/person_edit_hint"
+                android:hint="@string/person_birth_hint"
                 android:background="@null"/>
         </LinearLayout>
 
