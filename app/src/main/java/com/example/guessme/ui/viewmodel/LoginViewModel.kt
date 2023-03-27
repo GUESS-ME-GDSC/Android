@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.guessme.data.model.User
-import com.example.guessme.data.response.LoginResponseBody
+import com.example.guessme.data.response.BaseResponseBody
 import com.example.guessme.domain.repository.LocalRepository
 import com.example.guessme.domain.repository.LogInRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,7 +27,7 @@ class LoginViewModel @Inject constructor(
 
     suspend fun login(user: User) {
         try {
-            val response: Response<LoginResponseBody> = loginRepository.logIn(user)
+            val response: Response<BaseResponseBody> = loginRepository.logIn(user)
             val status = response.body()?.status
             val token = response.body()?.data
 
