@@ -26,7 +26,7 @@ class SignUpViewModel @Inject constructor(
             val response: Response<BaseResponseBody> = repository.signUp(user)
             val status = response.body()?.status
 
-            if (response.isSuccessful and (status == 200)) {
+            if (response.isSuccessful and (status == 201)) {
                 _isSignUp.postValue(true)
             } else if (status == 500) {
                 _errorState.postValue(R.string.dialog_existed_user)

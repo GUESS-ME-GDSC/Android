@@ -29,9 +29,10 @@ class LoginViewModel @Inject constructor(
         try {
             val response: Response<BaseResponseBody> = loginRepository.logIn(user)
             val status = response.body()?.status
+            Log.d("status", status.toString())
             val token = response.body()?.data
 
-            if ((status == 200) and response.isSuccessful) {
+            if ((status == 201) and response.isSuccessful) {
                 //토큰 처리
                 Log.d("token", token!!)
                 saveToken(token!!)
@@ -41,6 +42,7 @@ class LoginViewModel @Inject constructor(
             }
 
         }catch (e: Exception) {
+            Log.d("e", e.toString())
             _errorState.postValue(true)
         }
     }
