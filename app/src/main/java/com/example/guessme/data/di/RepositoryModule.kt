@@ -1,13 +1,7 @@
 package com.example.guessme.data.di
 
-import com.example.guessme.data.repository.AddPersonRepositoryImpl
-import com.example.guessme.data.repository.LocalRepositoryImpl
-import com.example.guessme.data.repository.LogInRepositoryImpl
-import com.example.guessme.data.repository.SignUpRepositoryImpl
-import com.example.guessme.domain.repository.AddPersonRepository
-import com.example.guessme.domain.repository.LocalRepository
-import com.example.guessme.domain.repository.LogInRepository
-import com.example.guessme.domain.repository.SignUpRepository
+import com.example.guessme.data.repository.*
+import com.example.guessme.domain.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -41,4 +35,10 @@ abstract class RepositoryModule {
     abstract fun bindAddPersonRepository(
         addPersonRepositoryImpl: AddPersonRepositoryImpl
     ): AddPersonRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindPersonDetailRepository(
+        personDetailRepositoryImpl: PersonDetailRepositoryImpl
+    ): PersonDetailRepository
 }
