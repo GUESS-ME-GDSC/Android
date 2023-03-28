@@ -1,5 +1,6 @@
 package com.example.guessme.ui.view
 
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -8,20 +9,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.common.base.BasePlayer
+import com.example.guessme.data.model.Info
 import com.example.guessme.databinding.FragmentPersonDetailBinding
 import com.example.guessme.ui.adapter.InfoListAdapter
 import com.example.guessme.ui.dialog.AddInfoDialog
+import com.example.guessme.ui.dialog.NoticeDialog
 import com.example.guessme.ui.viewmodel.PersonDetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.File
 import java.time.format.DateTimeFormatter
 
+@AndroidEntryPoint
 class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.fragment_person_detail) {
     private val args: PersonDetailFragmentArgs by navArgs()
     private val personDetailViewModel by viewModels<PersonDetailViewModel>()
@@ -36,47 +43,91 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        personDetailViewModel.setPerson(args.person)
-        personDetailViewModel.getInfoList()
+        //arg에서 id를 받아와야 함
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        init()
+        setObserver()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            getPerson(2)
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setObserver() {
+        personDetailViewModel.infoList.observe(viewLifecycleOwner) {
+            if (it != null) {
+                infoListAdapter.submitList(it)
+            }
+            if ((it != null) and (it!!.isNotEmpty())) {
+                binding.btnDetailInfoDelete.visibility = View.VISIBLE
+            }
+        }
+
+        personDetailViewModel.isDelete.observe(viewLifecycleOwner) {
+            infoListAdapter.setDelete(it)
+            infoListAdapter.notifyDataSetChanged()
+        }
+
+        personDetailViewModel.addSuccess.observe(viewLifecycleOwner) {
+            if (it == false) {
+                val dialog = NoticeDialog(R.string.dialog_msg_error)
+                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            }
+        }
+
+        personDetailViewModel.getPersonSuccess.observe(viewLifecycleOwner) {
+            if (! it){
+                val dialog = NoticeDialog(R.string.dialog_msg_error)
+                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            }
+        }
+
+        personDetailViewModel.person.observe(viewLifecycleOwner) {
+            init()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private suspend fun getPerson(id: Int) {
+        try {
+            personDetailViewModel.getPerson(id)
+        } catch (e: java.lang.Exception) {
+            val dialog = NoticeDialog(R.string.dialog_msg_error)
+            dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun init() {
         personDetailViewModel.person.let { person ->
             val dateFormat = DateTimeFormatter.ofPattern("yyyy.MM.dd")
-            val fileName = if (person.voice == null) {
-                null
-            } else {
-                File(person.voice.path!!).path
-            }
+            val audioUri = Uri.parse(person.value!!.voice)
+            val fileName = File(audioUri.path!!).path
 
-            binding.txtDetailName.text = person.name
-            binding.txtDetailRelation.text = person.relation
-            binding.txtDetailBirth.text = person.birth.format(dateFormat)
-            binding.txtDetailAddress.text = person.residence
+            binding.txtDetailName.text = person.value!!.name
+            binding.txtDetailRelation.text = person.value!!.relation
+            binding.txtDetailBirth.text = person.value!!.birth.format(dateFormat)
+            binding.txtDetailAddress.text = person.value!!.residence
 
             binding.btnDetailSpeaker.setOnClickListener {
                 personDetailViewModel.setPlayer(BasePlayer(requireActivity().supportFragmentManager))
                 personDetailViewModel.startPlaying(fileName)
             }
 
-            if (person.image != null) {
-                binding.imageDetailProfile.setImageURI(person.image)
-            }
+            val imageUri = Uri.parse(person.value!!.image)
+            binding.imageDetailProfile.setImageURI(imageUri)
 
-            if (person.favorite) {
+            if (person.value!!.favorite) {
                 binding.imageDetailFavoriteTrue.setImageResource(R.drawable.ic_favorite_true)
             } else {
                 binding.imageDetailFavoriteTrue.setImageResource(R.drawable.ic_favorite_false)
             }
-
         }
 
         binding.btnDetailInfoAdd.setOnClickListener {
@@ -102,38 +153,26 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         }
 
         binding.fabDetailPersonModify.setOnClickListener {
-            val person = personDetailViewModel.person
-            val infoList = personDetailViewModel.infoList
+//            val person = personDetailViewModel.person
+//            val infoList = personDetailViewModel.infoList
 
-            val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToModifyPersonFragment(person = person, infoList = infoList.value)
-            findNavController().navigate(action)
+            //person 넘기는 부분에서 오류 발생!
+//            val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToModifyPersonFragment(person = person.value!!, infoList = infoList.value)
+//            findNavController().navigate(action)
         }
 
         binding.btnDetailQuiz.setOnClickListener {
             //서버에 해당 인물 퀴즈 요청
             //넘겨받은 값을 전달해야 함(추후 수정)
-            val person = personDetailViewModel.person
-            val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToStartQuizFragment(person)
-            findNavController().navigate(action)
-        }
-
-        personDetailViewModel.infoList.observe(viewLifecycleOwner) {
-            infoListAdapter.submitList(it.data)
-            if (it.data.size > 0) {
-                binding.btnDetailInfoDelete.visibility = View.VISIBLE
-            }
-        }
-
-        personDetailViewModel.isDelete.observe(viewLifecycleOwner) {
-            infoListAdapter.setDelete(it)
-            infoListAdapter.notifyDataSetChanged()
+//            val person = personDetailViewModel.person.value
+//            val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToStartQuizFragment(person!!)
+//            findNavController().navigate(action)
         }
     }
 
     private fun setupRecyclerView() {
         infoListAdapter = InfoListAdapter()
         binding.recyclerDetailInfo.apply {
-            setHasFixedSize(true)
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             addItemDecoration(
