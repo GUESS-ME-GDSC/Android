@@ -2,9 +2,8 @@ package com.example.guessme.data.model
 
 import android.net.Uri
 import android.os.Parcelable
-import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 @Parcelize
 data class Person(
@@ -15,7 +14,7 @@ data class Person(
     val info: InfoList?,
     val name: String,
     val relation: String,
-    val birth: LocalDateTime,
+    val birth: LocalDate,
     val residence: String,
     val score: Int?
 ): Parcelable
