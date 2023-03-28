@@ -2,9 +2,8 @@ package com.example.guessme.data.repository
 
 import com.example.guessme.data.api.RetrofitApi
 import com.example.guessme.data.model.InfoList
-import com.example.guessme.data.model.Person
 import com.example.guessme.data.response.BaseResponseBody
-import com.example.guessme.data.response.GetPersonResponseBody
+import com.example.guessme.data.response.PersonResponse
 import com.example.guessme.domain.repository.PersonDetailRepository
 import retrofit2.Response
 import javax.inject.Inject
@@ -19,7 +18,7 @@ class PersonDetailRepositoryImpl @Inject constructor(
         return api.addInfo(token, id, info)
     }
 
-    override suspend fun getPerson(token: String, id: Int): Response<GetPersonResponseBody> {
+    override suspend fun getPerson(token: String, id: Int): Response<PersonResponse> {
         return api.getPerson(token, id)
     }
 
