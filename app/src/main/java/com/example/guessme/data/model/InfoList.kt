@@ -5,5 +5,5 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class InfoList(
-    val data: ArrayList<Info>
+    val data: List<Info>
 ): Parcelable
