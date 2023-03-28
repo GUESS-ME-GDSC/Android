@@ -2,6 +2,7 @@ package com.example.guessme.data.api
 
 import com.example.guessme.data.model.InfoList
 import com.example.guessme.data.model.User
+import com.example.guessme.data.response.AddPersonRequestBody
 import com.example.guessme.data.response.BaseResponseBody
 import com.example.guessme.data.response.PersonResponse
 import okhttp3.MultipartBody
@@ -36,7 +37,7 @@ interface RetrofitApi {
         @Part("relation") relation: RequestBody,
         @Part("birth") birth: RequestBody,
         @Part("residence") residence: RequestBody
-    ): Response<BaseResponseBody>
+    ): Response<AddPersonRequestBody>
 
     @POST("/person/{id}/newinfo")
     suspend fun addInfo(
