@@ -3,7 +3,7 @@ package com.example.guessme.data.api
 import com.example.guessme.data.model.InfoList
 import com.example.guessme.data.model.User
 import com.example.guessme.data.response.BaseResponseBody
-import com.example.guessme.data.response.GetPersonResponseBody
+import com.example.guessme.data.response.PersonResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -49,5 +49,5 @@ interface RetrofitApi {
     suspend fun getPerson(
         @Header("Authorization") authorization: String,
         @Path("id") id: Int
-    ): Response<GetPersonResponseBody>
+    ): Response<PersonResponse>
 }
