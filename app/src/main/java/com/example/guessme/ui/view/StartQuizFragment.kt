@@ -1,5 +1,6 @@
 package com.example.guessme.ui.view
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,12 @@ import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.databinding.FragmentStartQuizBinding
 import com.example.guessme.ui.viewmodel.StartQuizViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class StartQuizFragment : BaseFragment<FragmentStartQuizBinding>(R.layout.fragment_start_quiz) {
     private val startQuizFragmentArgs: StartQuizFragmentArgs by navArgs()
     private val startQuizViewModel by viewModels<StartQuizViewModel>()
@@ -22,28 +28,29 @@ class StartQuizFragment : BaseFragment<FragmentStartQuizBinding>(R.layout.fragme
         return FragmentStartQuizBinding.inflate(inflater, container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        startQuizViewModel.setPerson(startQuizFragmentArgs.person)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
+        setObserver()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            startQuizViewModel.getPersonQuiz(startQuizFragmentArgs.id)
+        }
+    }
+
+    private fun setObserver() {
+        startQuizViewModel.personImage.observe(viewLifecycleOwner) {
+            val uri = Uri.parse(it)
+            binding.imageQuizProfile.setImageURI(uri)
+        }
     }
 
     private fun init() {
-        val person = startQuizViewModel.person
-
-        person.image?.let {
-            binding.imageQuizProfile.setImageURI(it)
-        }
 
         binding.btnQuizStart.setOnClickListener {
             //info 넘겨줌
             //퀴즈 화면으로 이동 필요
         }
+
     }
 
 
