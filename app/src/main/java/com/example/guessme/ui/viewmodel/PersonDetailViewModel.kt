@@ -9,7 +9,7 @@ import com.example.guessme.common.base.BasePlayer
 import com.example.guessme.data.model.Info
 import com.example.guessme.data.model.InfoList
 import com.example.guessme.data.repository.LocalRepositoryImpl
-import com.example.guessme.data.response.BaseResponseBody
+import com.example.guessme.data.response.BaseNullResponseBody
 import com.example.guessme.data.response.Data
 import com.example.guessme.data.response.PersonResponse
 import com.example.guessme.domain.repository.PersonDetailRepository
@@ -42,15 +42,15 @@ class PersonDetailViewModel @Inject constructor(
         _addSuccess.postValue(data)
     }
 
-    fun addInfoList(info: Info) {
-        var list: ArrayList<Info>? = null
-        if (infoList.value == null){
-            list = ArrayList<Info>()
+    private fun addInfoList(info: Info) {
+        var list = infoList.value
+
+        list = if (list == null){
+            ArrayList()
         } else {
-            list = infoList.value as ArrayList<Info>?
-            list!!.add(info)
+            list as ArrayList<Info>
         }
-        list!!.add(info)
+        list.add(info)
 
         _infoList.postValue(list)
     }
@@ -96,16 +96,15 @@ class PersonDetailViewModel @Inject constructor(
             val token = withContext(Dispatchers.IO) {
                 localRepositoryImpl.getToken().first()
             }
-            val temp = ArrayList<Info>()
-            temp.add(info)
+            val infoList = List(1){info}
 
-            val response: Response<BaseResponseBody> = personDetailRepository.addInfo(token, id, InfoList(temp))
+            val response: Response<BaseNullResponseBody> = personDetailRepository.addInfo("Bearer $token",2,
+                InfoList(infoList))
             val status = response.body()?.status
             Log.d("status", status.toString())
-            Log.d("status", response.body()!!.data)
 
             if ((status == 201) and response.isSuccessful) {
-                _addSuccess.postValue(true)
+                addInfoList(info)
             }else {
                 _addSuccess.postValue(false)
             }

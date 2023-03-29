@@ -62,6 +62,8 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
     private fun setObserver() {
         personDetailViewModel.infoList.observe(viewLifecycleOwner) {
             if (it != null) {
+                Log.d("list check", it.toString())
+                setupRecyclerView()
                 infoListAdapter.submitList(it)
             }
             if ((it != null) and (it!!.isNotEmpty())) {
@@ -131,7 +133,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         }
 
         binding.btnDetailInfoAdd.setOnClickListener {
-            val dialog = AddInfoDialog()
+            val dialog = AddInfoDialog(personDetailViewModel)
             dialog.show(requireActivity().supportFragmentManager, "AddInfoDialog")
         }
 
