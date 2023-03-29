@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.guessme.data.model.Person
+import com.example.guessme.data.response.PersonPreview
 import com.example.guessme.databinding.ItemPersonPreviewBinding
 
-class PeopleListAdapter: ListAdapter<Person, PersonHolder>(diffCallback) {
-    private var onItemClickListener: ((Person) -> Unit)? = null
+class PeopleListAdapter: ListAdapter<PersonPreview, PersonHolder>(diffCallback) {
+    private var onItemClickListener: ((PersonPreview) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonHolder {
         return PersonHolder(
@@ -24,17 +25,21 @@ class PeopleListAdapter: ListAdapter<Person, PersonHolder>(diffCallback) {
         }
     }
 
-    fun setOnItemClickListener(listener: (Person) -> Unit) {
+    fun setOnItemClickListener(listener: (PersonPreview) -> Unit) {
         onItemClickListener = listener
     }
 
     companion object {
-        private val diffCallback = object: DiffUtil.ItemCallback<Person>() {
-            override fun areItemsTheSame(oldItem: Person, newItem: Person): Boolean {
-                return oldItem.uuid == oldItem.uuid
+
+        private val diffCallback = object: DiffUtil.ItemCallback<PersonPreview>() {
+            override fun areItemsTheSame(oldItem: PersonPreview, newItem: PersonPreview): Boolean {
+                return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: Person, newItem: Person): Boolean {
+            override fun areContentsTheSame(
+                oldItem: PersonPreview,
+                newItem: PersonPreview
+            ): Boolean {
                 return oldItem == newItem
             }
 

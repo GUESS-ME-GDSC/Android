@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.time.LocalDateTime
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
@@ -72,10 +72,8 @@ class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.
                     (residence.trim() != "") and
                     (birth.trim() != "")) {
 
-                    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-                    val localDateTime = LocalDateTime.parse("$birth 00:00:00", formatter)
-                    //datetime 관련 알아보기
-                    Log.d("localdatetime", localDateTime.toString())
+                    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                    val localDate = LocalDate.parse(birth, formatter)
 
                     var voice: Uri? = null
                     addPersonViewModel.fileName?.let {
@@ -90,7 +88,7 @@ class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.
                         null,
                         name,
                         relation,
-                        localDateTime,
+                        localDate,
                         residence,
                         null
                     )

@@ -95,9 +95,6 @@
         android:name="com.example.guessme.ui.view.PersonDetailFragment"
         android:label="@string/fragment_person_detail"
         tools:layout="@layout/fragment_person_detail">
-        <argument
-            android:name="person"
-            app:argType="com.example.guessme.data.model.Person" />
         <action
             android:id="@+id/action_fragment_person_detail_to_modifyPersonFragment"
             app:destination="@id/fragment_modify_person"
@@ -112,6 +109,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/fragment_modify_person"

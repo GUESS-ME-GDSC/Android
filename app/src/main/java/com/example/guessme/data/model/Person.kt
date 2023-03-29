@@ -3,7 +3,7 @@ package com.example.guessme.data.model
 import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 @Parcelize
 data class Person(
@@ -11,10 +11,10 @@ data class Person(
     var favorite: Boolean,
     val image: Uri?,
     val voice: Uri?,
-    val info: ArrayList<Info>?,
+    val info: InfoList?,
     val name: String,
     val relation: String,
-    val birth: LocalDateTime,
+    val birth: LocalDate,
     val residence: String,
     val score: Int?
 ): Parcelable
