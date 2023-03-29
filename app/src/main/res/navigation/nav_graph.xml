@@ -129,7 +129,7 @@
     <fragment
         android:id="@+id/fragment_start_quiz"
         android:name="com.example.guessme.ui.view.StartQuizFragment"
-        android:label="startqu"
+        android:label="@string/fragment_start_quiz"
         tools:layout="@layout/fragment_start_quiz">
         <action
             android:id="@+id/action_fragment_start_quiz_to_quizFragment"
