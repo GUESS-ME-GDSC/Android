@@ -2,10 +2,7 @@ package com.example.guessme.data.api
 
 import com.example.guessme.data.model.InfoList
 import com.example.guessme.data.model.User
-import com.example.guessme.data.response.BaseNullResponseBody
-import com.example.guessme.data.response.BaseResponseBody
-import com.example.guessme.data.response.PeopleListResponseBody
-import com.example.guessme.data.response.PersonResponse
+import com.example.guessme.data.response.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -63,6 +60,6 @@ interface RetrofitApi {
     @GET("/quiz/create/{id}")
     suspend fun getPersonQuiz(
         @Header("Authorization") authorization: String,
-        @Path("id") id: Int?
-    ): Response<PersonResponse>
+        @Path("id") id: Int
+    ): Response<QuizResponseBody>
 }
