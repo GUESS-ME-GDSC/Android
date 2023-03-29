@@ -12,9 +12,9 @@ data class Data(
     @field:Json(name = "favorite")
     val favorite: Boolean,
     @field:Json(name = "image")
-    val image: String,
+    val image: String?,
     @field:Json(name = "info")
-    val info: List<Info>,
+    val info: List<Info>?,
     @field:Json(name = "name")
     val name: String,
     @field:Json(name = "relation")
@@ -22,5 +22,5 @@ data class Data(
     @field:Json(name = "residence")
     val residence: String,
     @field:Json(name = "voice")
-    val voice: String
+    val voice: String?
 )
