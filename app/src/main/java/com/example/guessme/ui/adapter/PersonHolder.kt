@@ -15,7 +15,10 @@ class PersonHolder(private val binding: ItemPersonPreviewBinding):
             val relation = person.relation
             val favorite = person.favorite
             val score = person.score
-            val imageUri = Uri.parse(person.image)
+            person.image?.let {
+                val imageUri = Uri.parse(person.image)
+                binding.imagePreviewPerson.setImageURI(imageUri)
+            }
 
             if (favorite) {
                 binding.imagePreviewFavoriteTrue.visibility = View.VISIBLE
@@ -27,6 +30,5 @@ class PersonHolder(private val binding: ItemPersonPreviewBinding):
             binding.txtPreviewRelation.text = relation
             binding.txtPreviewScore.text = "$score%"
             binding.progressPreviewScore.progress = score!!
-            binding.imagePreviewPerson.setImageURI(imageUri)
         }
 }
