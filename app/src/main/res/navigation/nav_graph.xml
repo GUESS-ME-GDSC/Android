@@ -147,9 +147,6 @@
         android:name="com.example.guessme.ui.view.QuizFragment"
         android:label="@string/fragment_start_quiz"
         tools:layout="@layout/fragment_quiz" >
-        <argument
-            android:name="person"
-            app:argType="com.example.guessme.data.model.Person" />
         <action
             android:id="@+id/action_fragment_quiz_to_scoring_fragment"
             app:destination="@id/fragment_scoring"
