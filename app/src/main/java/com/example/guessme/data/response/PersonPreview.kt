@@ -5,6 +5,8 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class PersonPreview(
+    @Json(name = "favorite")
+    val favorite: Boolean,
     @Json(name = "id")
     val id: String,
     @Json(name = "image")
