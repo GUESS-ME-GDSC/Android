@@ -59,4 +59,10 @@ interface RetrofitApi {
         @Header("Authorization") authorization: String,
         @Query("favorite") favorite: Boolean
     ): Response<PeopleListResponseBody>
+
+    @GET("/quiz/create/{id}")
+    suspend fun getPersonQuiz(
+        @Header("Authorization") authorization: String,
+        @Path("id") id: Int?
+    ): Response<PersonResponse>
 }
