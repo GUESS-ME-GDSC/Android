@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModel
 import com.example.guessme.common.base.BasePlayer
 import com.example.guessme.common.base.BaseRecorder
 import com.example.guessme.data.model.Person
-import com.example.guessme.data.response.AddPersonRequestBody
+import com.example.guessme.data.response.BaseNullResponseBody
 import com.example.guessme.domain.repository.AddPersonRepository
 import com.example.guessme.domain.repository.LocalRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -90,7 +90,7 @@ class AddPersonViewModel @Inject constructor(
             val token = withContext(Dispatchers.IO){
                 localRepository.getToken().first()
             }
-            val response: Response<AddPersonRequestBody> = addPersonRepository.addPerson(token, person, image)
+            val response: Response<BaseNullResponseBody> = addPersonRepository.addPerson(token, person, image)
             val status = response.body()?.status
 
             if((status == 201) and response.isSuccessful) {

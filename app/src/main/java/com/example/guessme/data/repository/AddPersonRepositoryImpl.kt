@@ -3,7 +3,7 @@ package com.example.guessme.data.repository
 import android.util.Log
 import com.example.guessme.data.api.RetrofitApi
 import com.example.guessme.data.model.Person
-import com.example.guessme.data.response.AddPersonRequestBody
+import com.example.guessme.data.response.BaseNullResponseBody
 import com.example.guessme.domain.repository.AddPersonRepository
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -21,7 +21,7 @@ class AddPersonRepositoryImpl @Inject constructor(
     private val api: RetrofitApi
 ): AddPersonRepository {
 
-    override suspend fun addPerson(token: String, person: Person, image: File?): Response<AddPersonRequestBody> {
+    override suspend fun addPerson(token: String, person: Person, image: File?): Response<BaseNullResponseBody> {
         Log.d("person", person.toString())
         var imageRequestBody: RequestBody?
         var imageMultipartBody: MultipartBody.Part? = null
