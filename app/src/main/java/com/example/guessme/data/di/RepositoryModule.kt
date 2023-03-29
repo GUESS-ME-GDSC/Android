@@ -47,4 +47,10 @@ abstract class RepositoryModule {
     abstract fun bindPeopleListRepository(
         peopleListRepositoryImpl: PeopleListRepositoryImpl
     ): PeopleListRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindStartQuizRepository(
+        startQuizRepositoryImpl: StartQuizRepositoryImpl
+    ): StartQuizRepository
 }
