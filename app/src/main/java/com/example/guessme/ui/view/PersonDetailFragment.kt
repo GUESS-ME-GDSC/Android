@@ -9,13 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.common.base.BasePlayer
-import com.example.guessme.data.model.Info
 import com.example.guessme.databinding.FragmentPersonDetailBinding
 import com.example.guessme.ui.adapter.InfoListAdapter
 import com.example.guessme.ui.dialog.AddInfoDialog
@@ -30,7 +30,7 @@ import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.fragment_person_detail) {
-    private val args: PersonDetailFragmentArgs by navArgs()
+    private val personDetialFragmentargs: PersonDetailFragmentArgs by navArgs()
     private val personDetailViewModel by viewModels<PersonDetailViewModel>()
     private lateinit var infoListAdapter: InfoListAdapter
 
@@ -48,7 +48,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         setObserver()
 
         CoroutineScope(Dispatchers.IO).launch {
-            getPerson(args.id)
+            getPerson(personDetialFragmentargs.id)
         }
     }
 
@@ -131,7 +131,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         }
 
         binding.btnDetailInfoAdd.setOnClickListener {
-            val dialog = AddInfoDialog(personDetailViewModel, args.id)
+            val dialog = AddInfoDialog(personDetailViewModel, personDetialFragmentargs.id)
             dialog.show(requireActivity().supportFragmentManager, "AddInfoDialog")
         }
 
@@ -162,11 +162,8 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         }
 
         binding.btnDetailQuiz.setOnClickListener {
-            //서버에 해당 인물 퀴즈 요청
-            //넘겨받은 값을 전달해야 함(추후 수정)
-//            val person = personDetailViewModel.person.value
-//            val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToStartQuizFragment(person!!)
-//            findNavController().navigate(action)
+            val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToStartQuizFragment(personDetialFragmentargs.id)
+            findNavController().navigate(action)
         }
     }
 
