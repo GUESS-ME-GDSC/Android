@@ -2,10 +2,13 @@ package com.example.guessme.ui.view
 
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -28,6 +31,7 @@ import java.time.LocalDate
 class PeopleListFragment : BaseFragment<FragmentPeopleListBinding>(R.layout.fragment_people_list) {
     private lateinit var peopleListAdapter: PeopleListAdapter
     private val peopleListViewModel: PeopleListViewModel by viewModels()
+    private val filteredList = ArrayList<PersonPreview>()
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -41,12 +45,15 @@ class PeopleListFragment : BaseFragment<FragmentPeopleListBinding>(R.layout.frag
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setObserver()
+        init()
 
         CoroutineScope(Dispatchers.IO).launch {
-//            peopleListViewModel.getPeopleList(true)
             peopleListViewModel.getPeopleList(false)
         }
 
+    }
+
+    private fun init() {
         peopleListAdapter.setOnItemClickListener { personPreview ->
             val id = personPreview.id.toInt()
             val action = PeopleListFragmentDirections.actionFragmentPeopleListToFragmentPersonDetail(id)
@@ -57,6 +64,34 @@ class PeopleListFragment : BaseFragment<FragmentPeopleListBinding>(R.layout.frag
             findNavController().navigate(R.id.action_fragment_people_list_to_fragment_add_person)
         }
 
+        binding.editListSearch.addTextChangedListener( object: TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                var allList = arrayListOf<PersonPreview>()
+                val filter = p0.toString()
+                filteredList.clear()
+                peopleListViewModel.favoritePeopleList?.value?.let {
+                    allList += it
+                }
+
+                peopleListViewModel.notFavoritePeopleList?.value?.let {
+                    allList += it
+                }
+
+                for (item in allList) {
+                    if (item.name.contains(filter) || item.relation.contains(filter)) {
+                        filteredList.add(item)
+                    }
+                }
+
+                peopleListAdapter.submitList(filteredList)
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+        })
     }
 
     private fun setObserver() {
