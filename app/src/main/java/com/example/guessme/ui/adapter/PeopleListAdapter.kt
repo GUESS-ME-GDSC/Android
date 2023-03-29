@@ -13,7 +13,8 @@ class PeopleListAdapter: ListAdapter<PersonPreview, PersonHolder>(diffCallback) 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonHolder {
         return PersonHolder(
-            ItemPersonPreviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemPersonPreviewBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            parent.context
         )
     }
 

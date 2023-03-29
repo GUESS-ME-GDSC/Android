@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.common.base.BasePlayer
@@ -119,8 +120,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             }
 
             person.value!!.image?.let {
-                val imageUri = Uri.parse(person.value!!.image)
-                binding.imageDetailProfile.setImageURI(imageUri)
+                Glide.with(requireContext()).load(it).into(binding.imageDetailProfile)
             }
 
             if (person.value!!.favorite) {
