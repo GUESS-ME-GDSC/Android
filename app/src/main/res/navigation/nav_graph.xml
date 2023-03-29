@@ -131,9 +131,6 @@
         android:name="com.example.guessme.ui.view.StartQuizFragment"
         android:label="startqu"
         tools:layout="@layout/fragment_start_quiz">
-        <argument
-            android:name="person"
-            app:argType="com.example.guessme.data.model.Person" />
         <action
             android:id="@+id/action_fragment_start_quiz_to_quizFragment"
             app:destination="@id/fragment_quiz"
@@ -141,6 +138,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/fragment_quiz"
