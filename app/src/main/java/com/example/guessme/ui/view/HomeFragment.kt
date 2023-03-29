@@ -30,9 +30,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
 
         binding.btnHomeQuiz.setOnClickListener {
-            //랜덤 인물 서버에 요청후
-            //safe args로 전달 처리
-            findNavController().navigate(R.id.action_fragment_home_to_startQuizFragment)
+            val action = HomeFragmentDirections.actionFragmentHomeToStartQuizFragment(0)
+            findNavController().navigate(action)
         }
     }
 
