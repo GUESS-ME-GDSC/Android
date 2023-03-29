@@ -41,12 +41,6 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         return FragmentPersonDetailBinding.inflate(inflater, container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //arg에서 id를 받아와야 함
-
-    }
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,7 +48,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         setObserver()
 
         CoroutineScope(Dispatchers.IO).launch {
-            getPerson(2)
+            getPerson(args.id)
         }
     }
 
@@ -109,21 +103,25 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
     private fun init() {
         personDetailViewModel.person.let { person ->
             val dateFormat = DateTimeFormatter.ofPattern("yyyy.MM.dd")
-            val audioUri = Uri.parse(person.value!!.voice)
-            val fileName = File(audioUri.path!!).path
 
             binding.txtDetailName.text = person.value!!.name
             binding.txtDetailRelation.text = person.value!!.relation
             binding.txtDetailBirth.text = person.value!!.birth.format(dateFormat)
             binding.txtDetailAddress.text = person.value!!.residence
 
-            binding.btnDetailSpeaker.setOnClickListener {
-                personDetailViewModel.setPlayer(BasePlayer(requireActivity().supportFragmentManager))
-                personDetailViewModel.startPlaying(fileName)
+            person.value!!.voice?.let {
+                binding.btnDetailSpeaker.setOnClickListener {
+                    val audioUri = Uri.parse(person.value!!.voice)
+                    val fileName = File(audioUri.path!!).path
+                    personDetailViewModel.setPlayer(BasePlayer(requireActivity().supportFragmentManager))
+                    personDetailViewModel.startPlaying(fileName)
+                }
             }
 
-            val imageUri = Uri.parse(person.value!!.image)
-            binding.imageDetailProfile.setImageURI(imageUri)
+            person.value!!.image?.let {
+                val imageUri = Uri.parse(person.value!!.image)
+                binding.imageDetailProfile.setImageURI(imageUri)
+            }
 
             if (person.value!!.favorite) {
                 binding.imageDetailFavoriteTrue.setImageResource(R.drawable.ic_favorite_true)
@@ -133,7 +131,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         }
 
         binding.btnDetailInfoAdd.setOnClickListener {
-            val dialog = AddInfoDialog(personDetailViewModel)
+            val dialog = AddInfoDialog(personDetailViewModel, args.id)
             dialog.show(requireActivity().supportFragmentManager, "AddInfoDialog")
         }
 

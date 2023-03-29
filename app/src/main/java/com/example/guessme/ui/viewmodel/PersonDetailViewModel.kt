@@ -74,14 +74,16 @@ class PersonDetailViewModel @Inject constructor(
                 localRepositoryImpl.getToken().first()
             }
             //owner 추후 수정해야 함
-            val response: Response<PersonResponse> = personDetailRepository.getPerson("Bearer $token", 2)
+            val response: Response<PersonResponse> = personDetailRepository.getPerson("Bearer $token", id)
             val status = response.body()?.status
 
             if((status == 200) and response.isSuccessful) {
                 val person = response.body()?.data
-                Log.d("person", person.toString())
+
                 _person.postValue(person!!)
-                _infoList.postValue(person.info!!)
+                person.info?.let {
+                    _infoList.postValue(person.info!!)
+                }
             }else {
                 _getPersonSuccess.postValue(false)
             }
@@ -98,7 +100,7 @@ class PersonDetailViewModel @Inject constructor(
             }
             val infoList = List(1){info}
 
-            val response: Response<BaseNullResponseBody> = personDetailRepository.addInfo("Bearer $token",2,
+            val response: Response<BaseNullResponseBody> = personDetailRepository.addInfo("Bearer $token",id,
                 InfoList(infoList))
             val status = response.body()?.status
             Log.d("status", status.toString())

@@ -6,18 +6,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.data.model.Person
+import com.example.guessme.data.response.PersonPreview
 import com.example.guessme.databinding.FragmentPeopleListBinding
 import com.example.guessme.ui.adapter.PeopleListAdapter
-import java.time.LocalDateTime
+import com.example.guessme.ui.dialog.NoticeDialog
+import com.example.guessme.ui.viewmodel.PeopleListViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.time.LocalDate
 
+@AndroidEntryPoint
 class PeopleListFragment : BaseFragment<FragmentPeopleListBinding>(R.layout.fragment_people_list) {
     private lateinit var peopleListAdapter: PeopleListAdapter
+    private val peopleListViewModel: PeopleListViewModel by viewModels()
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -30,11 +40,16 @@ class PeopleListFragment : BaseFragment<FragmentPeopleListBinding>(R.layout.frag
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        setObserver()
 
-        peopleListAdapter.submitList(getTempPeopleData())
+        CoroutineScope(Dispatchers.IO).launch {
+//            peopleListViewModel.getPeopleList(true)
+            peopleListViewModel.getPeopleList(false)
+        }
 
-        peopleListAdapter.setOnItemClickListener { person ->
-            val action = PeopleListFragmentDirections.actionFragmentPeopleListToFragmentPersonDetail(person)
+        peopleListAdapter.setOnItemClickListener { personPreview ->
+            val id = personPreview.id.toInt()
+            val action = PeopleListFragmentDirections.actionFragmentPeopleListToFragmentPersonDetail(id)
             findNavController().navigate(action)
         }
 
@@ -42,6 +57,34 @@ class PeopleListFragment : BaseFragment<FragmentPeopleListBinding>(R.layout.frag
             findNavController().navigate(R.id.action_fragment_people_list_to_fragment_add_person)
         }
 
+    }
+
+    private fun setObserver() {
+        var newList: List<PersonPreview>
+        peopleListViewModel.favoritePeopleList.observe(viewLifecycleOwner) { favoriteList ->
+            newList = favoriteList
+            peopleListViewModel.notFavoritePeopleList.value?.let {
+                newList += it
+            }
+            peopleListAdapter.submitList(newList)
+        }
+
+        peopleListViewModel.notFavoritePeopleList.observe(viewLifecycleOwner) { notFavoriteList ->
+            newList = if (peopleListViewModel.favoritePeopleList.value == null) {
+                notFavoriteList
+            } else {
+                peopleListViewModel.favoritePeopleList.value!! + notFavoriteList
+            }
+
+            peopleListAdapter.submitList(newList)
+        }
+
+        peopleListViewModel.getPeopleList.observe(viewLifecycleOwner) { getPeopleList ->
+            if (! getPeopleList){
+                val dialog = NoticeDialog(R.string.dialog_msg_error)
+                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -58,15 +101,5 @@ class PeopleListFragment : BaseFragment<FragmentPeopleListBinding>(R.layout.frag
             )
             adapter = peopleListAdapter
         }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun getTempPeopleData(): ArrayList<Person> {
-        val data = ArrayList<Person>()
-
-        data.add(Person(0, true, null, null, null, "길동이", "손자", LocalDateTime.now(), "경기도 처인구", 30))
-        data.add(Person(0, false, null, null, null, "동백이", "손녀", LocalDateTime.now(), "경기도 처인구", 60))
-
-        return data
     }
 }

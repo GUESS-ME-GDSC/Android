@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import okhttp3.internal.wait
 
 
-class AddInfoDialog(private val viewModel: PersonDetailViewModel): BaseDialog<DialogAddInfoBinding>(R.layout.dialog_add_info) {
+class AddInfoDialog(private val viewModel: PersonDetailViewModel, private val personId: Int): BaseDialog<DialogAddInfoBinding>(R.layout.dialog_add_info) {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,10 +35,9 @@ class AddInfoDialog(private val viewModel: PersonDetailViewModel): BaseDialog<Di
             val value = binding.editAddInfoValue.text.toString()
 
             if ((key.trim() != "") and (value.trim() != "")) {
-                //owner 추후 수정해야 함.
                 val info = Info(null, key, value)
                 CoroutineScope(Dispatchers.IO).launch {
-                    addInfo(info, 2)
+                    addInfo(info, personId)
                 }
             }
 
