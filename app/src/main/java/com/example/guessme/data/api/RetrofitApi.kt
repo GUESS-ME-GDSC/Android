@@ -1,8 +1,6 @@
 package com.example.guessme.data.api
 
-import com.example.guessme.data.model.InfoList
-import com.example.guessme.data.model.NewScore
-import com.example.guessme.data.model.User
+import com.example.guessme.data.model.*
 import com.example.guessme.data.response.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -71,4 +69,9 @@ interface RetrofitApi {
         @Body newScore: NewScore
     ): Response<BaseResponseBody>
 
+    @HTTP(method = "DELETE", path = "/info/", hasBody = true)
+    suspend fun deleteInfo(
+        @Header("Authorization") authorization: String,
+        @Body idList: IdList
+    ): Response<BaseNullResponseBody>
 }

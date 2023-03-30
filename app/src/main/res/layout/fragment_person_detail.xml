@@ -8,6 +8,7 @@
     tools:context=".ui.view.PersonDetailFragment">
 
     <androidx.core.widget.NestedScrollView
+        android:background="@color/base_yellow"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,10 +17,8 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/base_yellow">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/image_detail_profile"
@@ -265,56 +264,56 @@
                 android:id="@+id/recycler_detail_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/btn_detail_info_add"
+                app:layout_constraintBottom_toTopOf="@id/layout_info_buttons"
                 app:layout_constraintLeft_toLeftOf="@id/layout_detail_address"
                 app:layout_constraintRight_toRightOf="@id/layout_detail_address"
                 app:layout_constraintTop_toBottomOf="@id/layout_detail_address" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_detail_info_add"
-                android:layout_width="130dp"
-                android:layout_height="48dp"
+            <LinearLayout
+                android:id="@+id/layout_info_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
-                android:background="@drawable/base_green_round_shape"
-                android:gravity="center"
-                android:text="@string/detail_info_add"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintTop_toBottomOf="@id/recycler_detail_info"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/btn_detail_info_delete"
-                app:layout_constraintTop_toBottomOf="@id/recycler_detail_info" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_detail_info_delete"
-                android:layout_width="130dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/base_green_round_shape"
-                android:gravity="center"
-                android:text="@string/detail_info_delete"
-                android:textColor="@color/white"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/btn_detail_info_add"
-                app:layout_constraintLeft_toRightOf="@id/btn_detail_info_add"
-                app:layout_constraintRight_toLeftOf="@id/btn_detail_delete_complete"
-                app:layout_constraintTop_toTopOf="@id/btn_detail_info_add" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_detail_delete_complete"
-                android:layout_width="130dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/base_green_round_shape"
-                android:gravity="center"
-                android:text="@string/detail_info_delete_complete"
-                android:textColor="@color/white"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/btn_detail_info_delete"
-                app:layout_constraintLeft_toRightOf="@id/btn_detail_info_delete"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/btn_detail_info_delete" />
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_detail_info_add"
+                    android:layout_width="130dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/base_green_round_shape"
+                    android:gravity="center"
+                    android:text="@string/detail_info_add"
+                    android:textColor="@color/white"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_detail_info_delete"
+                    android:layout_width="130dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/base_green_round_shape"
+                    android:gravity="center"
+                    android:text="@string/detail_info_delete"
+                    android:textColor="@color/white"
+                    android:visibility="gone"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_detail_delete_complete"
+                    android:layout_width="130dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/base_green_round_shape"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="@string/detail_info_delete_complete"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
