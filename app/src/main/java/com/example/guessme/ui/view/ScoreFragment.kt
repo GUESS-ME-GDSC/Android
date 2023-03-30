@@ -16,6 +16,7 @@ import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.common.base.BasePlayer
 import com.example.guessme.common.util.GlideApp
+import com.example.guessme.data.model.NewScore
 import com.example.guessme.databinding.FragmentScoreBinding
 import com.example.guessme.ui.adapter.InfoListAdapter
 import com.example.guessme.ui.dialog.NoticeDialog
@@ -49,6 +50,7 @@ class ScoreFragment : BaseFragment<FragmentScoreBinding>(R.layout.fragment_score
 
         CoroutineScope(Dispatchers.IO).launch {
             getPerson(startQuizViewModel.personId.value!!)
+            patchNewScore()
         }
     }
 
@@ -65,6 +67,20 @@ class ScoreFragment : BaseFragment<FragmentScoreBinding>(R.layout.fragment_score
             )
             adapter = infoListAdapter
         }
+
+        scoreViewModel.getPerson.observe(viewLifecycleOwner) { getPerson ->
+            if (! getPerson) {
+                val dialog = NoticeDialog(R.string.dialog_msg_error)
+                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            }
+        }
+
+        scoreViewModel.patchNewScore.observe(viewLifecycleOwner) { patchNewScore ->
+            if (! patchNewScore) {
+                val dialog = NoticeDialog(R.string.dialog_patch_score)
+                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            }
+        }
     }
 
     private suspend fun getPerson(id: Int) {
@@ -72,6 +88,16 @@ class ScoreFragment : BaseFragment<FragmentScoreBinding>(R.layout.fragment_score
             scoreViewModel.getPerson(id)
         } catch (e: java.lang.Exception) {
             val dialog = NoticeDialog(R.string.dialog_msg_error)
+            dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+        }
+    }
+
+    private suspend fun patchNewScore() {
+        try {
+            val newScore = NewScore(startQuizViewModel.personId.value!!, startQuizViewModel.getScore())
+            scoreViewModel.patchNewScore(newScore)
+        } catch (e: java.lang.Exception) {
+            val dialog = NoticeDialog(R.string.dialog_patch_score)
             dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
         }
     }
@@ -133,8 +159,6 @@ class ScoreFragment : BaseFragment<FragmentScoreBinding>(R.layout.fragment_score
 
         binding.btnQuizFinish.setOnClickListener {
             val start = startQuizViewModel.getQuizId()
-
-
 
             if (start == 0) {
                 findNavController().navigate(R.id.action_fragment_score_to_fragment_home)

@@ -1,11 +1,14 @@
 package com.example.guessme.ui.viewmodel
 
 import android.media.MediaPlayer
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.guessme.common.base.BasePlayer
 import com.example.guessme.data.model.Info
+import com.example.guessme.data.model.NewScore
+import com.example.guessme.data.response.BaseResponseBody
 import com.example.guessme.data.response.Data
 import com.example.guessme.data.response.PersonResponse
 import com.example.guessme.domain.repository.LocalRepository
@@ -30,6 +33,8 @@ class ScoreViewModel @Inject constructor(
     val infoList: LiveData<List<Info>?> = _infoList
     private var _player: BasePlayer? = null
     private val player get() = _player!!
+    private val _patchNewScore = MutableLiveData<Boolean>()
+    val patchNewScore: LiveData<Boolean> = _patchNewScore
 
     fun setPlayer(player: BasePlayer) {
         _player = player
@@ -39,6 +44,26 @@ class ScoreViewModel @Inject constructor(
     fun startPlaying(name: String?) {
         player.startPlaying(name)
     }
+
+    suspend fun patchNewScore(newScore: NewScore) {
+        try {
+            val token = withContext(Dispatchers.IO) {
+                localRepository.getToken().first()
+            }
+            val response: Response<BaseResponseBody> =
+                scoreRepository.patchNewScore("Bearer $token", newScore)
+            val status = response.body()?.status
+            Log.d("status", status.toString())
+            Log.d("data", response.body()!!.data!!)
+
+            if ((status != 200) or !response.isSuccessful) {
+                _patchNewScore.postValue(false)
+            }
+        } catch (e: java.lang.Exception) {
+            _patchNewScore.postValue(false)
+        }
+    }
+
     suspend fun getPerson(id: Int) {
         try {
             val token = withContext(Dispatchers.IO) {

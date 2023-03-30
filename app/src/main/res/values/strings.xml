@@ -71,6 +71,7 @@
     <string name="dialog_record_no_file"><b>음성 파일이 없습니다.\n 녹음을 진행해주세요!🙂</b></string>
     <string name="dialog_quiz_start"><b>해당 문제가 첫 문제입니다!🙂</b></string>
     <string name="dialog_quiz_last"><b>해당 문제가 마지막 문제입니다!🙂</b></string>
+    <string name="dialog_patch_score"><b>점수 등록에 실패했습니다.🥲</b></string>
 
     <!--  add info dialog  -->
     <string name="dialog_add_info_notice"><b>정보</b></string>
