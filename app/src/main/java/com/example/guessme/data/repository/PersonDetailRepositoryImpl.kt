@@ -1,6 +1,7 @@
 package com.example.guessme.data.repository
 
 import com.example.guessme.data.api.RetrofitApi
+import com.example.guessme.data.model.IdList
 import com.example.guessme.data.model.InfoList
 import com.example.guessme.data.response.BaseNullResponseBody
 import com.example.guessme.data.response.PersonResponse
@@ -20,6 +21,10 @@ class PersonDetailRepositoryImpl @Inject constructor(
 
     override suspend fun getPerson(token: String, id: Int): Response<PersonResponse> {
         return api.getPerson(token, id)
+    }
+
+    override suspend fun deleteInfo(token: String, info: IdList): Response<BaseNullResponseBody> {
+        return api.deleteInfo(token, info)
     }
 
 
