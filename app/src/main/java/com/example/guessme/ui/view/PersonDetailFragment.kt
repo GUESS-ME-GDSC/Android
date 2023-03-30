@@ -1,5 +1,6 @@
 package com.example.guessme.ui.view
 
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -13,10 +14,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.common.base.BasePlayer
+import com.example.guessme.common.util.GlideApp
 import com.example.guessme.databinding.FragmentPersonDetailBinding
 import com.example.guessme.ui.adapter.InfoListAdapter
 import com.example.guessme.ui.dialog.AddInfoDialog
@@ -120,7 +121,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             }
 
             person.value!!.image?.let {
-                Glide.with(requireContext()).load(it).into(binding.imageDetailProfile)
+                GlideApp.with(requireContext()).load(it).into(binding.imageDetailProfile)
             }
 
             if (person.value!!.favorite) {
