@@ -39,7 +39,11 @@ class StartQuizViewModel @Inject constructor(
     val personId: LiveData<Int> = _personId
     private val _score = MutableLiveData<Int>()
     val score: LiveData<Int> = _score
+    private var getQuizId: Int? = null
 
+    fun getQuizId(): Int {
+        return getQuizId!!
+    }
 
     fun increaseCur() {
         _cur.postValue(_cur.value!!+1)
@@ -55,6 +59,10 @@ class StartQuizViewModel @Inject constructor(
 
     fun setCorrect() {
         answer!![cur.value!!] = 1
+    }
+
+    fun setWrong() {
+        answer!![cur.value!!] = 0
     }
 
     fun getScore(): Int {
@@ -92,7 +100,7 @@ class StartQuizViewModel @Inject constructor(
 
             if ((status == 200) and response.isSuccessful) {
                 val personQuiz = response.body()!!.data
-
+                getQuizId = id
                 _quizImage.postValue(personQuiz.image)
                 _quizVoice.postValue(personQuiz.voice)
                 _quizList.postValue(personQuiz.quizList)
