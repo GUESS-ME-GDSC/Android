@@ -12,6 +12,7 @@ import com.example.guessme.data.repository.LocalRepositoryImpl
 import com.example.guessme.data.response.BaseNullResponseBody
 import com.example.guessme.data.response.Data
 import com.example.guessme.data.response.PersonResponse
+import com.example.guessme.domain.repository.LocalRepository
 import com.example.guessme.domain.repository.PersonDetailRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PersonDetailViewModel @Inject constructor(
     private val personDetailRepository: PersonDetailRepository,
-    private val localRepositoryImpl: LocalRepositoryImpl
+    private val localRepository: LocalRepository
 ): ViewModel() {
     private var _person = MutableLiveData<Data>()
     val person get() = _person
@@ -71,9 +72,9 @@ class PersonDetailViewModel @Inject constructor(
     suspend fun getPerson(id: Int) {
         try {
             val token = withContext(Dispatchers.IO) {
-                localRepositoryImpl.getToken().first()
+                localRepository.getToken().first()
             }
-            //owner 추후 수정해야 함
+
             val response: Response<PersonResponse> = personDetailRepository.getPerson("Bearer $token", id)
             val status = response.body()?.status
 
@@ -96,7 +97,7 @@ class PersonDetailViewModel @Inject constructor(
     suspend fun addInfo(info: Info, id: Int) {
         try {
             val token = withContext(Dispatchers.IO) {
-                localRepositoryImpl.getToken().first()
+                localRepository.getToken().first()
             }
             val infoList = List(1){info}
 
