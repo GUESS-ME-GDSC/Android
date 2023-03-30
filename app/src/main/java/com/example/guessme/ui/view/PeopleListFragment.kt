@@ -8,14 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
-import com.example.guessme.data.model.Person
 import com.example.guessme.data.response.PersonPreview
 import com.example.guessme.databinding.FragmentPeopleListBinding
 import com.example.guessme.ui.adapter.PeopleListAdapter
@@ -25,7 +23,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 
 @AndroidEntryPoint
 class PeopleListFragment : BaseFragment<FragmentPeopleListBinding>(R.layout.fragment_people_list) {
@@ -48,6 +45,7 @@ class PeopleListFragment : BaseFragment<FragmentPeopleListBinding>(R.layout.frag
         init()
 
         CoroutineScope(Dispatchers.IO).launch {
+            peopleListViewModel.getPeopleList(true)
             peopleListViewModel.getPeopleList(false)
         }
 
