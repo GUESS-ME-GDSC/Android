@@ -6,9 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.guessme.common.base.BasePlayer
+import com.example.guessme.data.model.IdList
 import com.example.guessme.data.model.Info
 import com.example.guessme.data.model.InfoList
-import com.example.guessme.data.repository.LocalRepositoryImpl
 import com.example.guessme.data.response.BaseNullResponseBody
 import com.example.guessme.data.response.Data
 import com.example.guessme.data.response.PersonResponse
@@ -38,6 +38,8 @@ class PersonDetailViewModel @Inject constructor(
     private val _addSuccess = MutableLiveData<Boolean>()
     val addSuccess: LiveData<Boolean> = _addSuccess
     val getPersonSuccess: LiveData<Boolean> = _getPersonSuccess
+    private val _deleteSuccess = MutableLiveData<Boolean>()
+    val deleteSuccess: LiveData<Boolean> = _deleteSuccess
 
     fun setAddSuccess(data: Boolean) {
         _addSuccess.postValue(data)
@@ -83,7 +85,7 @@ class PersonDetailViewModel @Inject constructor(
 
                 _person.postValue(person!!)
                 person.info?.let {
-                    _infoList.postValue(person.info!!)
+                    _infoList.postValue(person.info)
                 }
             }else {
                 _getPersonSuccess.postValue(false)
@@ -114,6 +116,28 @@ class PersonDetailViewModel @Inject constructor(
         }catch (e: Exception) {
             Log.e("e", e.toString())
             _addSuccess.postValue(false)
+        }
+    }
+
+    suspend fun deleteInfo(idList: IdList) {
+        try {
+            val token = withContext(Dispatchers.IO) {
+                localRepository.getToken().first()
+            }
+            Log.d("idList", idList.toString())
+            val response: Response<BaseNullResponseBody> = personDetailRepository.deleteInfo("Bearer $token", idList)
+            val status = response.body()?.status
+            Log.d("status", status.toString())
+            Log.d("message", response.body()!!.message.toString())
+
+            if ((status == 201) and response.isSuccessful) {
+                _deleteSuccess.postValue(true)
+            } else {
+                _deleteSuccess.postValue(false)
+            }
+        } catch (e: java.lang.Exception) {
+            Log.d("e", e.toString())
+            _deleteSuccess.postValue(false)
         }
     }
 
