@@ -1,20 +1,130 @@
 package com.example.guessme.ui.view
 
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
+import androidx.fragment.app.activityViewModels
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
+import com.example.guessme.common.base.BasePlayer
+import com.example.guessme.common.util.Constants.REQUIRED_CAMERA_PERMISSION
+import com.example.guessme.common.util.GlideApp
 import com.example.guessme.databinding.FragmentQuizBinding
+import com.example.guessme.ui.dialog.ErrorDialog
+import com.example.guessme.ui.dialog.NoticeDialog
+import com.example.guessme.ui.viewmodel.StartQuizViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 
+@AndroidEntryPoint
 class QuizFragment : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) {
+    private val startQuizViewModel: StartQuizViewModel by activityViewModels()
+    private var photoUri: Uri? = null
+
     override fun getFragmentBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
     ): FragmentQuizBinding {
         return FragmentQuizBinding.inflate(inflater, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init()
+        setObserver()
+    }
+
+    private fun setObserver() {
+        startQuizViewModel.cur.observe(viewLifecycleOwner) { cur ->
+            init()
+        }
+    }
+
+    private fun init() {
+        val image = startQuizViewModel.quizImage
+        val voice = startQuizViewModel.quizVoice
+        val quiz = startQuizViewModel.getCurQuiz()
+
+        image.value?.let {
+            GlideApp.with(requireContext()).load(it).into(binding.imageQuizStepProfile)
+        }
+
+
+        if (voice.value != null) {
+            val uri = Uri.parse(voice.value)
+            val fileName = File(uri.path!!).path
+
+            binding.btnQuizStepVoice.setOnClickListener {
+                startQuizViewModel.player?.let {
+                    startQuizViewModel.setPlayer(BasePlayer(requireActivity().supportFragmentManager))
+                }
+                startQuizViewModel.startPlaying(fileName)
+            }
+
+        } else {
+            binding.btnQuizStepVoice.visibility = View.GONE
+        }
+
+        binding.txtQuizStepKey.text = quiz.question
+
+        binding.btnQuizStepAnswer.setOnClickListener {
+            requestCameraLauncher.launch(REQUIRED_CAMERA_PERMISSION)
+        }
+
+        if (startQuizViewModel.isQuizLast()) {
+            binding.btnQuizStepNext.setOnClickListener {
+                val dialog = NoticeDialog(R.string.dialog_quiz_last)
+                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            }
+        } else {
+            binding.btnQuizStepNext.setOnClickListener {
+                startQuizViewModel.increaseCur()
+            }
+        }
+
+        if (startQuizViewModel.isQuizStart()) {
+            binding.btnQuizStepBefore.setOnClickListener {
+                val dialog = NoticeDialog(R.string.dialog_quiz_start)
+                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            }
+        } else {
+            binding.btnQuizStepBefore.setOnClickListener {
+                startQuizViewModel.decreaseCur()
+            }
+        }
+
+    }
+
+    private val requestCameraLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()){ isGranted ->
+        if (isGranted) {
+            val photoFile = File.createTempFile("IMG_", ".jpg",
+                requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES))
+            photoUri = FileProvider.getUriForFile(requireContext(), "${requireActivity().packageName}", photoFile)
+            imageCaptureLauncher.launch(photoUri)
+        }else {
+            val dialog = NoticeDialog(R.string.dialog_permission)
+            dialog.show( requireActivity().supportFragmentManager,"NoticeDialog")
+        }
+    }
+
+    private val imageCaptureLauncher = registerForActivityResult(
+        ActivityResultContracts.TakePicture()) { isGranted ->
+        if(isGranted) {
+            //이미지 값 처리! photo
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        (activity as AppCompatActivity)?.supportActionBar?.hide()
     }
 
 }
