@@ -20,6 +20,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/txt_quiz_result_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/quiz_result"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/image_quiz_result_profile"/>
+
+
             <ImageView
                 android:id="@+id/image_quiz_result_profile"
                 android:layout_width="200dp"
@@ -32,12 +47,11 @@
                 android:padding="5dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_base_profile"
-                app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintBottom_toTopOf="@id/txt_quiz_score"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/txt_quiz_result_title"/>
 
             <View
                 android:layout_width="200dp"
