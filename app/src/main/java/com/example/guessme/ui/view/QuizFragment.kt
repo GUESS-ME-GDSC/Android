@@ -11,22 +11,27 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.common.base.BasePlayer
 import com.example.guessme.common.util.Constants.REQUIRED_CAMERA_PERMISSION
 import com.example.guessme.common.util.GlideApp
+import com.example.guessme.data.response.Quiz
 import com.example.guessme.databinding.FragmentQuizBinding
 import com.example.guessme.ui.dialog.ErrorDialog
 import com.example.guessme.ui.dialog.NoticeDialog
 import com.example.guessme.ui.viewmodel.StartQuizViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 @AndroidEntryPoint
 class QuizFragment : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) {
     private val startQuizViewModel: StartQuizViewModel by activityViewModels()
     private var photoUri: Uri? = null
+    private var quiz: Quiz? = null
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -50,7 +55,7 @@ class QuizFragment : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) {
     private fun init() {
         val image = startQuizViewModel.quizImage
         val voice = startQuizViewModel.quizVoice
-        val quiz = startQuizViewModel.getCurQuiz()
+        quiz = startQuizViewModel.getCurQuiz()
 
         image.value?.let {
             GlideApp.with(requireContext()).load(it).into(binding.imageQuizStepProfile)
@@ -72,7 +77,7 @@ class QuizFragment : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) {
             binding.btnQuizStepVoice.visibility = View.GONE
         }
 
-        binding.txtQuizStepKey.text = quiz.question
+        binding.txtQuizStepKey.text = quiz!!.question
 
         binding.btnQuizStepAnswer.setOnClickListener {
             requestCameraLauncher.launch(REQUIRED_CAMERA_PERMISSION)
@@ -118,7 +123,8 @@ class QuizFragment : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) {
     private val imageCaptureLauncher = registerForActivityResult(
         ActivityResultContracts.TakePicture()) { isGranted ->
         if(isGranted) {
-            //이미지 값 처리! photo
+            val action = QuizFragmentDirections.actionFragmentQuizToScoringFragment(imageUri = photoUri.toString(), quiz = quiz!!)
+            findNavController().navigate(action)
         }
     }
 
