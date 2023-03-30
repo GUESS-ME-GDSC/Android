@@ -18,6 +18,7 @@ import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.common.base.BasePlayer
 import com.example.guessme.common.util.GlideApp
+import com.example.guessme.data.model.IdList
 import com.example.guessme.databinding.FragmentPersonDetailBinding
 import com.example.guessme.ui.adapter.InfoListAdapter
 import com.example.guessme.ui.dialog.AddInfoDialog
@@ -89,6 +90,20 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         personDetailViewModel.person.observe(viewLifecycleOwner) {
             init()
         }
+
+        personDetailViewModel.deleteSuccess.observe(viewLifecycleOwner) { deleteSuccess ->
+            if (! deleteSuccess) {
+                val dialog = NoticeDialog(R.string.dialog_msg_error)
+                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            } else {
+                CoroutineScope(Dispatchers.IO).launch {
+                    getPerson(personDetailFragmentArgs.id)
+                }
+
+                val dialog = NoticeDialog(R.string.detail_info_delete_success)
+                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -144,9 +159,12 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         }
 
         binding.btnDetailDeleteComplete.setOnClickListener {
+
+            CoroutineScope(Dispatchers.IO).launch {
+                deleteInfo()
+            }
+
             personDetailViewModel.setDelete(false)
-            //delete 값 서버에 전달 처리
-            Log.d("list", infoListAdapter.deleteSet.toString())
             binding.btnDetailDeleteComplete.visibility = View.GONE
             binding.btnDetailInfoAdd.visibility = View.VISIBLE
             binding.btnDetailInfoDelete.visibility = View.VISIBLE
@@ -165,6 +183,16 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         binding.btnDetailQuiz.setOnClickListener {
             val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToStartQuizFragment(personDetailFragmentArgs.id)
             findNavController().navigate(action)
+        }
+    }
+
+    private suspend fun deleteInfo() {
+        try {
+            val idList = IdList(infoListAdapter.deleteSet.toList())
+            personDetailViewModel.deleteInfo(idList)
+        } catch (e: java.lang.Exception) {
+            val dialog = NoticeDialog(R.string.dialog_msg_error)
+            dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
         }
     }
 
