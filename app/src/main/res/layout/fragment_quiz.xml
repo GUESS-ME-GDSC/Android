@@ -7,7 +7,34 @@
     android:background="@color/base_yellow"
     tools:context=".ui.view.QuizFragment">
 
-    <androidx.appcompat.widget.AppCompatButton
+    <TextView
+        android:id="@+id/txt_quiz_step_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintRight_toLeftOf="@id/txt_quiz_step"
+        app:layout_constraintTop_toTopOf="@id/txt_quiz_step"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/txt_quiz_step"/>
+
+    <TextView
+        android:id="@+id/txt_quiz_step"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quiz_scoring_step"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/txt_quiz_step_num"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/image_quiz_step_profile"/>
+
+    <TextView
         android:id="@+id/btn_quiz_step_before"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -15,6 +42,7 @@
         android:textColor="@color/white"
         android:gravity="center"
         android:textSize="20sp"
+        android:padding="15dp"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
@@ -27,9 +55,9 @@
 
     <ImageView
         android:id="@+id/image_quiz_step_profile"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/base_green_stroke_shape"
@@ -38,16 +66,15 @@
         android:scaleType="fitXY"
         android:src="@drawable/ic_base_profile"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintBottom_toTopOf="@id/txt_quiz_step_info"
         app:layout_constraintLeft_toRightOf="@id/btn_quiz_step_before"
         app:layout_constraintRight_toLeftOf="@id/btn_quiz_step_next"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/txt_quiz_step"/>
 
     <View
         android:id="@+id/view_quiz_tep_for_profile"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:background="@drawable/base_green_stroke_image"
         app:layout_constraintBottom_toBottomOf="@id/image_quiz_step_profile"
         app:layout_constraintLeft_toLeftOf="@id/image_quiz_step_profile"
@@ -66,7 +93,7 @@
         app:layout_constraintRight_toRightOf="@id/image_quiz_step_profile"/>
 
 
-    <androidx.appcompat.widget.AppCompatButton
+    <TextView
         android:id="@+id/btn_quiz_step_next"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -74,6 +101,7 @@
         android:textColor="@color/white"
         android:gravity="center"
         android:textSize="20sp"
+        android:padding="15dp"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"

@@ -96,5 +96,6 @@
     <string name="quiz_result_info"><b>정보</b></string>
     <string name="quiz_result_finish"><b>종료</b></string>
     <string name="quiz_scoring">채점 중..👀</string>
+    <string name="quiz_scoring_step"><b>단계📝</b></string>
 
 </resources>
