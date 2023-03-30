@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 @JsonClass(generateAdapter = true)
 @Parcelize
 data class Info(
-    val uuid: Int?,
+    @field:Json(name = "id") val uuid: Int?,
     @field:Json(name = "infoKey") val infoKey: String,
     @field:Json(name = "infoValue") val infoValue: String,
 ): Parcelable
