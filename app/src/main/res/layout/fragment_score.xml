@@ -110,7 +110,7 @@
                 android:textColor="@color/base_green"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="2dp"
                 app:layout_constraintTop_toTopOf="@id/txt_quiz_down"
                 app:layout_constraintBottom_toBottomOf="@id/txt_quiz_down"
                 app:layout_constraintLeft_toRightOf="@id/txt_quiz_down"/>
