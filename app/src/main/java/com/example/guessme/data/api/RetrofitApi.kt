@@ -62,4 +62,12 @@ interface RetrofitApi {
         @Header("Authorization") authorization: String,
         @Path("id") id: Int
     ): Response<QuizResponseBody>
+
+    @Multipart
+    @POST("/quiz/scoring")
+    suspend fun quizScoring(
+        @Header("Authorization") authorization: String,
+        @Part image: MultipartBody.Part,
+        @Part("infoValue") infoValue: RequestBody
+    ): Response<ScoringResponseBody>
 }
