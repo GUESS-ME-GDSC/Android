@@ -119,12 +119,7 @@
         android:label="@string/fragment_modify_person" >
         <argument
             android:name="person"
-            app:argType="com.example.guessme.data.model.Person" />
-        <argument
-            android:name="infoList"
-            app:argType="com.example.guessme.data.model.InfoList"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:argType="com.example.guessme.data.response.Data" />
     </fragment>
     <fragment
         android:id="@+id/fragment_start_quiz"

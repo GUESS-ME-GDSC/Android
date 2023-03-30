@@ -1,10 +1,12 @@
 package com.example.guessme.data.response
 
-
+import android.os.Parcelable
 import com.example.guessme.data.model.Info
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @JsonClass(generateAdapter = true)
 data class Data(
     @field:Json(name = "birth")
@@ -23,4 +25,4 @@ data class Data(
     val residence: String,
     @field:Json(name = "voice")
     val voice: String?
-)
+):Parcelable

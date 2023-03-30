@@ -172,12 +172,9 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         }
 
         binding.fabDetailPersonModify.setOnClickListener {
-//            val person = personDetailViewModel.person
-//            val infoList = personDetailViewModel.infoList
-
-            //person 넘기는 부분에서 오류 발생!
-//            val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToModifyPersonFragment(person = person.value!!, infoList = infoList.value)
-//            findNavController().navigate(action)
+            val person = personDetailViewModel.person.value
+            val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToModifyPersonFragment(person!!)
+            findNavController().navigate(action)
         }
 
         binding.btnDetailQuiz.setOnClickListener {
