@@ -1,8 +1,10 @@
 package com.example.guessme.ui.view
 
+import android.content.ContentValues
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +28,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 @AndroidEntryPoint
 class QuizFragment : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) {
@@ -123,9 +127,30 @@ class QuizFragment : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) {
     private val imageCaptureLauncher = registerForActivityResult(
         ActivityResultContracts.TakePicture()) { isGranted ->
         if(isGranted) {
-            val action = QuizFragmentDirections.actionFragmentQuizToScoringFragment(imageUri = photoUri.toString(), quiz = quiz!!)
+            val uri = getRealPath(photoUri!!)
+            val action = QuizFragmentDirections.actionFragmentQuizToScoringFragment(imageUri = uri!!, quiz = quiz!!)
             findNavController().navigate(action)
         }
+    }
+
+    private fun getRealPath(uri: Uri): String?{
+        val contentResolver = requireContext().contentResolver
+        val filePath = requireContext().applicationInfo.dataDir + File.separator + System.currentTimeMillis() + ".jpg"
+        val file = File(filePath)
+
+        try{
+            val inputStream = contentResolver.openInputStream(uri) ?: return null
+            val outputStream = FileOutputStream(file)
+            val buf = ByteArray(1024)
+            var len: Int
+            while(inputStream.read(buf).also { len = it } > 0)
+                outputStream.write(buf, 0, len)
+            outputStream.close()
+            inputStream.close()
+        }catch(ignore: IOException){
+            return null
+        }
+        return file.absolutePath
     }
 
     override fun onStart() {
