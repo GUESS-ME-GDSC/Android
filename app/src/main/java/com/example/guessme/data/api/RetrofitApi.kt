@@ -1,19 +1,13 @@
 package com.example.guessme.data.api
 
 import com.example.guessme.data.model.InfoList
+import com.example.guessme.data.model.NewScore
 import com.example.guessme.data.model.User
 import com.example.guessme.data.response.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface RetrofitApi {
     @POST("/auth/login")
@@ -62,4 +56,19 @@ interface RetrofitApi {
         @Header("Authorization") authorization: String,
         @Path("id") id: Int
     ): Response<QuizResponseBody>
+
+    @Multipart
+    @POST("/quiz/scoring")
+    suspend fun quizScoring(
+        @Header("Authorization") authorization: String,
+        @Part image: MultipartBody.Part,
+        @Part("infoValue") infoValue: RequestBody
+    ): Response<ScoringResponseBody>
+
+    @PATCH("/quiz/newscore")
+    suspend fun patchNewScore(
+        @Header("Authorization") authorization: String,
+        @Body newScore: NewScore
+    ): Response<BaseResponseBody>
+
 }

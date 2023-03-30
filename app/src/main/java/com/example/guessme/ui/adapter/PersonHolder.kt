@@ -1,13 +1,16 @@
 package com.example.guessme.ui.adapter
 
-import android.net.Uri
+import android.content.Context
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.guessme.data.model.Person
+import com.bumptech.glide.Glide
+import com.example.guessme.common.util.GlideApp
 import com.example.guessme.data.response.PersonPreview
 import com.example.guessme.databinding.ItemPersonPreviewBinding
 
-class PersonHolder(private val binding: ItemPersonPreviewBinding):
+
+class PersonHolder(private val binding: ItemPersonPreviewBinding, private val context: Context):
     RecyclerView.ViewHolder(binding.root) {
 
         fun bind(person: PersonPreview) {
@@ -16,8 +19,9 @@ class PersonHolder(private val binding: ItemPersonPreviewBinding):
             val favorite = person.favorite
             val score = person.score
             person.image?.let {
-                val imageUri = Uri.parse(person.image)
-                binding.imagePreviewPerson.setImageURI(imageUri)
+                Log.d("image", it)
+
+                GlideApp.with(context).load(it).into(binding.imagePreviewPerson);
             }
 
             if (favorite) {
@@ -29,6 +33,7 @@ class PersonHolder(private val binding: ItemPersonPreviewBinding):
             binding.txtPreviewName.text = name
             binding.txtPreviewRelation.text = relation
             binding.txtPreviewScore.text = "$score%"
-            binding.progressPreviewScore.progress = score!!
+            binding.progressPreviewScore.progress = score
         }
+
 }

@@ -53,4 +53,16 @@ abstract class RepositoryModule {
     abstract fun bindStartQuizRepository(
         startQuizRepositoryImpl: StartQuizRepositoryImpl
     ): StartQuizRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindScoringRepository(
+        scoringRepositoryImpl: ScoringRepositoryImpl
+    ): ScoringRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindScoreRepository(
+        scoreRepositoryImpl: ScoreRepositoryImpl
+    ): ScoreRepository
 }

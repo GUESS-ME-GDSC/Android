@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.common.base.BasePlayer
+import com.example.guessme.common.util.GlideApp
 import com.example.guessme.databinding.FragmentPersonDetailBinding
 import com.example.guessme.ui.adapter.InfoListAdapter
 import com.example.guessme.ui.dialog.AddInfoDialog
@@ -30,7 +32,7 @@ import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.fragment_person_detail) {
-    private val personDetialFragmentargs: PersonDetailFragmentArgs by navArgs()
+    private val personDetailFragmentArgs: PersonDetailFragmentArgs by navArgs()
     private val personDetailViewModel by viewModels<PersonDetailViewModel>()
     private lateinit var infoListAdapter: InfoListAdapter
 
@@ -48,7 +50,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         setObserver()
 
         CoroutineScope(Dispatchers.IO).launch {
-            getPerson(personDetialFragmentargs.id)
+            getPerson(personDetailFragmentArgs.id)
         }
     }
 
@@ -119,8 +121,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             }
 
             person.value!!.image?.let {
-                val imageUri = Uri.parse(person.value!!.image)
-                binding.imageDetailProfile.setImageURI(imageUri)
+                GlideApp.with(requireContext()).load(it).into(binding.imageDetailProfile)
             }
 
             if (person.value!!.favorite) {
@@ -131,7 +132,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         }
 
         binding.btnDetailInfoAdd.setOnClickListener {
-            val dialog = AddInfoDialog(personDetailViewModel, personDetialFragmentargs.id)
+            val dialog = AddInfoDialog(personDetailViewModel, personDetailFragmentArgs.id)
             dialog.show(requireActivity().supportFragmentManager, "AddInfoDialog")
         }
 
@@ -162,7 +163,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         }
 
         binding.btnDetailQuiz.setOnClickListener {
-            val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToStartQuizFragment(personDetialFragmentargs.id)
+            val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToStartQuizFragment(personDetailFragmentArgs.id)
             findNavController().navigate(action)
         }
     }
@@ -182,4 +183,8 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        (activity as AppCompatActivity).supportActionBar!!.show()
+    }
 }

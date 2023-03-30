@@ -10,5 +10,9 @@ data class PersonQuiz(
     @field:Json(name = "quizList")
     val quizList: List<Quiz>,
     @field:Json(name = "voice")
-    val voice: String?
+    val voice: String?,
+    @field:Json(name = "personId")
+    val personId: Int,
+    @field:Json(name = "score")
+    val score: Int
 )

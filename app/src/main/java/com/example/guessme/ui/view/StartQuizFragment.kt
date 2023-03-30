@@ -1,15 +1,15 @@
 package com.example.guessme.ui.view
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
+import com.example.guessme.common.util.GlideApp
 import com.example.guessme.databinding.FragmentStartQuizBinding
 import com.example.guessme.ui.dialog.NoticeDialog
 import com.example.guessme.ui.viewmodel.StartQuizViewModel
@@ -50,10 +50,9 @@ class StartQuizFragment : BaseFragment<FragmentStartQuizBinding>(R.layout.fragme
 
         startQuizViewModel.quizImage.observe(viewLifecycleOwner) { image ->
             if (image != null) {
-                val uri = Uri.parse(image)
                 binding.imageQuizProfile.visibility = View.VISIBLE
                 binding.viewQuizForProfile.visibility = View.VISIBLE
-                binding.imageQuizProfile.setImageURI(uri)
+                GlideApp.with(requireActivity()).load(image).into(binding.imageQuizProfile)
             }
         }
     }
@@ -61,8 +60,7 @@ class StartQuizFragment : BaseFragment<FragmentStartQuizBinding>(R.layout.fragme
     private fun init() {
 
         binding.btnQuizStart.setOnClickListener {
-            //info 넘겨줌
-            //퀴즈 화면으로 이동 필요
+            findNavController().navigate(R.id.action_fragment_start_quiz_to_quizFragment)
         }
 
     }

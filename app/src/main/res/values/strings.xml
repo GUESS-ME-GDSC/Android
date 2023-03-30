@@ -69,6 +69,9 @@
     <string name="dialog_permission"><b>권한</b>이 필요합니다!🥲</string>
     <string name="dialog_record_error"><b>녹음 준비 중 오류가 발생했습니다.\n 다시 시도해주세요!🥲</b></string>
     <string name="dialog_record_no_file"><b>음성 파일이 없습니다.\n 녹음을 진행해주세요!🙂</b></string>
+    <string name="dialog_quiz_start"><b>해당 문제가 첫 문제입니다!🙂</b></string>
+    <string name="dialog_quiz_last"><b>해당 문제가 마지막 문제입니다!🙂</b></string>
+    <string name="dialog_patch_score"><b>점수 등록에 실패했습니다.🥲</b></string>
 
     <!--  add info dialog  -->
     <string name="dialog_add_info_notice"><b>정보</b></string>
@@ -93,5 +96,8 @@
     <string name="quiz_result_down"><b>▼</b></string>
     <string name="quiz_result_info"><b>정보</b></string>
     <string name="quiz_result_finish"><b>종료</b></string>
+    <string name="quiz_scoring">채점 중..👀</string>
+    <string name="quiz_scoring_step"><b>단계📝</b></string>
+    <string name="quiz_result"><b>결과👀</b></string>
 
 </resources>
