@@ -100,7 +100,7 @@ class ScoreFragment : BaseFragment<FragmentScoreBinding>(R.layout.fragment_score
         val dateFormat = DateTimeFormatter.ofPattern("yyyy.MM.dd")
 
         person.image?.let {
-            GlideApp.with(requireContext()).load(it).into(binding.imageQuizResultProfile)
+            GlideApp.with(requireActivity()).load(it).into(binding.imageQuizResultProfile)
         }
 
         binding.txtResultName.text = person.name

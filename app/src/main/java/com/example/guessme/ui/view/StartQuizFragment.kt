@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.common.util.GlideApp
@@ -53,7 +52,7 @@ class StartQuizFragment : BaseFragment<FragmentStartQuizBinding>(R.layout.fragme
             if (image != null) {
                 binding.imageQuizProfile.visibility = View.VISIBLE
                 binding.viewQuizForProfile.visibility = View.VISIBLE
-                GlideApp.with(requireContext()).load(image).into(binding.imageQuizProfile)
+                GlideApp.with(requireActivity()).load(image).into(binding.imageQuizProfile)
             }
         }
     }

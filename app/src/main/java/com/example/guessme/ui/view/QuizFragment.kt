@@ -1,11 +1,8 @@
 package com.example.guessme.ui.view
 
-import android.content.ContentValues
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,15 +18,12 @@ import com.example.guessme.common.util.Constants.REQUIRED_CAMERA_PERMISSION
 import com.example.guessme.common.util.GlideApp
 import com.example.guessme.data.response.Quiz
 import com.example.guessme.databinding.FragmentQuizBinding
-import com.example.guessme.ui.dialog.ErrorDialog
 import com.example.guessme.ui.dialog.NoticeDialog
 import com.example.guessme.ui.viewmodel.StartQuizViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
 
 @AndroidEntryPoint
 class QuizFragment : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) {
@@ -52,7 +46,7 @@ class QuizFragment : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) {
     }
 
     private fun setObserver() {
-        startQuizViewModel.cur.observe(viewLifecycleOwner) { cur ->
+        startQuizViewModel.cur.observe(viewLifecycleOwner) {
             init()
         }
     }
@@ -66,7 +60,7 @@ class QuizFragment : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) {
 
         quiz = startQuizViewModel.getCurQuiz()
         image.value?.let {
-            GlideApp.with(requireContext()).load(it).into(binding.imageQuizStepProfile)
+            GlideApp.with(requireActivity()).load(it).into(binding.imageQuizStepProfile)
         }
 
 
@@ -120,7 +114,7 @@ class QuizFragment : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) {
         if (isGranted) {
             val photoFile = File.createTempFile("IMG_", ".jpg",
                 requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES))
-            photoUri = FileProvider.getUriForFile(requireContext(), "${requireActivity().packageName}", photoFile)
+            photoUri = FileProvider.getUriForFile(requireContext(),"${requireActivity().packageName}", photoFile)
             imageCaptureLauncher.launch(photoUri)
         }else {
             val dialog = NoticeDialog(R.string.dialog_permission)
@@ -159,7 +153,7 @@ class QuizFragment : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) {
 
     override fun onStart() {
         super.onStart()
-        (activity as AppCompatActivity)?.supportActionBar?.hide()
+        (activity as AppCompatActivity).supportActionBar?.hide()
     }
 
 }
