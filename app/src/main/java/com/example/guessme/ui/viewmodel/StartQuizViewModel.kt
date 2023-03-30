@@ -27,7 +27,7 @@ class StartQuizViewModel @Inject constructor(
     private val _getPersonQuiz = MutableLiveData<Boolean>()
     val getPersonQuiz: LiveData<Boolean> = _getPersonQuiz
     private var answer: IntArray? = null
-    var _cur = MutableLiveData<Int>()
+    private var _cur = MutableLiveData<Int>()
     val cur: LiveData<Int> get() = _cur
     private val _quizImage = MutableLiveData<String?>()
     val quizImage: LiveData<String?> = _quizImage
@@ -35,6 +35,11 @@ class StartQuizViewModel @Inject constructor(
     val quizVoice: LiveData<String?> = _quizVoice
     private var _player: BasePlayer? = null
     val player get() = _player
+    private val _personId = MutableLiveData<Int>()
+    val personId: LiveData<Int> = _personId
+    private val _score = MutableLiveData<Int>()
+    val score: LiveData<Int> = _score
+
 
     fun increaseCur() {
         _cur.postValue(_cur.value!!+1)
@@ -91,6 +96,8 @@ class StartQuizViewModel @Inject constructor(
                 _quizImage.postValue(personQuiz.image)
                 _quizVoice.postValue(personQuiz.voice)
                 _quizList.postValue(personQuiz.quizList)
+                _personId.postValue(personQuiz.personId)
+                _score.postValue(personQuiz.score)
                 _cur.postValue(0)
                 setAnswerList(personQuiz.quizList.size)
 
