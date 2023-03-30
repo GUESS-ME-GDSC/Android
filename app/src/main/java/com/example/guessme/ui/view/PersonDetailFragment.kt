@@ -1,6 +1,5 @@
 package com.example.guessme.ui.view
 
-import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -9,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -32,7 +32,7 @@ import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.fragment_person_detail) {
-    private val personDetialFragmentargs: PersonDetailFragmentArgs by navArgs()
+    private val personDetailFragmentArgs: PersonDetailFragmentArgs by navArgs()
     private val personDetailViewModel by viewModels<PersonDetailViewModel>()
     private lateinit var infoListAdapter: InfoListAdapter
 
@@ -50,7 +50,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         setObserver()
 
         CoroutineScope(Dispatchers.IO).launch {
-            getPerson(personDetialFragmentargs.id)
+            getPerson(personDetailFragmentArgs.id)
         }
     }
 
@@ -132,7 +132,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         }
 
         binding.btnDetailInfoAdd.setOnClickListener {
-            val dialog = AddInfoDialog(personDetailViewModel, personDetialFragmentargs.id)
+            val dialog = AddInfoDialog(personDetailViewModel, personDetailFragmentArgs.id)
             dialog.show(requireActivity().supportFragmentManager, "AddInfoDialog")
         }
 
@@ -163,7 +163,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         }
 
         binding.btnDetailQuiz.setOnClickListener {
-            val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToStartQuizFragment(personDetialFragmentargs.id)
+            val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToStartQuizFragment(personDetailFragmentArgs.id)
             findNavController().navigate(action)
         }
     }
@@ -183,4 +183,8 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        (activity as AppCompatActivity).supportActionBar!!.show()
+    }
 }
