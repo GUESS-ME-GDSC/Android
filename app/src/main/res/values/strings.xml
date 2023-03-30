@@ -58,6 +58,7 @@
     <string name="detail_info_delete"><b>정보 삭제</b></string>
     <string name="detail_info_delete_complete"><b>완료</b></string>
     <string name="detail_info_floating">modify info</string>
+    <string name="detail_info_delete_success"><b>성공적으로 삭제되었습니다!🙂</b></string>
 
     <!--  dialog  -->
     <string name="dialog_ok"><b>확인</b></string>
