@@ -50,6 +50,7 @@ class ScoringFragment : BaseFragment<FragmentScoringBinding>(R.layout.fragment_s
                 startQuizViewModel.setCorrect()
                 binding.txtQuizResult.setText(R.string.quiz_result_correct)
             } else {
+                startQuizViewModel.setWrong()
                 binding.txtQuizResult.setText(R.string.quiz_result_wrong)
             }
         }
