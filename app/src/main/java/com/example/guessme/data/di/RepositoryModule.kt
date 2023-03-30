@@ -59,4 +59,10 @@ abstract class RepositoryModule {
     abstract fun bindScoringRepository(
         scoringRepositoryImpl: ScoringRepositoryImpl
     ): ScoringRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindScoreRepository(
+        scoreRepositoryImpl: ScoreRepositoryImpl
+    ): ScoreRepository
 }
