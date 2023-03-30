@@ -63,6 +63,8 @@ class ScoringFragment : BaseFragment<FragmentScoringBinding>(R.layout.fragment_s
     }
 
     private fun init() {
+        binding.txtQuizStepNum.text = (startQuizViewModel.cur.value!!+1).toString()
+
         val uri = Uri.parse(scoringFragmentArgs.imageUri)
         binding.imageQuizUserAnswer.setImageURI(uri)
 

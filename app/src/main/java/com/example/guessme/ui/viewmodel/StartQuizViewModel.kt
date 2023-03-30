@@ -27,7 +27,7 @@ class StartQuizViewModel @Inject constructor(
     private val _getPersonQuiz = MutableLiveData<Boolean>()
     val getPersonQuiz: LiveData<Boolean> = _getPersonQuiz
     private var answer: IntArray? = null
-    private var _cur = MutableLiveData<Int>()
+    var _cur = MutableLiveData<Int>()
     val cur: LiveData<Int> get() = _cur
     private val _quizImage = MutableLiveData<String?>()
     val quizImage: LiveData<String?> = _quizImage

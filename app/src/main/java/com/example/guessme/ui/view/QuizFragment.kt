@@ -36,6 +36,7 @@ class QuizFragment : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) {
     private val startQuizViewModel: StartQuizViewModel by activityViewModels()
     private var photoUri: Uri? = null
     private var quiz: Quiz? = null
+    private var step: Int? = null
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -59,8 +60,11 @@ class QuizFragment : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) {
     private fun init() {
         val image = startQuizViewModel.quizImage
         val voice = startQuizViewModel.quizVoice
-        quiz = startQuizViewModel.getCurQuiz()
 
+        step = startQuizViewModel.cur.value
+        binding.txtQuizStepNum.text = (step!!+1).toString()
+
+        quiz = startQuizViewModel.getCurQuiz()
         image.value?.let {
             GlideApp.with(requireContext()).load(it).into(binding.imageQuizStepProfile)
         }
