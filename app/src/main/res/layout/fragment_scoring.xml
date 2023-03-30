@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/image_quiz_user_answer"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -27,8 +27,8 @@
 
     <View
         android:id="@+id/view_quiz_answer_for_profile"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:background="@drawable/base_green_stroke_image"
         app:layout_constraintBottom_toBottomOf="@id/image_quiz_user_answer"
         app:layout_constraintLeft_toLeftOf="@id/image_quiz_user_answer"
@@ -77,6 +77,7 @@
         android:textSize="25sp"
         android:textColor="@color/black"
         android:layout_marginTop="20dp"
+        android:text="@string/quiz_scoring"
         app:layout_constraintBottom_toTopOf="@id/btn_quiz_answer_next"
         app:layout_constraintTop_toBottomOf="@id/layout_quiz_answer_data"
         app:layout_constraintLeft_toLeftOf="@id/image_quiz_user_answer"
@@ -86,7 +87,7 @@
         android:id="@+id/btn_quiz_answer_next"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/base_green_round_shape"
         android:padding="15dp"
         android:text="@string/quiz_answer_next"

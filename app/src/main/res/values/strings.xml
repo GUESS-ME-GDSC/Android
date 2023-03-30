@@ -95,5 +95,6 @@
     <string name="quiz_result_down"><b>▼</b></string>
     <string name="quiz_result_info"><b>정보</b></string>
     <string name="quiz_result_finish"><b>종료</b></string>
+    <string name="quiz_scoring">채점 중..👀</string>
 
 </resources>
