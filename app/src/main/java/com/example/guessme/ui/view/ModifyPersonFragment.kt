@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -74,6 +75,8 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
             if (deleteSuccess) {
                 val dialog = NoticeDialog(R.string.detail_info_delete_success)
                 dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+
+                findNavController().navigate(R.id.action_fragment_modify_person_to_fragment_people_list)
 
             } else {
                 val dialog = NoticeDialog(R.string.dialog_msg_error)
