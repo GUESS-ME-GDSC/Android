@@ -102,6 +102,16 @@ There is **Two key features** exist.
 
 <h2 id="gettingstarted"> 🏃 Getting Started </h2>
 
+
+
+### 1. Repository Clone
+
+```
+git clone https://github.com/GUESS-ME-GDSC/Android.git
+```
+
+### 2. Run Emulator
+
 You don't need to install anything to run Guessme.
 
 👀 But there's one thing to watch out for!
