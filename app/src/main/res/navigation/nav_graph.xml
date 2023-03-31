@@ -30,6 +30,8 @@
         android:name="com.example.guessme.ui.view.SignUpFragment"
         tools:layout="@layout/fragment_sign_up">
         <action
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/fragment_sign_up"
             android:id="@+id/action_signUpFragment_to_fragment_login"
             app:destination="@id/fragment_login"
             app:enterAnim="@anim/nav_default_enter_anim"
@@ -130,8 +132,8 @@
             android:name="id"
             app:argType="integer" />
         <action
-            app:popUpToInclusive="true"
             app:popUpTo="@id/fragment_people_list"
+            app:popUpToInclusive="true"
             android:id="@+id/action_fragment_modify_person_to_fragment_people_list"
             app:destination="@id/fragment_people_list"
             app:enterAnim="@anim/nav_default_enter_anim"
@@ -145,8 +147,8 @@
         android:label="@string/fragment_start_quiz"
         tools:layout="@layout/fragment_start_quiz">
         <action
+            app:popUpTo="@id/fragment_start_quiz"
             app:popUpToInclusive="true"
-            app:popUpTo="@id/fragment_home"
             android:id="@+id/action_fragment_start_quiz_to_quizFragment"
             app:destination="@id/fragment_quiz"
             app:enterAnim="@anim/nav_default_enter_anim"
@@ -164,7 +166,7 @@
         tools:layout="@layout/fragment_quiz" >
         <action
             app:popUpToInclusive="true"
-            app:popUpTo="@id/fragment_start_quiz"
+            app:popUpTo="@id/fragment_quiz"
             android:id="@+id/action_fragment_quiz_to_scoring_fragment"
             app:destination="@id/fragment_scoring"
             app:enterAnim="@anim/nav_default_enter_anim"
@@ -179,7 +181,7 @@
         tools:layout="@layout/fragment_scoring" >
         <action
             app:popUpToInclusive="true"
-            app:popUpTo="@id/fragment_start_quiz"
+            app:popUpTo="@id/fragment_scoring"
             android:id="@+id/action_fragment_scoring_to_fragment_quiz"
             app:destination="@id/fragment_quiz"
             app:enterAnim="@anim/nav_default_enter_anim"
@@ -188,7 +190,7 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             app:popUpToInclusive="true"
-            app:popUpTo="@id/fragment_start_quiz"
+            app:popUpTo="@id/fragment_scoring"
             android:id="@+id/action_fragment_scoring_to_scoreFragment"
             app:destination="@id/fragment_score"
             app:enterAnim="@anim/nav_default_enter_anim"
@@ -212,7 +214,7 @@
             app:argType="com.example.guessme.data.model.Person" />
         <action
             app:popUpToInclusive="true"
-            app:popUpTo="@id/fragment_person_detail"
+            app:popUpTo="@id/fragment_score"
             android:id="@+id/action_fragment_score_to_fragment_person_detail"
             app:destination="@id/fragment_person_detail"
             app:enterAnim="@anim/nav_default_enter_anim"
@@ -221,7 +223,7 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             app:popUpToInclusive="true"
-            app:popUpTo="@id/fragment_home"
+            app:popUpTo="@id/fragment_score"
             android:id="@+id/action_fragment_score_to_fragment_home"
             app:destination="@id/fragment_home"
             app:enterAnim="@anim/nav_default_enter_anim"
