@@ -44,6 +44,7 @@
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
         android:maxLines="1"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@id/btn_login"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
