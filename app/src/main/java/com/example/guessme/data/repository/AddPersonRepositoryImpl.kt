@@ -36,7 +36,7 @@ class AddPersonRepositoryImpl @Inject constructor(
         person.voice?.let {
             voiceFile = File(it.path!!)
             voiceRequestBody = voiceFile!!.asRequestBody("audio/mp4".toMediaType())
-            voiceMultipartBody = MultipartBody.Part.createFormData(name= "image", filename = voiceFile!!.name, body = voiceRequestBody!!)
+            voiceMultipartBody = MultipartBody.Part.createFormData(name= "voice", filename = voiceFile!!.name, body = voiceRequestBody!!)
         }
 
         val nameRequestBody = person.name.toRequestBody("text/plain".toMediaType())
