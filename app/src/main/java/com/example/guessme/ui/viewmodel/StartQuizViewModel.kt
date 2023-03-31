@@ -24,8 +24,8 @@ class StartQuizViewModel @Inject constructor(
 ): ViewModel() {
     private val _quizList = MutableLiveData<List<Quiz>>()
     private val quizList: LiveData<List<Quiz>> = _quizList
-    private val _getPersonQuiz = MutableLiveData<Boolean>()
-    val getPersonQuiz: LiveData<Boolean> = _getPersonQuiz
+    private val _getPersonQuiz = MutableLiveData<Int>()
+    val getPersonQuiz: LiveData<Int> = _getPersonQuiz
     private var answer: IntArray? = null
     private var _cur = MutableLiveData<Int>()
     val cur: LiveData<Int> get() = _cur
@@ -109,12 +109,14 @@ class StartQuizViewModel @Inject constructor(
                 _cur.postValue(0)
                 setAnswerList(personQuiz.quizList.size)
 
+            } else if (status == 500) {
+                _getPersonQuiz.postValue(500)
             } else {
-                _getPersonQuiz.postValue(false)
+                _getPersonQuiz.postValue(0)
             }
         } catch (e: java.lang.Exception) {
             Log.d("e", e.toString())
-            _getPersonQuiz.postValue(false)
+            _getPersonQuiz.postValue(0)
         }
     }
 

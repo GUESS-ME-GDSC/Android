@@ -84,6 +84,7 @@
 
     <!--  quiz  -->
     <string name="quiz_start"><b>당신의 소중한 기억을 잊지마세요!😊</b></string>
+    <string name="quiz_no_person_error"><b>퀴즈 대상이 없습니다.\n 인물 먼저 추가해주세요!🙂</b></string>
     <string name="quiz_btn_start"><b>시작</b></string>
     <string name="quiz_btn_cancel"><b>취소</b></string>
     <string name="quiz_btn_before"><b>◀︎</b></string>
