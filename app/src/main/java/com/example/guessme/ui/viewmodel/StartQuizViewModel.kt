@@ -66,7 +66,7 @@ class StartQuizViewModel @Inject constructor(
     }
 
     fun getScore(): Int {
-        return (answer!!.sum() / quizList.value!!.size) * 100
+        return ((answer!!.sum()).toDouble() / (quizList.value!!.size).toDouble() * 100).toInt()
     }
 
     fun isQuizLast(): Boolean {

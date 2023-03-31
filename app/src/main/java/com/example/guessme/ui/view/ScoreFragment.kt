@@ -3,6 +3,7 @@ package com.example.guessme.ui.view
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -144,7 +145,9 @@ class ScoreFragment : BaseFragment<FragmentScoreBinding>(R.layout.fragment_score
         }
 
         val beforeScore = startQuizViewModel.score.value!!
+        Log.d("before", beforeScore.toString())
         val curScore = startQuizViewModel.getScore()
+        Log.d("current", curScore.toString())
         binding.txtQuizScore.text = curScore.toString()
         if (beforeScore > curScore) {
             binding.txtQuizScoreDiff.text = (beforeScore - curScore).toString()
