@@ -77,6 +77,7 @@ class PersonDetailViewModel @Inject constructor(
 
             val response: Response<PersonResponse> = personDetailRepository.getPerson("Bearer $token", id)
             val status = response.body()?.status
+            Log.d("person", response.body()!!.data!!.toString())
 
             if((status == 200) and response.isSuccessful) {
                 val person = response.body()?.data
@@ -107,7 +108,8 @@ class PersonDetailViewModel @Inject constructor(
             Log.d("status", status.toString())
 
             if ((status == 201) and response.isSuccessful) {
-                addInfoList(info)
+//                addInfoList(info)
+                _addSuccess.postValue(true)
             }else {
                 _addSuccess.postValue(false)
             }
@@ -128,7 +130,7 @@ class PersonDetailViewModel @Inject constructor(
             Log.d("status", status.toString())
             Log.d("message", response.body()!!.message.toString())
 
-            if ((status == 201) and response.isSuccessful) {
+            if ((status == 200) and response.isSuccessful) {
                 _deleteSuccess.postValue(true)
             } else {
                 _deleteSuccess.postValue(false)

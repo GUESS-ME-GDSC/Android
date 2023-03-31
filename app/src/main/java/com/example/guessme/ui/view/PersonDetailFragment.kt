@@ -75,6 +75,10 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             if (it == false) {
                 val dialog = NoticeDialog(R.string.dialog_msg_error)
                 dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            } else {
+                CoroutineScope(Dispatchers.IO).launch {
+                    getPerson(personDetailFragmentArgs.id)
+                }
             }
         }
 
