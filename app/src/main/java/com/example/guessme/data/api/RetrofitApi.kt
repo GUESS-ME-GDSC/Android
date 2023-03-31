@@ -74,4 +74,10 @@ interface RetrofitApi {
         @Header("Authorization") authorization: String,
         @Body idList: IdList
     ): Response<BaseNullResponseBody>
+
+    @DELETE("/person/{id}")
+    suspend fun deletePerson(
+        @Header("Authorization") authorization: String,
+        @Path("id") id: Int
+    ): Response<BaseNullResponseBody>
 }
