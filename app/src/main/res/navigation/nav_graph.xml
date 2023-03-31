@@ -120,6 +120,9 @@
         <argument
             android:name="person"
             app:argType="com.example.guessme.data.response.Data" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/fragment_start_quiz"

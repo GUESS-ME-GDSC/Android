@@ -173,7 +173,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
 
         binding.fabDetailPersonModify.setOnClickListener {
             val person = personDetailViewModel.person.value
-            val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToModifyPersonFragment(person!!)
+            val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToModifyPersonFragment(person = person!!, id = personDetailFragmentArgs.id)
             findNavController().navigate(action)
         }
 
