@@ -127,8 +127,9 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
             modifyPersonViewModel.stopRecording()
         }
 
-        modifyPersonViewModel.setPlayer(BasePlayer(requireActivity().supportFragmentManager))
+
         binding.btnAddPersonSpeaker.setOnClickListener {
+            modifyPersonViewModel.setPlayer(BasePlayer(requireActivity().supportFragmentManager))
             modifyPersonViewModel.startPlaying(modifyPersonViewModel.fileName)
         }
 

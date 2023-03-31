@@ -128,8 +128,9 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             binding.txtDetailBirth.text = person.value!!.birth.format(dateFormat)
             binding.txtDetailAddress.text = person.value!!.residence
 
-            personDetailViewModel.setPlayer(BasePlayer(requireActivity().supportFragmentManager))
+
             binding.btnDetailSpeaker.setOnClickListener {
+                personDetailViewModel.setPlayer(BasePlayer(requireActivity().supportFragmentManager))
                 personDetailViewModel.startPlaying(person.value!!.voice)
             }
 

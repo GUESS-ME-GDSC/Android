@@ -31,7 +31,7 @@ class ModifyPersonViewModel @Inject constructor(
 ): ViewModel() {
     private var _imageUri: Uri? = null
     private var _basePlayer: BasePlayer? = null
-    private val basePlayer get() = _basePlayer!!
+    val basePlayer get() = _basePlayer!!
     private var _baseRecorder: BaseRecorder? = null
     private val baseRecorder get() = _baseRecorder!!
     private val _recordStatus = MutableLiveData<Boolean>()

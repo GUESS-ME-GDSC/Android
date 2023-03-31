@@ -140,8 +140,8 @@ class ScoreFragment : BaseFragment<FragmentScoreBinding>(R.layout.fragment_score
         if (person.voice == null) {
             binding.btnQuizStepVoice.visibility = View.GONE
         } else {
-            scoreViewModel.setPlayer(BasePlayer(requireActivity().supportFragmentManager))
             binding.btnQuizStepVoice.setOnClickListener {
+                scoreViewModel.setPlayer(BasePlayer(requireActivity().supportFragmentManager))
                 scoreViewModel.startPlaying(person.voice)
             }
         }
