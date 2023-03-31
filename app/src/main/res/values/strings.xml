@@ -23,6 +23,7 @@
     <string name="btn_login"><b>로그인</b></string>
     <string name="btn_sign_in"><b>회원가입</b></string>
     <string name="login_or"><b>또는</b></string>
+    <string name="login_error"><b>없는 회원입니다.🥲</b></string>
 
     <!--  sign up   -->
     <string name="sign_up_welcome"><b>환영합니다!</b></string>
@@ -58,7 +59,6 @@
     <string name="detail_info_delete"><b>정보 삭제</b></string>
     <string name="detail_info_delete_complete"><b>완료</b></string>
     <string name="detail_info_floating">modify info</string>
-    <string name="detail_info_delete_success"><b>성공적으로 삭제되었습니다!🙂</b></string>
 
     <!--  dialog  -->
     <string name="dialog_ok"><b>확인</b></string>
@@ -73,6 +73,7 @@
     <string name="dialog_quiz_start"><b>해당 문제가 첫 문제입니다!🙂</b></string>
     <string name="dialog_quiz_last"><b>해당 문제가 마지막 문제입니다!🙂</b></string>
     <string name="dialog_patch_score"><b>점수 등록에 실패했습니다.🥲</b></string>
+    <string name="detail_info_delete_success"><b>성공적으로 삭제되었습니다!🙂</b></string>
 
     <!--  add info dialog  -->
     <string name="dialog_add_info_notice"><b>정보</b></string>
@@ -83,6 +84,7 @@
 
     <!--  quiz  -->
     <string name="quiz_start"><b>당신의 소중한 기억을 잊지마세요!😊</b></string>
+    <string name="quiz_no_person_error"><b>퀴즈 대상이 없습니다.\n 인물 먼저 추가해주세요!🙂</b></string>
     <string name="quiz_btn_start"><b>시작</b></string>
     <string name="quiz_btn_cancel"><b>취소</b></string>
     <string name="quiz_btn_before"><b>◀︎</b></string>

@@ -65,14 +65,11 @@ class QuizFragment : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) {
 
 
         if (voice.value != null) {
-            val uri = Uri.parse(voice.value)
-            val fileName = File(uri.path!!).path
-
             binding.btnQuizStepVoice.setOnClickListener {
                 startQuizViewModel.player?.let {
                     startQuizViewModel.setPlayer(BasePlayer(requireActivity().supportFragmentManager))
                 }
-                startQuizViewModel.startPlaying(fileName)
+                startQuizViewModel.startPlaying(voice.value!!)
             }
 
         } else {

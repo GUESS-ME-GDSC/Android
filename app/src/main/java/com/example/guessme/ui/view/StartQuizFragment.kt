@@ -42,9 +42,16 @@ class StartQuizFragment : BaseFragment<FragmentStartQuizBinding>(R.layout.fragme
 
     private fun setObserver() {
         startQuizViewModel.getPersonQuiz.observe(viewLifecycleOwner) { getPersonQuiz ->
-            if (getPersonQuiz) {
-                val dialog = NoticeDialog(R.string.dialog_msg_error)
-                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            binding.btnQuizStart.isClickable = false
+            when (getPersonQuiz) {
+                500 -> {
+                    val dialog = NoticeDialog(R.string.quiz_no_person_error)
+                    dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+                }
+                else -> {
+                    val dialog = NoticeDialog(R.string.dialog_msg_error)
+                    dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+                }
             }
         }
 

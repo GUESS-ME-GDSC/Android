@@ -137,12 +137,9 @@ class ScoreFragment : BaseFragment<FragmentScoreBinding>(R.layout.fragment_score
         if (person.voice == null) {
             binding.btnQuizStepVoice.visibility = View.GONE
         } else {
-            val audioUri = Uri.parse(person.voice)
-            val fileName = File(audioUri.path!!).path
-
             scoreViewModel.setPlayer(BasePlayer(requireActivity().supportFragmentManager))
             binding.btnQuizStepVoice.setOnClickListener {
-                scoreViewModel.startPlaying(fileName)
+                scoreViewModel.startPlaying(person.voice)
             }
         }
 

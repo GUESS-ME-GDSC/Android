@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,15 +17,21 @@ import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.common.base.BasePlayer
 import com.example.guessme.common.base.BaseRecorder
 import com.example.guessme.common.util.Constants
+import com.example.guessme.common.util.GlideApp
 import com.example.guessme.databinding.FragmentAddModifyPersonBinding
 import com.example.guessme.ui.adapter.InfoModifyAdapter
 import com.example.guessme.ui.dialog.NoticeDialog
 import com.example.guessme.ui.viewmodel.ModifyPersonViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.time.format.DateTimeFormatter
 
+@AndroidEntryPoint
 class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layout.fragment_add_modify_person) {
     private val modifyPersonViewModel by viewModels<ModifyPersonViewModel>()
-    private val args: ModifyPersonFragmentArgs by navArgs()
+    private val modifyPersonFragmentArgs: ModifyPersonFragmentArgs by navArgs()
     private lateinit var infoModifyAdapter: InfoModifyAdapter
 
     override fun getFragmentBinding(
@@ -36,32 +43,62 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        modifyPersonViewModel.setPerson(args.person)
-        modifyPersonViewModel.setInfoList(args.infoList)
-        modifyPersonViewModel.setFavorite(args.person.favorite)
+        modifyPersonViewModel.setPerson(modifyPersonFragmentArgs.person)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
         setupRecyclerView()
+        setObserver()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setObserver() {
+        modifyPersonViewModel.person.observe(viewLifecycleOwner) {
+            init()
+        }
+
+        modifyPersonViewModel.infoList.observe(viewLifecycleOwner) { infoList ->
+            infoModifyAdapter.submitList(infoList)
+        }
+
+        modifyPersonViewModel.favorite.observe(viewLifecycleOwner) { favorite ->
+            if (favorite) {
+                binding.imageModifyFavoriteTrue.setImageResource(R.drawable.ic_favorite_true)
+            } else {
+                binding.imageModifyFavoriteTrue.setImageResource(R.drawable.ic_favorite_false)
+            }
+        }
+
+        modifyPersonViewModel.deleteSuccess.observe(viewLifecycleOwner) { deleteSuccess ->
+            if (deleteSuccess) {
+                val dialog = NoticeDialog(R.string.detail_info_delete_success)
+                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+
+                findNavController().navigate(R.id.action_fragment_modify_person_to_fragment_people_list)
+
+            } else {
+                val dialog = NoticeDialog(R.string.dialog_msg_error)
+                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun init() {
-        val person = modifyPersonViewModel.person
+        val person = modifyPersonViewModel.person.value!!
         val format = DateTimeFormatter.ofPattern("yyyy.MM.dd")
 
         binding.btnAddPersonDelete.visibility = View.VISIBLE
         binding.recyclerModifyInfo.visibility = View.VISIBLE
 
         person.image?.let {
-            binding.imageAddPersonProfile.setImageURI(it)
+            GlideApp.with(requireActivity()).load(it).into(binding.imageAddPersonProfile)
         }
 
         person.voice?.let {
-            modifyPersonViewModel.setFileName(it.path!!)
+            modifyPersonViewModel.setFileName(it)
         }
 
         binding.editAddPersonName.setText(person.name)
@@ -83,8 +120,8 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
             modifyPersonViewModel.stopRecording()
         }
 
+        modifyPersonViewModel.setPlayer(BasePlayer(requireActivity().supportFragmentManager))
         binding.btnAddPersonSpeaker.setOnClickListener {
-            modifyPersonViewModel.setPlayer(BasePlayer(requireActivity().supportFragmentManager))
             modifyPersonViewModel.startPlaying(modifyPersonViewModel.fileName)
         }
 
@@ -99,21 +136,23 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
         }
 
         binding.imageModifyFavoriteTrue.setOnClickListener {
-            modifyPersonViewModel.setFavorite(!modifyPersonViewModel.favorite.value!!)
+//            modifyPersonViewModel.setFavorite(!modifyPersonViewModel.favorite.value!!)
         }
 
-        modifyPersonViewModel.infoList.observe(viewLifecycleOwner) { infoList ->
-            infoModifyAdapter.submitList(infoList?.data)
-        }
-
-        modifyPersonViewModel.favorite.observe(viewLifecycleOwner) { favorite ->
-            if (favorite) {
-                binding.imageModifyFavoriteTrue.setImageResource(R.drawable.ic_favorite_true)
-            } else {
-                binding.imageModifyFavoriteTrue.setImageResource(R.drawable.ic_favorite_false)
+        binding.btnAddPersonDelete.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                deletePerson()
             }
         }
+    }
 
+    private suspend fun deletePerson() {
+        try {
+            modifyPersonViewModel.deletePerson(modifyPersonFragmentArgs.id)
+        } catch (e: java.lang.Exception) {
+            val dialog = NoticeDialog(R.string.dialog_msg_error)
+            dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+        }
     }
 
     private fun setupRecyclerView() {

@@ -1,9 +1,8 @@
 package com.example.guessme.domain.repository
 
-import com.example.guessme.data.model.User
 import com.example.guessme.data.response.BaseNullResponseBody
 import retrofit2.Response
 
-interface LogInRepository {
-    suspend fun logIn(user: User): Response<BaseNullResponseBody>
+interface ModifyPersonRepository {
+    suspend fun deletePerson(token: String, id: Int): Response<BaseNullResponseBody>
 }

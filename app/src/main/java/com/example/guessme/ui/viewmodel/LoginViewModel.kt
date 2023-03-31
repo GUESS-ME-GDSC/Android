@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.guessme.data.model.User
-import com.example.guessme.data.response.BaseResponseBody
+import com.example.guessme.data.response.BaseNullResponseBody
 import com.example.guessme.domain.repository.LocalRepository
 import com.example.guessme.domain.repository.LogInRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,8 +18,8 @@ class LoginViewModel @Inject constructor(
     private val loginRepository: LogInRepository,
     private val localRepository: LocalRepository
 ): ViewModel() {
-    private val _errorMsg = MutableLiveData<String>()
-    val errorMsg: LiveData<String> get() = _errorMsg
+    private val _errorMsg = MutableLiveData<Int>()
+    val errorMsg: LiveData<Int> get() = _errorMsg
     private val _errorState = MutableLiveData(false)
     val errorState: LiveData<Boolean> get() = _errorState
     private val _isLogin: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -27,7 +27,7 @@ class LoginViewModel @Inject constructor(
 
     suspend fun login(user: User) {
         try {
-            val response: Response<BaseResponseBody> = loginRepository.logIn(user)
+            val response: Response<BaseNullResponseBody> = loginRepository.logIn(user)
             val status = response.body()?.status
             Log.d("status", status.toString())
             val token = response.body()?.data
@@ -37,8 +37,10 @@ class LoginViewModel @Inject constructor(
                 Log.d("token", token!!)
                 saveToken(token!!)
                 _isLogin.postValue(true)
+            } else if (status == 400) {
+                _errorMsg.postValue(400)
             } else {
-                _errorMsg.postValue(response.body()?.data)
+                _errorState.postValue(true)
             }
 
         }catch (e: Exception) {

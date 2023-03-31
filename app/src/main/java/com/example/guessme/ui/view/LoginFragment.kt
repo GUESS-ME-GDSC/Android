@@ -11,7 +11,6 @@ import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.data.model.User
 import com.example.guessme.databinding.FragmentLoginBinding
-import com.example.guessme.ui.dialog.ErrorDialog
 import com.example.guessme.ui.dialog.NoticeDialog
 import com.example.guessme.ui.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,8 +53,10 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
         }
 
         logInViewModel.errorMsg.observe(viewLifecycleOwner) { msg ->
-            val dialog = ErrorDialog(msg)
-            dialog.show(requireActivity().supportFragmentManager, "ErrorDialog")
+            if (msg == 400) {
+                val dialog = NoticeDialog(R.string.login_error)
+                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            }
         }
 
         logInViewModel.errorState.observe(viewLifecycleOwner) { error ->

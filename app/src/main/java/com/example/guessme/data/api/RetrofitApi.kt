@@ -11,12 +11,12 @@ interface RetrofitApi {
     @POST("/auth/login")
     suspend fun logIn(
         @Body user: User
-    ): Response<BaseResponseBody>
+    ): Response<BaseNullResponseBody>
 
     @POST("/auth/join")
     suspend fun signUp(
         @Body user: User
-    ): Response<BaseResponseBody>
+    ): Response<BaseNullResponseBody>
 
     @Multipart
     @POST("/person/")
@@ -73,5 +73,11 @@ interface RetrofitApi {
     suspend fun deleteInfo(
         @Header("Authorization") authorization: String,
         @Body idList: IdList
+    ): Response<BaseNullResponseBody>
+
+    @DELETE("/person/{id}")
+    suspend fun deletePerson(
+        @Header("Authorization") authorization: String,
+        @Path("id") id: Int
     ): Response<BaseNullResponseBody>
 }
