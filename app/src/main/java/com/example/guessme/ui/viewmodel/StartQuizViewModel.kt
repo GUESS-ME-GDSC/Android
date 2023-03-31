@@ -70,7 +70,7 @@ class StartQuizViewModel @Inject constructor(
     }
 
     fun isQuizLast(): Boolean {
-        return cur.value == quizList.value!!.size-1
+        return cur.value!! >= quizList.value!!.size-1
     }
 
     fun isQuizStart(): Boolean {

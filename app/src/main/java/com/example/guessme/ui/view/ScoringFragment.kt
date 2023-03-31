@@ -46,7 +46,10 @@ class ScoringFragment : BaseFragment<FragmentScoringBinding>(R.layout.fragment_s
 
     private fun setObserver() {
         scoringViewModel.result.observe(viewLifecycleOwner) { result ->
-            binding.btnQuizAnswerNext.visibility = View.VISIBLE
+            if (! startQuizViewModel.isQuizLast()) {
+                binding.btnQuizAnswerNext.visibility = View.VISIBLE
+            }
+
             if (result) {
                 startQuizViewModel.setCorrect()
                 binding.txtQuizResult.setText(R.string.quiz_result_correct)
