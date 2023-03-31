@@ -51,7 +51,9 @@ class ScoreFragment : BaseFragment<FragmentScoreBinding>(R.layout.fragment_score
 
         CoroutineScope(Dispatchers.IO).launch {
             getPerson(startQuizViewModel.personId.value!!)
-            patchNewScore()
+            if (startQuizViewModel.score.value!! < startQuizViewModel.getScore()) {
+                patchNewScore()
+            }
         }
     }
 
