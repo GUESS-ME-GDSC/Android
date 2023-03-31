@@ -16,7 +16,7 @@ interface RetrofitApi {
     @POST("/auth/join")
     suspend fun signUp(
         @Body user: User
-    ): Response<BaseResponseBody>
+    ): Response<BaseNullResponseBody>
 
     @Multipart
     @POST("/person/")
