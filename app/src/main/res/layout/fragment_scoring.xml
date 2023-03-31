@@ -120,6 +120,7 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/txt_quiz_result"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btn_quiz_stop"

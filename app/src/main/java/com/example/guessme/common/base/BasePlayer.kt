@@ -1,6 +1,7 @@
 package com.example.guessme.common.base
 
 import android.media.MediaPlayer
+import android.provider.MediaStore.Audio.Media
 import android.util.Log
 import androidx.fragment.app.FragmentManager
 import com.example.guessme.R
@@ -8,9 +9,8 @@ import com.example.guessme.ui.dialog.NoticeDialog
 import java.io.IOException
 
 class BasePlayer(private val fragmentManager: FragmentManager) {
-    private var _player: MediaPlayer? = null
+    private var _player: MediaPlayer? = MediaPlayer()
     private val player get() = _player!!
-
 
 
     fun setPlayer(player: MediaPlayer) {

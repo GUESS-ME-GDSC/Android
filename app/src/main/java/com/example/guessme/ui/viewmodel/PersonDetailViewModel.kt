@@ -1,6 +1,5 @@
 package com.example.guessme.ui.viewmodel
 
-import android.media.MediaPlayer
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -28,8 +27,8 @@ class PersonDetailViewModel @Inject constructor(
 ): ViewModel() {
     private var _person = MutableLiveData<Data>()
     val person get() = _person
-    private var _player: BasePlayer? = null
-    private val player get() = _player!!
+    private var _basePlayer: BasePlayer? = null
+    private val basePlayer get() = _basePlayer!!
     private var _infoList = MutableLiveData<List<Info>?>()
     val infoList: LiveData<List<Info>?> = _infoList
     private var _isDelete = MutableLiveData<Boolean>()
@@ -58,13 +57,12 @@ class PersonDetailViewModel @Inject constructor(
         _infoList.postValue(list)
     }
 
-    fun setPlayer(player: BasePlayer) {
-        _player = player
-        player.setPlayer(MediaPlayer())
+    fun setPlayer(base: BasePlayer) {
+        _basePlayer = base
     }
 
     fun startPlaying(name: String?) {
-        player.startPlaying(name)
+        basePlayer.startPlaying(name)
     }
 
     fun setDelete(value: Boolean) {

@@ -54,12 +54,13 @@ class ModifyPersonViewModel @Inject constructor(
     fun setPerson(data: Data) {
         _person.postValue(data)
         _infoList.postValue(data.info)
+        _favorite.postValue(data.favorite)
+
     }
 
-//    fun setFavorite(data: Boolean) {
-//        _person?.favorite = data
-//        _favorite.postValue(data)
-//    }
+    fun setFavorite(data: Boolean) {
+        _favorite.postValue(data)
+    }
 
     fun setPlayer(player: BasePlayer) {
         _basePlayer = player

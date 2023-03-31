@@ -101,6 +101,13 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
             modifyPersonViewModel.setFileName(it)
         }
 
+        binding.imageModifyFavoriteTrue.visibility = View.VISIBLE
+        if (person.favorite) {
+            binding.imageModifyFavoriteTrue.setImageResource(R.drawable.ic_favorite_true)
+        } else {
+            binding.imageModifyFavoriteTrue.setImageResource(R.drawable.ic_favorite_false)
+        }
+
         binding.editAddPersonName.setText(person.name)
         binding.editAddPersonRelation.setText(person.relation)
         binding.editAddPersonBirth.setText(person.birth.format(format))
@@ -136,7 +143,7 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
         }
 
         binding.imageModifyFavoriteTrue.setOnClickListener {
-//            modifyPersonViewModel.setFavorite(!modifyPersonViewModel.favorite.value!!)
+            modifyPersonViewModel.setFavorite(!modifyPersonViewModel.favorite.value!!)
         }
 
         binding.btnAddPersonDelete.setOnClickListener {
