@@ -66,7 +66,7 @@ class QuizFragment : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) {
 
         if (voice.value != null) {
             binding.btnQuizStepVoice.setOnClickListener {
-                startQuizViewModel.player?.let {
+                if (startQuizViewModel.player == null) {
                     startQuizViewModel.setPlayer(BasePlayer(requireActivity().supportFragmentManager))
                 }
                 startQuizViewModel.startPlaying(voice.value!!)

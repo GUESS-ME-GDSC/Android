@@ -79,7 +79,6 @@ class StartQuizViewModel @Inject constructor(
 
     fun setPlayer(player: BasePlayer) {
         _player = player
-        player.setPlayer(MediaPlayer())
     }
 
     fun startPlaying(fileName: String) {
