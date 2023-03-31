@@ -4,5 +4,5 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class IdList(
-    val list: List<Int>
+    val idList: List<Int>
 )

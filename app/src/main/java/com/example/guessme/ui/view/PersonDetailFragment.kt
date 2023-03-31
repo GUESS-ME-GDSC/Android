@@ -1,6 +1,5 @@
 package com.example.guessme.ui.view
 
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -28,7 +27,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.io.File
 import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
