@@ -23,6 +23,7 @@
     <string name="btn_login"><b>로그인</b></string>
     <string name="btn_sign_in"><b>회원가입</b></string>
     <string name="login_or"><b>또는</b></string>
+    <string name="login_error"><b>없는 회원입니다.🥲</b></string>
 
     <!--  sign up   -->
     <string name="sign_up_welcome"><b>환영합니다!</b></string>
