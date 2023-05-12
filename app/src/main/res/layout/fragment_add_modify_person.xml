@@ -204,7 +204,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:background="@drawable/base_green_stroke_shape"
             app:layout_constraintBottom_toTopOf="@id/layout_add_person_address"
             app:layout_constraintLeft_toLeftOf="@id/line_add_person_left"
@@ -223,16 +223,15 @@
                 android:layout_marginStart="10dp"
                 android:textColor="@color/black"/>
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <DatePicker
                 android:id="@+id/edit_add_person_birth"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:layout_height="150dp"
                 android:layout_gravity="center_vertical"
                 android:padding="12dp"
-                android:layout_marginEnd="10dp"
-                android:hint="@string/person_birth_hint"
-                android:background="@null"/>
+                android:datePickerMode="spinner"
+                android:calendarViewShown="false"
+                android:layout_marginEnd="10dp" />
         </LinearLayout>
 
         <LinearLayout
