@@ -32,6 +32,7 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        logInViewModel.getToken()
 
         binding.btnLoginSignUp.setOnClickListener {
             findNavController().navigate(R.id.action_fragment_login_to_signUpFragment)
@@ -63,6 +64,12 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
             if (error) {
                 val dialog = NoticeDialog(R.string.dialog_msg_error)
                 dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            }
+        }
+
+        logInViewModel.token.observe(viewLifecycleOwner) { token ->
+            if (! token.isNullOrEmpty()) {
+                findNavController().navigate(R.id.action_fragment_login_to_homeFragment)
             }
         }
     }
