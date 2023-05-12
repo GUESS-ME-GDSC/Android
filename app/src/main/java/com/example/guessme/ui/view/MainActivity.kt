@@ -1,7 +1,10 @@
 package com.example.guessme.ui.view
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -39,5 +42,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        //현재 열려있는 소프트 키보드 숨김 처리
+        imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+        //터치 이벤트를 기존 동작으로 전달해줌
+        return super.dispatchTouchEvent(ev)
     }
 }
