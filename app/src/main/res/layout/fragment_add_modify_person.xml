@@ -227,11 +227,9 @@
                 android:id="@+id/edit_add_person_birth"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_gravity="center_vertical"
-                android:padding="12dp"
+                android:layout_gravity="center_horizontal"
                 android:datePickerMode="spinner"
-                android:calendarViewShown="false"
-                android:layout_marginEnd="10dp" />
+                android:calendarViewShown="false" />
         </LinearLayout>
 
         <LinearLayout
