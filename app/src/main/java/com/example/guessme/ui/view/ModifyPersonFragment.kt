@@ -26,6 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
@@ -88,7 +89,8 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
     @RequiresApi(Build.VERSION_CODES.O)
     private fun init() {
         val person = modifyPersonViewModel.person.value!!
-        val format = DateTimeFormatter.ofPattern("yyyy.MM.dd")
+        val format = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val localDate = LocalDate.parse(person.birth, format)
 
         binding.btnAddPersonDelete.visibility = View.VISIBLE
         binding.recyclerModifyInfo.visibility = View.VISIBLE
@@ -110,7 +112,7 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
 
         binding.editAddPersonName.setText(person.name)
         binding.editAddPersonRelation.setText(person.relation)
-        binding.editAddPersonBirth.setText(person.birth.format(format))
+        binding.editAddPersonBirth.updateDate(localDate.year, localDate.monthValue-1, localDate.dayOfMonth)
         binding.editAddPersonAddress.setText(person.residence)
 
         binding.viewAddPersonForImage.setOnClickListener {

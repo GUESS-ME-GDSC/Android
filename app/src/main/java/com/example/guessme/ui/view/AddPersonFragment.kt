@@ -30,6 +30,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.Date
 
 @AndroidEntryPoint
 class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.fragment_add_modify_person) {
@@ -65,15 +66,20 @@ class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.
                 val name = binding.editAddPersonName.text.toString()
                 val relation = binding.editAddPersonRelation.text.toString()
                 val residence = binding.editAddPersonAddress.text.toString()
-                val birth = binding.editAddPersonBirth.text.toString()
+                val year = binding.editAddPersonBirth.year
+                val month = binding.editAddPersonBirth.month
+                val day = binding.editAddPersonBirth.dayOfMonth
 
                 if ((name.trim() != "") and
                     (relation.trim() != "") and
-                    (residence.trim() != "") and
-                    (birth.trim() != "")) {
+                    (residence.trim() != "")) {
 
                     val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-                    val localDate = LocalDate.parse(birth, formatter)
+                    val localDate = if (month < 10) {
+                        LocalDate.parse("$year-0$month-$day", formatter)
+                    } else {
+                        LocalDate.parse("$year-$month-$day", formatter)
+                    }
 
                     var voice: Uri? = null
                     addPersonViewModel.fileName?.let {
