@@ -10,8 +10,6 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.common.base.BasePlayer
@@ -19,7 +17,6 @@ import com.example.guessme.common.base.BaseRecorder
 import com.example.guessme.common.util.Constants
 import com.example.guessme.common.util.GlideApp
 import com.example.guessme.databinding.FragmentAddModifyPersonBinding
-import com.example.guessme.ui.adapter.InfoModifyAdapter
 import com.example.guessme.ui.dialog.NoticeDialog
 import com.example.guessme.ui.viewmodel.ModifyPersonViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,7 +30,6 @@ import java.time.format.DateTimeFormatter
 class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layout.fragment_add_modify_person) {
     private val modifyPersonViewModel by viewModels<ModifyPersonViewModel>()
     private val modifyPersonFragmentArgs: ModifyPersonFragmentArgs by navArgs()
-    private lateinit var infoModifyAdapter: InfoModifyAdapter
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -50,7 +46,6 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
         setObserver()
     }
 
@@ -58,10 +53,6 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
     private fun setObserver() {
         modifyPersonViewModel.person.observe(viewLifecycleOwner) {
             init()
-        }
-
-        modifyPersonViewModel.infoList.observe(viewLifecycleOwner) { infoList ->
-            infoModifyAdapter.submitList(infoList)
         }
 
         modifyPersonViewModel.favorite.observe(viewLifecycleOwner) { favorite ->
@@ -93,7 +84,6 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
         val localDate = LocalDate.parse(person.birth, format)
 
         binding.btnAddPersonDelete.visibility = View.VISIBLE
-        binding.recyclerModifyInfo.visibility = View.VISIBLE
 
         person.image?.let {
             GlideApp.with(requireActivity()).load(it).into(binding.imageAddPersonProfile)
@@ -162,22 +152,6 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
         } catch (e: java.lang.Exception) {
             val dialog = NoticeDialog(R.string.dialog_msg_error)
             dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
-        }
-    }
-
-    private fun setupRecyclerView() {
-        infoModifyAdapter = InfoModifyAdapter()
-        binding.recyclerModifyInfo.apply {
-            setHasFixedSize(true)
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            addItemDecoration(
-                DividerItemDecoration(
-                    requireContext(),
-                    DividerItemDecoration.VERTICAL
-                )
-            )
-            adapter = infoModifyAdapter
         }
     }
 
