@@ -15,6 +15,7 @@ import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.common.base.BasePlayer
 import com.example.guessme.common.base.BaseRecorder
+import com.example.guessme.common.util.Constants.REQUIRED_EXTERNAL_STORAGE
 import com.example.guessme.common.util.Constants.REQUIRED_GALLERY_PERMISSION
 import com.example.guessme.common.util.Constants.REQUIRED_RECORD_AUDIO
 import com.example.guessme.data.model.Person
@@ -47,22 +48,25 @@ class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerModifyInfo.visibility = View.GONE
 
-        binding.viewAddPersonForImage.setOnClickListener {
-            requestGalleryLauncher.launch(REQUIRED_GALLERY_PERMISSION)
+        binding.viewAddPersonForImage.setOnClickListener{
+            if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.Q) {
+                requestGalleryLauncher.launch(REQUIRED_GALLERY_PERMISSION)
+            } else {
+                requestGalleryLauncher.launch(REQUIRED_EXTERNAL_STORAGE)
+            }
         }
 
-        binding.btnAddPersonRecordStart.setOnClickListener {
+        binding.btnAddPersonRecordStart.setOnClickListener{
             requestRecordLauncher.launch(REQUIRED_RECORD_AUDIO)
         }
 
-        binding.btnAddPersonRecordStop.setOnClickListener {
+        binding.btnAddPersonRecordStop.setOnClickListener{
             addPersonViewModel.stopRecording()
         }
 
-        binding.btnAddPersonSave.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
+        binding.btnAddPersonSave.setOnClickListener{
+            CoroutineScope(Dispatchers.IO).launch{
                 val name = binding.editAddPersonName.text.toString()
                 val relation = binding.editAddPersonRelation.text.toString()
                 val residence = binding.editAddPersonAddress.text.toString()
@@ -82,7 +86,7 @@ class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.
                     }
 
                     var voice: Uri? = null
-                    addPersonViewModel.fileName?.let {
+                    addPersonViewModel.fileName?.let{
                         voice = Uri.parse(addPersonViewModel.fileName)
                     }
 
@@ -109,28 +113,28 @@ class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.
             }
         }
 
-        binding.btnAddPersonSpeaker.setOnClickListener {
+        binding.btnAddPersonSpeaker.setOnClickListener{
             addPersonViewModel.setPlayer(BasePlayer(requireActivity().supportFragmentManager))
             addPersonViewModel.startPlaying(addPersonViewModel.fileName)
         }
 
-        addPersonViewModel.recordStatus.observe(viewLifecycleOwner) { status ->
+        addPersonViewModel.recordStatus.observe(viewLifecycleOwner){status->
             if (status) {
-                binding.btnAddPersonRecordStart.visibility = View.GONE
-                binding.btnAddPersonRecordStop.visibility = View.VISIBLE
+                binding.btnAddPersonRecordStart.visibility= View.GONE
+                binding.btnAddPersonRecordStop.visibility= View.VISIBLE
             } else {
-                binding.btnAddPersonRecordStart.visibility = View.VISIBLE
-                binding.btnAddPersonRecordStop.visibility = View.GONE
+                binding.btnAddPersonRecordStart.visibility= View.VISIBLE
+                binding.btnAddPersonRecordStop.visibility= View.GONE
             }
         }
 
-        addPersonViewModel.addSuccess.observe(viewLifecycleOwner) { isSuccess ->
+        addPersonViewModel.addSuccess.observe(viewLifecycleOwner){isSuccess->
             if (isSuccess) {
                 findNavController().navigate(R.id.action_fragment_add_person_to_fragment_people_list)
             }
         }
 
-        addPersonViewModel.errorState.observe(viewLifecycleOwner) { code ->
+        addPersonViewModel.errorState.observe(viewLifecycleOwner){code->
             when(code) {
                 401 -> {
                     val dialog = NoticeDialog(R.string.dialog_token_request)
@@ -146,7 +150,7 @@ class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.
 
     private fun getRealPath(uri: Uri): String?{
         val contentResolver = requireContext().contentResolver
-        val filePath = requireContext().applicationInfo.dataDir + File.separator + System.currentTimeMillis() + ".jpg"
+        val filePath = requireContext().applicationInfo.dataDir + File.separator+ System.currentTimeMillis() + ".jpg"
         val file = File(filePath)
 
         try{
@@ -154,7 +158,7 @@ class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.
             val outputStream = FileOutputStream(file)
             val buf = ByteArray(1024)
             var len: Int
-            while(inputStream.read(buf).also { len = it } > 0)
+            while(inputStream.read(buf).also{len =it }> 0)
                 outputStream.write(buf, 0, len)
             outputStream.close()
             inputStream.close()
@@ -167,7 +171,7 @@ class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.
     private suspend fun addPerson(person: Person) {
         try {
             var image: File? = null
-            person.image?.let {
+            person.image?.let{
                 image = File(getRealPath(it)!!)
             }
             addPersonViewModel.addPerson(person, image)
@@ -178,7 +182,7 @@ class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.
     }
 
     private val requestGalleryLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()) { isGranted ->
+        ActivityResultContracts.RequestPermission()){isGranted->
         if (isGranted) {
             getGalleryLauncher.launch("image/*")
         } else {
@@ -188,8 +192,8 @@ class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.
     }
 
     private val getGalleryLauncher = registerForActivityResult(
-        ActivityResultContracts.GetContent()) { uri ->
-        uri?.let {
+        ActivityResultContracts.GetContent()){uri->
+        uri?.let{
             addPersonViewModel.setImage(uri)
             binding.imageAddPersonProfile.setImageURI(uri)
 
@@ -198,7 +202,7 @@ class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.
 
     @RequiresApi(Build.VERSION_CODES.S)
     private val requestRecordLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()) { isGranted ->
+        ActivityResultContracts.RequestPermission()){isGranted->
         if (isGranted) {
             addPersonViewModel.setFileName("${requireActivity().externalCacheDir!!.absolutePath}/recording.mp3")
             addPersonViewModel.setRecorder(BaseRecorder(), requireContext())
