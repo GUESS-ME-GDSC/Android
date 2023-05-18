@@ -6,6 +6,7 @@ import com.example.guessme.data.model.InfoList
 import com.example.guessme.data.response.BaseNullResponseBody
 import com.example.guessme.data.response.PersonResponse
 import com.example.guessme.domain.repository.PersonDetailRepository
+import okhttp3.RequestBody
 import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -27,5 +28,8 @@ class PersonDetailRepositoryImpl @Inject constructor(
         return api.deleteInfo(token, info)
     }
 
+    override suspend fun modifyInfo(token: String, info: InfoList, userId: Int): Response<BaseNullResponseBody> {
+        return api.modifyInfo(token, userId, null, null,  info, null, null, null, null)
+    }
 
 }

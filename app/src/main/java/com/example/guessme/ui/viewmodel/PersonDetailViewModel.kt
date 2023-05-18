@@ -17,6 +17,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
+import okhttp3.RequestBody
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -39,6 +40,9 @@ class PersonDetailViewModel @Inject constructor(
     val getPersonSuccess: LiveData<Boolean> = _getPersonSuccess
     private val _deleteSuccess = MutableLiveData<Boolean>()
     val deleteSuccess: LiveData<Boolean> = _deleteSuccess
+    private val _modifySuccess = MutableLiveData<Boolean>()
+    val modifySuccess: LiveData<Boolean> = _deleteSuccess
+
 
     fun setAddSuccess(data: Boolean) {
         _addSuccess.postValue(data)
@@ -128,7 +132,7 @@ class PersonDetailViewModel @Inject constructor(
             val response: Response<BaseNullResponseBody> = personDetailRepository.deleteInfo("Bearer $token", idList)
             val status = response.body()?.status
             Log.d("status", status.toString())
-            Log.d("message", response.body()!!.message.toString())
+            Log.d("message", response.body()!!.message)
 
             if ((status == 200) and response.isSuccessful) {
                 _deleteSuccess.postValue(true)
@@ -141,4 +145,25 @@ class PersonDetailViewModel @Inject constructor(
         }
     }
 
+    suspend fun modifyInfo(info: InfoList, userId: Int) {
+        try {
+            val token = withContext(Dispatchers.IO) {
+                localRepository.getToken().first()
+            }
+            Log.e("infoList", info.toString())
+            val response = personDetailRepository.modifyInfo("Bearer $token", info, userId)
+            val status = response.body()?.status
+            Log.d("status", status.toString())
+            Log.d("message", response.body()!!.message)
+
+            if ((status == 200) and response.isSuccessful) {
+                _modifySuccess.postValue(true)
+            } else {
+                _modifySuccess.postValue(false)
+            }
+        } catch (e: Exception) {
+            Log.d("e", e.toString())
+            _modifySuccess.postValue(false)
+        }
+    }
 }

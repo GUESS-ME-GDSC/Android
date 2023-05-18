@@ -30,6 +30,21 @@ interface RetrofitApi {
         @Part("residence") residence: RequestBody
     ): Response<BaseNullResponseBody>
 
+    @Multipart
+    @PATCH("/person/{id}")
+    suspend fun modifyInfo(
+        @Header("Authorization") authorization: String,
+        @Path("id") id: Int,
+        @Part image: MultipartBody.Part?,
+        @Part voice: MultipartBody.Part?,
+        @Part("info") info: InfoList,
+        @Part("name") name: RequestBody?,
+        @Part("relation") relation: RequestBody?,
+        @Part("birth") birth: RequestBody?,
+        @Part("residence") residence: RequestBody?
+    ): Response<BaseNullResponseBody>
+
+
     @POST("/person/{id}/newinfo")
     suspend fun addInfo(
         @Header("Authorization") authorization: String,

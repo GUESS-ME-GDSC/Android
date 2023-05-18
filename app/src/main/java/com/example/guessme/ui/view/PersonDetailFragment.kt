@@ -163,7 +163,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         infoListAdapter = InfoListAdapter()
 
         infoListAdapter.setOnItemClickListener { info ->
-            val dialog = ModifyInfoDialog(personDetailViewModel, info)
+            val dialog = ModifyInfoDialog(personDetailViewModel, info, personDetailFragmentArgs.id)
             dialog.show(requireActivity().supportFragmentManager, "ModifyInfoDialog")
         }
 
