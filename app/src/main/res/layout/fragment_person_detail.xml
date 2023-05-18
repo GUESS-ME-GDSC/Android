@@ -291,27 +291,6 @@
                     android:text="@string/detail_info_add"
                     android:textColor="@color/white"/>
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_detail_info_delete"
-                    android:layout_width="130dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="20dp"
-                    android:background="@drawable/base_green_round_shape"
-                    android:gravity="center"
-                    android:text="@string/detail_info_delete"
-                    android:textColor="@color/white"
-                    android:visibility="gone"/>
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_detail_delete_complete"
-                    android:layout_width="130dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/base_green_round_shape"
-                    android:gravity="center"
-                    android:visibility="gone"
-                    android:text="@string/detail_info_delete_complete"
-                    android:textColor="@color/white"/>
-
             </LinearLayout>
 
 
