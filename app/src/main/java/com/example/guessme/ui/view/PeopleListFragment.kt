@@ -84,7 +84,7 @@ class PeopleListFragment : BaseFragment<FragmentPeopleListBinding>(R.layout.frag
                     }
                 }
 
-                peopleListAdapter.submitList(filteredList)
+                peopleListAdapter.submitList(filteredList.toMutableList())
             }
 
             override fun afterTextChanged(p0: Editable?) {
