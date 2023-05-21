@@ -74,6 +74,7 @@
     <string name="dialog_quiz_last"><b>해당 문제가 마지막 문제입니다!🙂</b></string>
     <string name="dialog_patch_score"><b>점수 등록에 실패했습니다.🥲</b></string>
     <string name="detail_info_delete_success"><b>성공적으로 삭제되었습니다!🙂</b></string>
+    <string name="detail_info_modify_success"><b>성공적으로 수정되었습니다!🙂</b></string>
 
     <!--  add info dialog  -->
     <string name="dialog_add_info_notice"><b>정보</b></string>
