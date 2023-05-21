@@ -13,11 +13,21 @@ import com.example.guessme.data.response.Data
 import com.example.guessme.data.response.PersonResponse
 import com.example.guessme.domain.repository.LocalRepository
 import com.example.guessme.domain.repository.PersonDetailRepository
+import com.squareup.moshi.Json
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
+import com.squareup.moshi.addAdapter
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -145,16 +155,18 @@ class PersonDetailViewModel @Inject constructor(
         }
     }
 
-    suspend fun modifyInfo(info: InfoList, userId: Int) {
+    suspend fun modifyInfo(info: Info, userId: Int) {
         try {
             val token = withContext(Dispatchers.IO) {
                 localRepository.getToken().first()
             }
-            Log.e("infoList", info.toString())
-            val response = personDetailRepository.modifyInfo("Bearer $token", info, userId)
+
+            val infoRequest = createRequestBodyFromInfoList(info)
+            val imageMultipartBody = MultipartBody.Part.createFormData(name= "info", filename = info.infoKey, body = listOf(infoRequest))
+            val response = personDetailRepository.modifyInfo("Bearer $token", imageMultipartBody, userId)
             val status = response.body()?.status
             Log.d("status", status.toString())
-            Log.d("message", response.body()!!.message)
+            Log.d("message", response.body()!!.data.toString())
 
             if ((status == 200) and response.isSuccessful) {
                 _modifySuccess.postValue(true)
@@ -166,4 +178,18 @@ class PersonDetailViewModel @Inject constructor(
             _modifySuccess.postValue(false)
         }
     }
+
+    private fun convertInfoListToJson(info: Info): String {
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+        val adapter = moshi.adapter(Info::class.java)
+        return adapter.toJson(info)
+    }
+
+    private fun createRequestBodyFromInfoList(info: Info): RequestBody {
+        val json = convertInfoListToJson(info)
+        return json.toRequestBody("application/json".toMediaType())
+    }
+
 }
