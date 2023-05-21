@@ -4,5 +4,5 @@ import com.example.guessme.data.response.ScoringResponseBody
 import retrofit2.Response
 
 interface ScoringRepository {
-    suspend fun quizScoring(token: String, image: String, infoValue: String): Response<ScoringResponseBody>
+    suspend fun quizScoring(token: String, image: String, infoValue: String, infoKey: String, personId: Int): Response<ScoringResponseBody>
 }
