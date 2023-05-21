@@ -40,7 +40,7 @@ class ScoringFragment : BaseFragment<FragmentScoringBinding>(R.layout.fragment_s
         init()
 
         CoroutineScope(Dispatchers.IO).launch {
-            scoringViewModel.quizScoring(scoringFragmentArgs.imageUri, scoringFragmentArgs.quiz.answer)
+            scoringViewModel.quizScoring(scoringFragmentArgs.imageUri, scoringFragmentArgs.quiz.answer, scoringFragmentArgs.quiz.question, startQuizViewModel.personId.value!!)
         }
     }
 

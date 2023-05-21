@@ -60,7 +60,9 @@ interface RetrofitApi {
     suspend fun quizScoring(
         @Header("Authorization") authorization: String,
         @Part image: MultipartBody.Part,
-        @Part("infoValue") infoValue: RequestBody
+        @Part("infoValue") infoValue: RequestBody,
+        @Part("infoKey") infoKey: RequestBody,
+        @Part("personId") personId: RequestBody
     ): Response<ScoringResponseBody>
 
     @PATCH("/quiz/newscore")
