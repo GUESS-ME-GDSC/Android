@@ -43,8 +43,8 @@
             android:text="@string/dialog_add_info_key"
             android:background="@null"/>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edit_add_info_key"
+        <TextView
+            android:id="@+id/text_info_key"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
