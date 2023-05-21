@@ -30,12 +30,11 @@ class ModifyInfoDialog(private val viewModel: PersonDetailViewModel, private val
         binding.btnModifyInfo.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val key = binding.editAddInfoKey.text.toString()
+                    val key = binding.textInfoKey.text.toString()
                     val value = binding.editModifyInfoValue.text.toString()
                     val temp = Info(infoKey = key, infoValue = value, uuid = null)
                     val list = listOf(Info(infoKey = key, infoValue = value, uuid = null))
-                    val infoList = InfoList(list)
-                    viewModel.modifyInfo(infoList, userId)
+                    viewModel.modifyInfo(info, userId)
                     dismiss()
                 } catch (e: java.lang.Exception) {
                 }
@@ -57,7 +56,7 @@ class ModifyInfoDialog(private val viewModel: PersonDetailViewModel, private val
     }
 
     private fun init() {
-        binding.editAddInfoKey.setText(info.infoKey)
+        binding.textInfoKey.setText(info.infoKey)
         binding.editModifyInfoValue.setText(info.infoValue)
     }
 

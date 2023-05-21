@@ -14,5 +14,5 @@ interface PersonDetailRepository {
 
     suspend fun deleteInfo(token: String, info: IdList): Response<BaseNullResponseBody>
 
-    suspend fun modifyInfo(token: String, info: InfoList, userId: Int): Response<BaseNullResponseBody>
+    suspend fun modifyInfo(token: String, info: RequestBody, userId: Int): Response<BaseNullResponseBody>
 }

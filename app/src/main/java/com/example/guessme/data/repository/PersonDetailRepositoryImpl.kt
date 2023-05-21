@@ -28,8 +28,8 @@ class PersonDetailRepositoryImpl @Inject constructor(
         return api.deleteInfo(token, info)
     }
 
-    override suspend fun modifyInfo(token: String, info: InfoList, userId: Int): Response<BaseNullResponseBody> {
-        return api.modifyInfo(token, userId, null, null,  info, null, null, null, null)
+    override suspend fun modifyInfo(token: String, info: RequestBody, userId: Int): Response<BaseNullResponseBody> {
+        return api.modifyPerson(token, userId, null, null,  info, null, null, null, null)
     }
 
 }
