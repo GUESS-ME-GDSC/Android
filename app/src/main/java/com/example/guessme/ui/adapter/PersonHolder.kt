@@ -26,7 +26,9 @@ class PersonHolder(private val binding: ItemPersonPreviewBinding, private val co
 
             if (favorite) {
                 binding.imagePreviewFavoriteTrue.visibility = View.VISIBLE
+                binding.imagePreviewFavoriteFalse.visibility = View.GONE
             }else {
+                binding.imagePreviewFavoriteTrue.visibility = View.GONE
                 binding.imagePreviewFavoriteFalse.visibility = View.VISIBLE
             }
 
