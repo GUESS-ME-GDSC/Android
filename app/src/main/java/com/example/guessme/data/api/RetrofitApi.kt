@@ -37,7 +37,7 @@ interface RetrofitApi {
         @Path("id") id: Int,
         @Part image: MultipartBody.Part?,
         @Part voice: MultipartBody.Part?,
-        @Part("info") info: RequestBody?,
+        @Part info: MultipartBody.Part?,
         @Part("name") name: RequestBody?,
         @Part("relation") relation: RequestBody?,
         @Part("birth") birth: RequestBody?,

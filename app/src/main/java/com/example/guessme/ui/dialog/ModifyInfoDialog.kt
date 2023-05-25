@@ -32,9 +32,8 @@ class ModifyInfoDialog(private val viewModel: PersonDetailViewModel, private val
                 try {
                     val key = binding.textInfoKey.text.toString()
                     val value = binding.editModifyInfoValue.text.toString()
-                    val temp = Info(infoKey = key, infoValue = value, uuid = null)
-                    val list = listOf(Info(infoKey = key, infoValue = value, uuid = null))
-                    viewModel.modifyInfo(info, userId)
+                    val newInfo = Info(null,key, value)
+                    viewModel.modifyInfo(newInfo, userId)
                     dismiss()
                 } catch (e: java.lang.Exception) {
                 }
