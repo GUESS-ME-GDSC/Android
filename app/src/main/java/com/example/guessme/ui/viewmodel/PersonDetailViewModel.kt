@@ -155,11 +155,14 @@ class PersonDetailViewModel @Inject constructor(
         }
     }
 
+
     suspend fun modifyInfo(info: Info, userId: Int, position: Int) {
+
         try {
             val token = withContext(Dispatchers.IO) {
                 localRepository.getToken().first()
             }
+
             Log.d("userId", userId.toString())
             val hashMap = HashMap<String, String>()
             hashMap["info[${position}].infoKey"] = info.infoKey
@@ -181,5 +184,4 @@ class PersonDetailViewModel @Inject constructor(
             _modifySuccess.postValue(false)
         }
     }
-
 }

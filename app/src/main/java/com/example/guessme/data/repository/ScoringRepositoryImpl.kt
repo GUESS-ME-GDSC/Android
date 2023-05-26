@@ -25,15 +25,19 @@ class ScoringRepositoryImpl @Inject constructor(
     override suspend fun quizScoring(
         token: String,
         image: String,
-        infoValue: String
+        infoValue: String,
+        infoKey: String,
+        personId: Int
     ): Response<ScoringResponseBody> {
         val imageFile = File(image)
         Log.d("filePath", imageFile.absolutePath)
         val imageRequestBody = imageFile.asRequestBody("image/jpeg".toMediaType())
         val imageMultipartBody = MultipartBody.Part.createFormData(name = "image", filename = imageFile.absolutePath, body = imageRequestBody)
 
+        val personIdRequestBody = personId.toString().toRequestBody("text/plain".toMediaType())
+        val infoKeyRequestBody = infoKey.toRequestBody("text/plain".toMediaType())
         val infoValueRequestBody = infoValue.toRequestBody("text/plain".toMediaType())
 
-        return api.quizScoring(token, imageMultipartBody, infoValueRequestBody)
+        return api.quizScoring(token, imageMultipartBody, infoValueRequestBody, infoKeyRequestBody, personIdRequestBody)
     }
 }

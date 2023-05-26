@@ -26,14 +26,15 @@ class ScoringViewModel @Inject constructor(
     private val _quizScoring = MutableLiveData<Boolean>()
     val quizScoring: LiveData<Boolean> = _quizScoring
 
-    suspend fun quizScoring(image: String, infoValue: String) {
+    suspend fun quizScoring(image: String, infoValue: String, infoKey: String, personId: Int) {
         try {
             val token = withContext(Dispatchers.IO) {
                 localRepository.getToken().first()
             }
 
-            val response: Response<ScoringResponseBody> = scoringRepository.quizScoring("Bearer $token", image, infoValue)
+            val response: Response<ScoringResponseBody> = scoringRepository.quizScoring("Bearer $token", image, infoValue, infoKey, personId)
             val status = response.body()?.status
+            Log.e("scoring result", status.toString())
 
             if((status == 200) and response.isSuccessful) {
                 _result.postValue( response.body()!!.data!!)

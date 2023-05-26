@@ -34,6 +34,7 @@ class ModifyInfoDialog(private val position: Int, private val viewModel: PersonD
                     val value = binding.editModifyInfoValue.text.toString()
                     val newInfo = Info(null,key, value)
                     viewModel.modifyInfo(newInfo, userId, position)
+                    
                     dismiss()
                 } catch (e: java.lang.Exception) {
                 }
