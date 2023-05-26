@@ -27,7 +27,7 @@ class ModifyPersonRepositoryImpl @Inject constructor(
         image: MultipartBody.Part?,
         voice: MultipartBody.Part?
     ): Response<BaseNullResponseBody> {
-        return api.modifyPerson(token, id, image, voice, null, name, relation, birth, residence)
+        return api.modifyPerson(token, id, image, voice, name, relation, birth, residence)
     }
 
     override suspend fun modifyPersonFavorite(
