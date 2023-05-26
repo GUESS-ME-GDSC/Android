@@ -100,8 +100,6 @@
         android:label="@string/fragment_person_detail"
         tools:layout="@layout/fragment_person_detail">
         <action
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/fragment_person_detail"
             android:id="@+id/action_fragment_person_detail_to_modifyPersonFragment"
             app:destination="@id/fragment_modify_person"
             app:enterAnim="@anim/nav_default_enter_anim"
@@ -109,8 +107,6 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/fragment_person_detail"
             android:id="@+id/action_fragment_person_detail_to_startQuizFragment"
             app:destination="@id/fragment_start_quiz"
             app:enterAnim="@anim/nav_default_enter_anim"
@@ -132,10 +128,19 @@
             android:name="id"
             app:argType="integer" />
         <action
-            app:popUpTo="@id/fragment_people_list"
             app:popUpToInclusive="true"
+            app:popUpTo="@id/fragment_people_list"
             android:id="@+id/action_fragment_modify_person_to_fragment_people_list"
             app:destination="@id/fragment_people_list"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/fragment_person_detail"
+            android:id="@+id/action_fragment_modify_person_to_fragment_person_detail"
+            app:destination="@id/fragment_person_detail"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"

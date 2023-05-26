@@ -1,31 +1,35 @@
 package com.example.guessme.ui.view
 
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.common.base.BasePlayer
 import com.example.guessme.common.base.BaseRecorder
 import com.example.guessme.common.util.Constants
 import com.example.guessme.common.util.GlideApp
+import com.example.guessme.data.model.Person
 import com.example.guessme.databinding.FragmentAddModifyPersonBinding
-import com.example.guessme.ui.adapter.InfoModifyAdapter
 import com.example.guessme.ui.dialog.NoticeDialog
 import com.example.guessme.ui.viewmodel.ModifyPersonViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -33,7 +37,6 @@ import java.time.format.DateTimeFormatter
 class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layout.fragment_add_modify_person) {
     private val modifyPersonViewModel by viewModels<ModifyPersonViewModel>()
     private val modifyPersonFragmentArgs: ModifyPersonFragmentArgs by navArgs()
-    private lateinit var infoModifyAdapter: InfoModifyAdapter
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -50,7 +53,6 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
         setObserver()
     }
 
@@ -58,10 +60,6 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
     private fun setObserver() {
         modifyPersonViewModel.person.observe(viewLifecycleOwner) {
             init()
-        }
-
-        modifyPersonViewModel.infoList.observe(viewLifecycleOwner) { infoList ->
-            infoModifyAdapter.submitList(infoList)
         }
 
         modifyPersonViewModel.favorite.observe(viewLifecycleOwner) { favorite ->
@@ -84,6 +82,20 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
                 dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
             }
         }
+
+        modifyPersonViewModel.modifySuccess.observe(viewLifecycleOwner) { modifySuccess ->
+            if (modifySuccess) {
+                val dialog = NoticeDialog(R.string.detail_info_modify_success)
+                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+
+                val action = ModifyPersonFragmentDirections.actionFragmentModifyPersonToFragmentPersonDetail(modifyPersonFragmentArgs.id)
+                findNavController().navigate(action)
+
+            } else {
+                val dialog = NoticeDialog(R.string.dialog_msg_error)
+                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -93,14 +105,9 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
         val localDate = LocalDate.parse(person.birth, format)
 
         binding.btnAddPersonDelete.visibility = View.VISIBLE
-        binding.recyclerModifyInfo.visibility = View.VISIBLE
 
         person.image?.let {
             GlideApp.with(requireActivity()).load(it).into(binding.imageAddPersonProfile)
-        }
-
-        person.voice?.let {
-            modifyPersonViewModel.setFileName(it)
         }
 
         binding.imageModifyFavoriteTrue.visibility = View.VISIBLE
@@ -154,6 +161,12 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
                 deletePerson()
             }
         }
+
+        binding.btnAddPersonSave.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                getPerson()
+            }
+        }
     }
 
     private suspend fun deletePerson() {
@@ -165,20 +178,112 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
         }
     }
 
-    private fun setupRecyclerView() {
-        infoModifyAdapter = InfoModifyAdapter()
-        binding.recyclerModifyInfo.apply {
-            setHasFixedSize(true)
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            addItemDecoration(
-                DividerItemDecoration(
-                    requireContext(),
-                    DividerItemDecoration.VERTICAL
+    @RequiresApi(Build.VERSION_CODES.O)
+    private suspend fun getPerson() {
+        try {
+            val name = binding.editAddPersonName.text.toString()
+            val relation = binding.editAddPersonRelation.text.toString()
+            val residence = binding.editAddPersonAddress.text.toString()
+            val year = binding.editAddPersonBirth.year
+            val month = binding.editAddPersonBirth.month
+            val day = binding.editAddPersonBirth.dayOfMonth
+            val favorite = modifyPersonViewModel.favorite.value
+
+            if ((name.trim() != "") and
+                (relation.trim() != "") and
+                (residence.trim() != "")) {
+
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                val localDate = if (month < 10) {
+                    if (day < 10) {
+                        LocalDate.parse("$year-0${month+1}-0$day", formatter)
+                    } else {
+                        LocalDate.parse("$year-0${month+1}-$day", formatter)
+                    }
+
+                } else {
+                    if (day < 10) {
+                        LocalDate.parse("$year-${month+1}-0$day", formatter)
+                    } else {
+                        LocalDate.parse("$year-${month+1}-$day", formatter)
+                    }
+                }
+
+                var voice: Uri? = null
+                modifyPersonViewModel.fileName?.let {
+                    voice = Uri.parse(modifyPersonViewModel.fileName)
+                }
+
+                val person = Person(
+                    null,
+                    favorite!!,
+                    modifyPersonViewModel.imageUri,
+                    voice,
+                    null,
+                    name,
+                    relation,
+                    localDate,
+                    residence,
+                    null
                 )
-            )
-            adapter = infoModifyAdapter
+                if (favorite != modifyPersonFragmentArgs.person.favorite){
+                    Log.e("favorite", "$favorite, ${modifyPersonFragmentArgs.person.favorite}")
+                    modifyPersonFavorite()
+                }
+                modifyPerson(person)
+            }
+
+        } catch (e: java.lang.Exception) {
+            Log.e("get modify person error", e.toString())
+            val dialog = NoticeDialog(R.string.dialog_msg_error)
+            dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
         }
+    }
+
+    private suspend fun modifyPerson(person: Person) {
+        try {
+            var image: File? = null
+            person.image?.let {
+                image = File(it.toString())
+            }
+
+            modifyPersonViewModel.modifyPerson(modifyPersonFragmentArgs.id, person, image)
+        } catch (e: java.lang.Exception) {
+            Log.e("modify person ", e.toString())
+            val dialog = NoticeDialog(R.string.dialog_msg_error)
+            dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+        }
+    }
+
+    private suspend fun modifyPersonFavorite() {
+        try {
+            modifyPersonViewModel.modifyPersonFavorite(modifyPersonFragmentArgs.id)
+        } catch (e: java.lang.Exception) {
+            Log.e("modify person favorite", e.toString())
+            val dialog = NoticeDialog(R.string.dialog_msg_error)
+            dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+        }
+    }
+
+    private fun getRealPath(uri: Uri): String?{
+        val contentResolver = requireContext().contentResolver
+        val filePath = requireContext().applicationInfo.dataDir + File.separator + System.currentTimeMillis() + ".jpg"
+        val file = File(filePath)
+
+        try{
+            val inputStream = contentResolver.openInputStream(uri) ?: return null
+            val outputStream = FileOutputStream(file)
+            val buf = ByteArray(1024)
+            var len: Int
+            while(inputStream.read(buf).also { len = it } > 0)
+                outputStream.write(buf, 0, len)
+            outputStream.close()
+            inputStream.close()
+        }catch(ignore: IOException){
+            Log.e("modify person getRealPath error", ignore.toString())
+            return null
+        }
+        return file.absolutePath
     }
 
     private val requestGalleryLauncher = registerForActivityResult(
@@ -194,7 +299,8 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
     private val getGalleryLauncher = registerForActivityResult(
         ActivityResultContracts.GetContent()) { uri ->
         uri?.let {
-            modifyPersonViewModel.setImage(uri)
+            val realPath = getRealPath(uri)
+            modifyPersonViewModel.setImage(realPath!!.toUri())
             binding.imageAddPersonProfile.setImageURI(uri)
         }
     }

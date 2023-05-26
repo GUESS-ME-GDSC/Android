@@ -13,10 +13,21 @@ import com.example.guessme.data.response.Data
 import com.example.guessme.data.response.PersonResponse
 import com.example.guessme.domain.repository.LocalRepository
 import com.example.guessme.domain.repository.PersonDetailRepository
+import com.squareup.moshi.Json
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
+import com.squareup.moshi.addAdapter
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -39,6 +50,9 @@ class PersonDetailViewModel @Inject constructor(
     val getPersonSuccess: LiveData<Boolean> = _getPersonSuccess
     private val _deleteSuccess = MutableLiveData<Boolean>()
     val deleteSuccess: LiveData<Boolean> = _deleteSuccess
+    private val _modifySuccess = MutableLiveData<Boolean>()
+    val modifySuccess: LiveData<Boolean> = _deleteSuccess
+
 
     fun setAddSuccess(data: Boolean) {
         _addSuccess.postValue(data)
@@ -128,7 +142,7 @@ class PersonDetailViewModel @Inject constructor(
             val response: Response<BaseNullResponseBody> = personDetailRepository.deleteInfo("Bearer $token", idList)
             val status = response.body()?.status
             Log.d("status", status.toString())
-            Log.d("message", response.body()!!.message.toString())
+            Log.d("message", response.body()!!.message)
 
             if ((status == 200) and response.isSuccessful) {
                 _deleteSuccess.postValue(true)
@@ -139,6 +153,43 @@ class PersonDetailViewModel @Inject constructor(
             Log.d("e", e.toString())
             _deleteSuccess.postValue(false)
         }
+    }
+
+    suspend fun modifyInfo(info: Info, userId: Int) {
+        try {
+            val token = withContext(Dispatchers.IO) {
+                localRepository.getToken().first()
+            }
+
+            val infoRequest = createRequestBodyFromInfoList(info)
+            val imageMultipartBody = MultipartBody.Part.createFormData(name= "info", filename = info.infoKey, body = listOf(infoRequest))
+            val response = personDetailRepository.modifyInfo("Bearer $token", imageMultipartBody, userId)
+            val status = response.body()?.status
+            Log.d("status", status.toString())
+            Log.d("message", response.body()!!.data.toString())
+
+            if ((status == 200) and response.isSuccessful) {
+                _modifySuccess.postValue(true)
+            } else {
+                _modifySuccess.postValue(false)
+            }
+        } catch (e: Exception) {
+            Log.d("e", e.toString())
+            _modifySuccess.postValue(false)
+        }
+    }
+
+    private fun convertInfoListToJson(info: Info): String {
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+        val adapter = moshi.adapter(Info::class.java)
+        return adapter.toJson(info)
+    }
+
+    private fun createRequestBodyFromInfoList(info: Info): RequestBody {
+        val json = convertInfoListToJson(info)
+        return json.toRequestBody("application/json".toMediaType())
     }
 
 }

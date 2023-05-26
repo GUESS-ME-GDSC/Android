@@ -239,7 +239,7 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:background="@drawable/base_green_stroke_shape"
-            app:layout_constraintBottom_toTopOf="@id/recycler_modify_info"
+            app:layout_constraintBottom_toTopOf="@id/btn_add_person_save"
             app:layout_constraintLeft_toLeftOf="@id/layout_add_person_birth"
             app:layout_constraintRight_toRightOf="@id/layout_add_person_birth"
             app:layout_constraintTop_toBottomOf="@id/layout_add_person_birth">
@@ -269,15 +269,6 @@
                 android:hint="@string/person_edit_hint"/>
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_modify_info"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="@id/layout_add_person_address"
-            app:layout_constraintRight_toRightOf="@id/layout_add_person_address"
-            app:layout_constraintTop_toBottomOf="@id/layout_add_person_address"
-            app:layout_constraintBottom_toTopOf="@id/btn_add_person_save"/>
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_add_person_save"
             android:layout_width="150dp"
@@ -288,7 +279,7 @@
             android:textColor="@color/white"
             android:layout_margin="20dp"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintTop_toBottomOf="@id/recycler_modify_info"
+            app:layout_constraintTop_toBottomOf="@id/layout_add_person_address"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/btn_add_person_delete"
             app:layout_constraintBottom_toBottomOf="parent"/>

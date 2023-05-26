@@ -14,10 +14,7 @@ import com.example.guessme.databinding.ItemPersonInfoPreviewBinding
 import com.squareup.moshi.internal.Util
 
 class InfoListAdapter: ListAdapter<Info, InfoHolder>(diffCallback) {
-    private var onItemClickListener: ((Info) -> Util)? = null
     private var delete: Boolean = false
-    private var _deleteSet = mutableSetOf<Int>()
-    val deleteSet: Set<Int> = _deleteSet
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InfoHolder {
         return InfoHolder(
@@ -27,29 +24,16 @@ class InfoListAdapter: ListAdapter<Info, InfoHolder>(diffCallback) {
 
     override fun onBindViewHolder(holder: InfoHolder, position: Int) {
         val info = currentList[position]
-        holder.bind(info)
+        holder.bind(info, position)
 
         holder.itemView.setOnClickListener {
-            onItemClickListener?.let { it(info) }
-        }
-
-        val checkBox = holder.itemView.findViewById<TextView>(R.id.checkbox_info_delete)
-        if (delete) {
-            checkBox.visibility = View.VISIBLE
-            checkBox.setOnClickListener {
-                if ((it as CheckBox).isChecked) {
-                    _deleteSet.add(info.uuid!!)
-                }else {
-                    _deleteSet.remove(info.uuid!!)
-                }
-            }
-        } else {
-            checkBox.visibility = View.GONE
+            onItemClickListener?.let { it(info, position) }
         }
 
     }
 
-    fun setOnItemClickListener(listener: (Info) -> Util) {
+    private var onItemClickListener: ((Info, Int) -> Unit)? = null
+    fun setOnItemClickListener(listener: (Info, Int) -> Unit) {
         onItemClickListener = listener
     }
 

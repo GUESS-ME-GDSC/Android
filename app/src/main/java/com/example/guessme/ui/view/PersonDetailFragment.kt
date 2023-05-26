@@ -11,16 +11,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
 import com.example.guessme.common.base.BasePlayer
 import com.example.guessme.common.util.GlideApp
-import com.example.guessme.data.model.IdList
 import com.example.guessme.databinding.FragmentPersonDetailBinding
 import com.example.guessme.ui.adapter.InfoListAdapter
 import com.example.guessme.ui.dialog.AddInfoDialog
+import com.example.guessme.ui.dialog.ModifyInfoDialog
 import com.example.guessme.ui.dialog.NoticeDialog
 import com.example.guessme.ui.viewmodel.PersonDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,9 +59,6 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
                 Log.d("list check", it.toString())
                 setupRecyclerView()
                 infoListAdapter.submitList(it)
-            }
-            if ((it != null) and (it!!.isNotEmpty())) {
-                binding.btnDetailInfoDelete.visibility = View.VISIBLE
             }
         }
 
@@ -151,26 +147,6 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             dialog.show(requireActivity().supportFragmentManager, "AddInfoDialog")
         }
 
-        binding.btnDetailInfoDelete.setOnClickListener {
-            binding.btnDetailInfoAdd.visibility = View.GONE
-            binding.btnDetailInfoDelete.visibility = View.GONE
-            binding.btnDetailDeleteComplete.visibility = View.VISIBLE
-            personDetailViewModel.setDelete(true)
-        }
-
-        binding.btnDetailDeleteComplete.setOnClickListener {
-
-            CoroutineScope(Dispatchers.IO).launch {
-                deleteInfo()
-            }
-
-            personDetailViewModel.setDelete(false)
-            binding.btnDetailDeleteComplete.visibility = View.GONE
-            binding.btnDetailInfoAdd.visibility = View.VISIBLE
-            binding.btnDetailInfoDelete.visibility = View.VISIBLE
-            infoListAdapter.setDelete(false)
-        }
-
         binding.fabDetailPersonModify.setOnClickListener {
             val person = personDetailViewModel.person.value
             val action = PersonDetailFragmentDirections.actionFragmentPersonDetailToModifyPersonFragment(person = person!!, id = personDetailFragmentArgs.id)
@@ -183,27 +159,17 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
         }
     }
 
-    private suspend fun deleteInfo() {
-        try {
-            val idList = IdList(infoListAdapter.deleteSet.toList())
-            personDetailViewModel.deleteInfo(idList)
-        } catch (e: java.lang.Exception) {
-            val dialog = NoticeDialog(R.string.dialog_msg_error)
-            dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
-        }
-    }
-
     private fun setupRecyclerView() {
         infoListAdapter = InfoListAdapter()
+
+        infoListAdapter.setOnItemClickListener { info ->
+            val dialog = ModifyInfoDialog(personDetailViewModel, info, personDetailFragmentArgs.id)
+            dialog.show(requireActivity().supportFragmentManager, "ModifyInfoDialog")
+        }
+
         binding.recyclerDetailInfo.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            addItemDecoration(
-                DividerItemDecoration(
-                    requireContext(),
-                    DividerItemDecoration.VERTICAL
-                )
-            )
             adapter = infoListAdapter
         }
     }
