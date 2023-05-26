@@ -10,5 +10,6 @@ import kotlinx.parcelize.Parcelize
 data class User(
     val uuid: Int?,
     @field:Json(name = "userId") val id: String,
-    @field:Json(name = "userPassword") val pw: String
+    @field:Json(name = "userPassword") val pw: String,
+    @field:Json(name = "email") val email: String?
 ): Parcelable

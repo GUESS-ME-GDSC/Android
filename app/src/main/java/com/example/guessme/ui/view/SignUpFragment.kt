@@ -41,8 +41,9 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(R.layout.fragment_sig
             CoroutineScope(Dispatchers.IO).launch {
                 val id = binding.editSignUpId.text.toString()
                 val pw = binding.editSignUpPw.text.toString()
+                val email = binding.editSignUpEmail.text.toString()
 
-                signUp(User(null, id, pw))
+                signUp(User(null, id, pw, email))
             }
         }
 

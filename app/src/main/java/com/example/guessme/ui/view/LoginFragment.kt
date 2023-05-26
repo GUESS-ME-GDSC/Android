@@ -43,7 +43,7 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(R.layout.fragment_login)
                 val id = binding.editLoginId.text.toString()
                 val pw = binding.editLoginPw.text.toString()
 
-                logIn(User(null, id, pw))
+                logIn(User(null, id, pw, null))
             }
         }
 
