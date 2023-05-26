@@ -102,6 +102,21 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
                 dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
             }
         }
+
+        personDetailViewModel.modifySuccess.observe(viewLifecycleOwner) { modifySuccess ->
+            if (!modifySuccess) {
+                val dialog = NoticeDialog(R.string.dialog_modify_msg_error)
+                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            } else {
+                CoroutineScope(Dispatchers.IO).launch {
+                    getPerson(personDetailFragmentArgs.id)
+                }
+
+                val dialog = NoticeDialog(R.string.detail_info_modify_success)
+                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            }
+
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -162,8 +177,8 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
     private fun setupRecyclerView() {
         infoListAdapter = InfoListAdapter()
 
-        infoListAdapter.setOnItemClickListener { info ->
-            val dialog = ModifyInfoDialog(personDetailViewModel, info, personDetailFragmentArgs.id)
+        infoListAdapter.setOnItemClickListener { info, pos ->
+            val dialog = ModifyInfoDialog(pos, personDetailViewModel, info, personDetailFragmentArgs.id)
             dialog.show(requireActivity().supportFragmentManager, "ModifyInfoDialog")
         }
 

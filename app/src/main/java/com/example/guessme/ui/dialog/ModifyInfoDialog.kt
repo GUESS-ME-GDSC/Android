@@ -17,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.RequestBody
 
-class ModifyInfoDialog(private val viewModel: PersonDetailViewModel, private val info: Info, private val userId: Int): BaseDialog<DialogModifyInfoBinding>(R.layout.dialog_modify_info) {
+class ModifyInfoDialog(private val position: Int, private val viewModel: PersonDetailViewModel, private val info: Info, private val userId: Int): BaseDialog<DialogModifyInfoBinding>(R.layout.dialog_modify_info) {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,10 +30,10 @@ class ModifyInfoDialog(private val viewModel: PersonDetailViewModel, private val
         binding.btnModifyInfo.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val key = binding.textInfoKey.text.toString()
+                    val key = info.infoKey
                     val value = binding.editModifyInfoValue.text.toString()
                     val newInfo = Info(null,key, value)
-                    viewModel.modifyInfo(newInfo, userId)
+                    viewModel.modifyInfo(newInfo, userId, position)
                     dismiss()
                 } catch (e: java.lang.Exception) {
                 }
