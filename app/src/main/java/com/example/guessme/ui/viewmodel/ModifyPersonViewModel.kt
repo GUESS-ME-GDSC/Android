@@ -168,7 +168,7 @@ class ModifyPersonViewModel @Inject constructor(
                 _modifySuccess.postValue(false)
             }
         } catch (e: Exception) {
-            Log.d("modify person viewmodel", e.toString())
+            Log.e("modify person viewmodel", e.toString())
             _modifySuccess.postValue(false)
         }
     }
