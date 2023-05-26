@@ -2,6 +2,7 @@ package com.example.guessme.data.repository
 
 import com.example.guessme.data.api.RetrofitApi
 import com.example.guessme.data.model.IdList
+import com.example.guessme.data.model.Info
 import com.example.guessme.data.model.InfoList
 import com.example.guessme.data.response.BaseNullResponseBody
 import com.example.guessme.data.response.PersonResponse
@@ -29,8 +30,8 @@ class PersonDetailRepositoryImpl @Inject constructor(
         return api.deleteInfo(token, info)
     }
 
-    override suspend fun modifyInfo(token: String, info: MultipartBody.Part, userId: Int): Response<BaseNullResponseBody> {
-        return api.modifyPerson(token, userId, null, null,  info, null, null, null, null)
+    override suspend fun modifyInfo(token: String, info: HashMap<String, String>?, userId: Int): Response<BaseNullResponseBody> {
+        return api.modifyInfo(token, userId,  info)
     }
 
 }
