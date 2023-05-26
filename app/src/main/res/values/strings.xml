@@ -18,6 +18,7 @@
     <string name="fragment_quiz_result"><b>결과</b></string>
 
     <!--  login  -->
+    <string name="sign_up_email">보호자 이메일</string>
     <string name="login_id"><b>아이디</b></string>
     <string name="login_pw"><b>패스워드</b></string>
     <string name="btn_login"><b>로그인</b></string>

@@ -80,10 +80,27 @@
         android:paddingRight="12dp"
         android:maxLines="1"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@id/btn_sign_up"
+        app:layout_constraintBottom_toTopOf="@id/edit_sign_up_email"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_sign_up_id" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edit_sign_up_email"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/base_white_round_shape"
+        android:hint="@string/sign_up_email"
+        android:gravity="center_vertical"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:maxLines="1"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@id/btn_sign_up"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_sign_up_pw" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_sign_up"
@@ -97,7 +114,7 @@
         app:layout_constraintBottom_toTopOf="@id/btn_sign_up_cancel"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_sign_up_pw" />
+        app:layout_constraintTop_toBottomOf="@id/edit_sign_up_email" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_sign_up_cancel"
