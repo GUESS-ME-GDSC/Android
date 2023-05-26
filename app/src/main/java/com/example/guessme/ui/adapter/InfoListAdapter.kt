@@ -15,8 +15,6 @@ import com.squareup.moshi.internal.Util
 
 class InfoListAdapter: ListAdapter<Info, InfoHolder>(diffCallback) {
     private var delete: Boolean = false
-    private var _deleteSet = mutableSetOf<Int>()
-    val deleteSet: Set<Int> = _deleteSet
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InfoHolder {
         return InfoHolder(
@@ -26,16 +24,16 @@ class InfoListAdapter: ListAdapter<Info, InfoHolder>(diffCallback) {
 
     override fun onBindViewHolder(holder: InfoHolder, position: Int) {
         val info = currentList[position]
-        holder.bind(info)
+        holder.bind(info, position)
 
         holder.itemView.setOnClickListener {
-            onItemClickListener?.let { it(info) }
+            onItemClickListener?.let { it(info, position) }
         }
 
     }
 
-    private var onItemClickListener: ((Info) -> Unit)? = null
-    fun setOnItemClickListener(listener: (Info) -> Unit) {
+    private var onItemClickListener: ((Info, Int) -> Unit)? = null
+    fun setOnItemClickListener(listener: (Info, Int) -> Unit) {
         onItemClickListener = listener
     }
 
