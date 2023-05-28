@@ -165,6 +165,7 @@ class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.
         }catch(ignore: IOException){
             return null
         }
+        Log.d("file.abosolutePath", file.absolutePath.toString())
         return file.absolutePath
     }
 

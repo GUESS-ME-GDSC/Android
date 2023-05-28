@@ -3,6 +3,7 @@ package com.example.guessme.ui.view
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -121,6 +122,7 @@ class QuizFragment : BaseFragment<FragmentQuizBinding>(R.layout.fragment_quiz) {
         ActivityResultContracts.TakePicture()) { isGranted ->
         if(isGranted) {
             val uri = getRealPath(photoUri!!)
+            Log.d("uri", uri.toString())
             val action = QuizFragmentDirections.actionFragmentQuizToScoringFragment(imageUri = uri!!, quiz = quiz!!)
             findNavController().navigate(action)
         }

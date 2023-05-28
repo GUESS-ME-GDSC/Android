@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.guessme.R
 import com.example.guessme.common.base.BaseFragment
+import com.example.guessme.common.util.ScoringState
 import com.example.guessme.databinding.FragmentScoringBinding
 import com.example.guessme.ui.dialog.NoticeDialog
 import com.example.guessme.ui.viewmodel.ScoringViewModel
@@ -50,7 +51,7 @@ class ScoringFragment : BaseFragment<FragmentScoringBinding>(R.layout.fragment_s
                 binding.btnQuizAnswerNext.visibility = View.VISIBLE
             }
 
-            if (result) {
+            if (result == "true") {
                 startQuizViewModel.setCorrect()
                 binding.txtQuizResult.setText(R.string.quiz_result_correct)
             } else {
@@ -60,7 +61,10 @@ class ScoringFragment : BaseFragment<FragmentScoringBinding>(R.layout.fragment_s
         }
 
         scoringViewModel.quizScoring.observe(viewLifecycleOwner) { quizScoring ->
-            if (! quizScoring) {
+            if (quizScoring == ScoringState.NO_TEXT) {
+                val dialog = NoticeDialog(R.string.dialog_no_text)
+                dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
+            } else if (quizScoring == ScoringState.FAIL) {
                 val dialog = NoticeDialog(R.string.dialog_msg_error)
                 dialog.show(requireActivity().supportFragmentManager, "NoticeDialog")
             }
