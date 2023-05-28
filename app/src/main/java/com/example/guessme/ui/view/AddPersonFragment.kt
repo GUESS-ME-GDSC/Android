@@ -50,7 +50,7 @@ class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewAddPersonForImage.setOnClickListener{
-            if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.Q) {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
                 requestGalleryLauncher.launch(REQUIRED_GALLERY_PERMISSION)
             } else {
                 requestGalleryLauncher.launch(REQUIRED_EXTERNAL_STORAGE)

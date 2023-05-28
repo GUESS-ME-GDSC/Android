@@ -123,7 +123,11 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
         binding.editAddPersonAddress.setText(person.residence)
 
         binding.viewAddPersonForImage.setOnClickListener {
-            requestGalleryLauncher.launch(Constants.REQUIRED_GALLERY_PERMISSION)
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+                requestGalleryLauncher.launch(Constants.REQUIRED_GALLERY_PERMISSION)
+            } else {
+                requestGalleryLauncher.launch(Constants.REQUIRED_EXTERNAL_STORAGE)
+            }
         }
 
         binding.btnAddPersonRecordStart.setOnClickListener {
