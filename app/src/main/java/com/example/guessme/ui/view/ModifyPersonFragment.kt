@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
@@ -138,6 +139,7 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
 
         binding.btnAddPersonRecordStop.setOnClickListener {
             modifyPersonViewModel.stopRecording()
+            Toast.makeText(context, "녹음이 완료되었습니다!", Toast.LENGTH_SHORT).show()
         }
 
 
@@ -316,6 +318,7 @@ class ModifyPersonFragment: BaseFragment<FragmentAddModifyPersonBinding>(R.layou
             modifyPersonViewModel.setFileName("${requireActivity().externalCacheDir!!.absolutePath}/recording.mp3")
             modifyPersonViewModel.setRecorder(BaseRecorder(), requireContext())
             modifyPersonViewModel.startRecording(modifyPersonViewModel.fileName!!)
+            Toast.makeText(context, "녹음이 진행됩니다!", Toast.LENGTH_SHORT).show()
         } else {
             val dialog = NoticeDialog(R.string.dialog_permission)
             dialog.show(requireActivity().supportFragmentManager, "PermissionDialog")

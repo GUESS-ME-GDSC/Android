@@ -3,6 +3,7 @@ package com.example.guessme.common.base
 import android.media.MediaPlayer
 import android.provider.MediaStore.Audio.Media
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import com.example.guessme.R
 import com.example.guessme.ui.dialog.NoticeDialog
@@ -33,6 +34,7 @@ class BasePlayer(private val fragmentManager: FragmentManager) {
                 setDataSource(fileName)
                 prepare()
                 start()
+                Toast.makeText(fragmentManager.fragments[0].context, "녹음이 재생됩니다!", Toast.LENGTH_SHORT).show()
             } catch (e: IOException) {
                 Log.e("IOException", "prepare() failed")
                 val dialog = NoticeDialog(R.string.dialog_record_error)
