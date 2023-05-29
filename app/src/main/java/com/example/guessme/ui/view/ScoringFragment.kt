@@ -51,7 +51,7 @@ class ScoringFragment : BaseFragment<FragmentScoringBinding>(R.layout.fragment_s
                 binding.btnQuizAnswerNext.visibility = View.VISIBLE
             }
 
-            if (result == "true") {
+            if (result) {
                 startQuizViewModel.setCorrect()
                 binding.txtQuizResult.setText(R.string.quiz_result_correct)
             } else {

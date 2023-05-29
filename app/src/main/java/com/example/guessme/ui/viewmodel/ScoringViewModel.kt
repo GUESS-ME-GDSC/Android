@@ -20,8 +20,8 @@ class ScoringViewModel @Inject constructor(
     private val localRepository: LocalRepository,
     private val scoringRepository: ScoringRepository
 ): ViewModel() {
-    private val _result = MutableLiveData<String>()
-    val result: LiveData<String> = _result
+    private val _result = MutableLiveData<Boolean>()
+    val result: LiveData<Boolean> = _result
     private val _quizScoring = MutableLiveData(ScoringState.LOADING)
     val quizScoring: LiveData<ScoringState> = _quizScoring
 
@@ -30,13 +30,14 @@ class ScoringViewModel @Inject constructor(
             val token = withContext(Dispatchers.IO) {
                 localRepository.getToken().first()
             }
+            Log.d("quizScoring", "$infoValue $infoKey $personId")
            val response = viewModelScope.async {
                scoringRepository.quizScoring("Bearer $token", image, infoValue, infoKey, personId)
            }.await()
 
             val status = response.body()?.status
             Log.e("scoring result", status.toString())
-            Log.e("scoring result", response.body()!!.data!!)
+            Log.e("scoring result", response.body().toString())
 
             if((status == 200) and response.isSuccessful) {
                 _result.postValue( response.body()!!.data!!)
