@@ -25,22 +25,30 @@
         android:src="@drawable/ic_favorite_false"
         android:layout_marginStart="13dp"
         android:visibility="gone"
-        app:layout_constraintRight_toLeftOf="@id/image_preview_person"
+        app:layout_constraintRight_toLeftOf="@id/card_view_image"
         app:layout_constraintTop_toTopOf="@id/image_preview_favorite_true"
         app:layout_constraintLeft_toRightOf="@id/image_preview_favorite_true"
         app:layout_constraintBottom_toBottomOf="@id/image_preview_favorite_true"/>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/image_preview_person"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/base_person_preview_profile"
-        android:padding="7dp"
+        app:cardCornerRadius="30dp"
         android:layout_margin="10dp"
         app:layout_constraintRight_toLeftOf="@id/txt_preview_relation"
         app:layout_constraintTop_toTopOf="@id/image_preview_favorite_false"
         app:layout_constraintBottom_toBottomOf="@id/image_preview_favorite_false"
-        app:layout_constraintLeft_toRightOf="@id/image_preview_favorite_false"/>
+        app:layout_constraintLeft_toRightOf="@id/image_preview_favorite_false">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_preview_person"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/base_person_preview_profile"/>
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/txt_preview_relation"
@@ -53,9 +61,9 @@
         android:maxLines="1"
         android:ellipsize="end"
         app:layout_constraintRight_toLeftOf="@id/txt_preview_name"
-        app:layout_constraintTop_toTopOf="@id/image_preview_person"
-        app:layout_constraintBottom_toBottomOf="@id/image_preview_person"
-        app:layout_constraintLeft_toRightOf="@id/image_preview_person"/>
+        app:layout_constraintTop_toTopOf="@id/card_view_image"
+        app:layout_constraintBottom_toBottomOf="@id/card_view_image"
+        app:layout_constraintLeft_toRightOf="@id/card_view_image"/>
 
     <TextView
         android:id="@+id/txt_preview_name"
