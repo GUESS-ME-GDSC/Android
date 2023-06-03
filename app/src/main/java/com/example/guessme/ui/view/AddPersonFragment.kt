@@ -73,19 +73,23 @@ class AddPersonFragment : BaseFragment<FragmentAddModifyPersonBinding>(R.layout.
                 val relation = binding.editAddPersonRelation.text.toString()
                 val residence = binding.editAddPersonAddress.text.toString()
                 val year = binding.editAddPersonBirth.year
-                val month = binding.editAddPersonBirth.month
-                val day = binding.editAddPersonBirth.dayOfMonth
+                val month: String = if (binding.editAddPersonBirth.month < 10) {
+                    "0" + binding.editAddPersonBirth.month.toString()
+                } else {
+                    binding.editAddPersonBirth.month.toString()
+                }
+                val day: String = if (binding.editAddPersonBirth.dayOfMonth < 10) {
+                    "0" + binding.editAddPersonBirth.dayOfMonth.toString()
+                } else {
+                    binding.editAddPersonBirth.dayOfMonth.toString()
+                }
 
                 if ((name.trim() != "") and
                     (relation.trim() != "") and
                     (residence.trim() != "")) {
 
                     val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-                    val localDate = if (month < 10) {
-                        LocalDate.parse("$year-0$month-$day", formatter)
-                    } else {
-                        LocalDate.parse("$year-$month-$day", formatter)
-                    }
+                    val localDate = LocalDate.parse("$year-$month-$day", formatter)
 
                     var voice: Uri? = null
                     addPersonViewModel.fileName?.let{
