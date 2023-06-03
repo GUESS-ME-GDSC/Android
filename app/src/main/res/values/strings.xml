@@ -7,106 +7,106 @@
     <string name="quiz_voice"><b>voice speaker</b></string>
 
     <!--  nav  -->
-    <string name="fragment_login"><b>로그인</b></string>
-    <string name="fragment_home"><b>홈</b></string>
-    <string name="fragment_sign_up"><b>회원가입</b></string>
-    <string name="fragment_people_list"><b>인물</b></string>
-    <string name="fragment_add_person"><b>추가</b></string>
-    <string name="fragment_person_detail"><b>정보</b></string>
-    <string name="fragment_modify_person"><b>수정</b></string>
-    <string name="fragment_start_quiz"><b>퀴즈</b></string>
-    <string name="fragment_quiz_result"><b>결과</b></string>
+    <string name="fragment_login"><b>Sign In</b></string>
+    <string name="fragment_home"><b>Home</b></string>
+    <string name="fragment_sign_up"><b>Sign Up</b></string>
+    <string name="fragment_people_list"><b>Person</b></string>
+    <string name="fragment_add_person"><b>Add Person</b></string>
+    <string name="fragment_person_detail"><b>Person Information</b></string>
+    <string name="fragment_modify_person"><b>Edit Information</b></string>
+    <string name="fragment_start_quiz"><b>Quiz</b></string>
+    <string name="fragment_quiz_result"><b>Result</b></string>
 
     <!--  login  -->
-    <string name="sign_up_email">보호자 이메일</string>
-    <string name="login_id"><b>아이디</b></string>
-    <string name="login_pw"><b>패스워드</b></string>
-    <string name="btn_login"><b>로그인</b></string>
-    <string name="btn_sign_in"><b>회원가입</b></string>
-    <string name="login_or"><b>또는</b></string>
-    <string name="login_error"><b>없는 회원입니다.🥲</b></string>
+    <string name="sign_up_email">Guardian Email</string>
+    <string name="login_id"><b>ID</b></string>
+    <string name="login_pw"><b>Password</b></string>
+    <string name="btn_login"><b>SignIn</b></string>
+    <string name="btn_sign_in"><b>SignUp</b></string>
+    <string name="login_or"><b>Or</b></string>
+    <string name="login_error"><b>Does not exist.🥲</b></string>
 
     <!--  sign up   -->
-    <string name="sign_up_welcome"><b>환영합니다!</b></string>
-    <string name="sign_up_cancel"><b>취소</b></string>
+    <string name="sign_up_welcome"><b>Welcome!</b></string>
+    <string name="sign_up_cancel"><b>Cancel</b></string>
 
     <!--  home  -->
-    <string name="home_person_list"><b>인물</b></string>
-    <string name="home_quiz"><b>퀴즈</b></string>
+    <string name="home_person_list"><b>Person</b></string>
+    <string name="home_quiz"><b>Quiz</b></string>
 
     <!--  list  -->
-    <string name="people_list_search"><b>검색</b></string>
+    <string name="people_list_search"><b>Search</b></string>
     <string name="people_list_floating">add person</string>
 
     <!--  add/modify person  -->
-    <string name="person_record_start"><b>녹음👂🏻</b></string>
-    <string name="person_record_finish"><b>완료👂🏻</b></string>
+    <string name="person_record_start"><b>Record👂🏻</b></string>
+    <string name="person_record_finish"><b>Complete👂🏻</b></string>
     <string name="person_profile_description">image_profile</string>
-    <string name="person_speaker"><b>스피커🔊</b></string>
-    <string name="people_list_info"><b>정보</b></string>
-    <string name="person_btn_save"><b>저장</b></string>
-    <string name="person_name"><b>이름</b></string>
-    <string name="person_relation"><b>관계</b></string>
-    <string name="person_birth"><b>생일</b></string>
-    <string name="person_address"><b>주소</b></string>
-    <string name="person_btn_delete"><b>삭제</b></string>
+    <string name="person_speaker"><b>Speaker🔊</b></string>
+    <string name="people_list_info"><b>Info</b></string>
+    <string name="person_btn_save"><b>Save</b></string>
+    <string name="person_name"><b>Name</b></string>
+    <string name="person_relation"><b>Relation</b></string>
+    <string name="person_birth"><b>Birth</b></string>
+    <string name="person_address"><b>Address</b></string>
+    <string name="person_btn_delete"><b>Cancel</b></string>
     <string name="person_edit_hint"><b>✎</b></string>
     <string name="person_birth_hint"><b>ex) 2023-01-01</b></string>
 
     <!--  detail   -->
-    <string name="detail_quiz"><b>퀴즈✏️</b></string>
-    <string name="detail_modify"><b>수정</b></string>
-    <string name="detail_info_add"><b>정보 추가</b></string>
-    <string name="detail_info_delete"><b>정보 삭제</b></string>
-    <string name="detail_info_delete_complete"><b>완료</b></string>
+    <string name="detail_quiz"><b>Quiz✏️</b></string>
+    <string name="detail_modify"><b>Edit</b></string>
+    <string name="detail_info_add"><b>Add Info</b></string>
+    <string name="detail_info_delete"><b>Delete Info</b></string>
+    <string name="detail_info_delete_complete"><b>Complete</b></string>
     <string name="detail_info_floating">modify info</string>
 
     <!--  dialog  -->
-    <string name="dialog_ok"><b>확인</b></string>
-    <string name="dialog_add_person">필수 정보를 모두 입력해주세요!🙂</string>
-    <string name="dialog_no_text">촬영한 이미지에\n채점 가능한 글씨가 없습니다!🥲</string>
-    <string name="dialog_msg_error">오류가 발생했습니다. \n 나중에 다시 시도해주세요!🥲</string>
-    <string name="dialog_modify_msg_error">삭제과정에서 오류가 발생했습니다. \n 나중에 다시 시도해주세요!🥲</string>
-    <string name="dialog_token_request">만료된 토큰입니다. \n 로그인을 다시 해주세요!🥲</string>
-    <string name="dialog_existed_user">이미 존재하는 유저입니다. \n 다시 시도해주세요!🥲</string>
-    <string name="dialog_sign_up_success">가입되었습니다.\n 로그인을 진행해주세요!😀</string>
-    <string name="dialog_permission"><b>권한</b>이 필요합니다!🥲</string>
-    <string name="dialog_record_error"><b>녹음 준비 중 오류가 발생했습니다.\n 다시 시도해주세요!🥲</b></string>
-    <string name="dialog_record_no_file"><b>음성 파일이 없습니다.\n 녹음을 진행해주세요!🙂</b></string>
-    <string name="dialog_quiz_start"><b>해당 문제가 첫 문제입니다!🙂</b></string>
-    <string name="dialog_quiz_last"><b>해당 문제가 마지막 문제입니다!🙂</b></string>
-    <string name="dialog_patch_score"><b>점수 등록에 실패했습니다.🥲</b></string>
-    <string name="detail_info_delete_success"><b>성공적으로 삭제되었습니다!🙂</b></string>
-    <string name="detail_info_modify_success"><b>성공적으로 수정되었습니다!🙂</b></string>
+    <string name="dialog_ok"><b>OK</b></string>
+    <string name="dialog_add_person">Please fill required information!🙂</string>
+    <string name="dialog_no_text">There are no recognizable parts!🥲</string>
+    <string name="dialog_msg_error">Error occurred!\n please try again.🥲</string>
+    <string name="dialog_modify_msg_error">Error occurred during deletion process,\n please try again.🥲</string>
+    <string name="dialog_token_request">Expired token.\n Please login again!🥲</string>
+    <string name="dialog_existed_user">User already exists!🥲</string>
+    <string name="dialog_sign_up_success">Sign up!\n Please sign in.😀</string>
+    <string name="dialog_permission"><b>Permissions</b> are required!🥲</string>
+    <string name="dialog_record_error"><b>Recording error occurred!\n Please try again!🥲</b></string>
+    <string name="dialog_record_no_file"><b>The voice file does not exist.\n Please record first!🙂</b></string>
+    <string name="dialog_quiz_start"><b>This is the first question!🙂</b></string>
+    <string name="dialog_quiz_last"><b>This is the last question.!🙂</b></string>
+    <string name="dialog_patch_score"><b>Score registration failed.🥲</b></string>
+    <string name="detail_info_delete_success"><b>Deleted Successfully!🙂</b></string>
+    <string name="detail_info_modify_success"><b>Corrected successfully!🙂</b></string>
 
     <!--  add info dialog  -->
-    <string name="dialog_add_info_notice"><b>정보</b></string>
-    <string name="dialog_add_info_key"><b>종류</b></string>
-    <string name="dialog_add_info_value"><b>값 </b></string>
-    <string name="dialog_add_info_save"><b>저장</b></string>
-    <string name="dialog_add_info_cancel"><b>취소</b></string>
-    <string name="dialog_modify_info">수정</string>
-    <string name="dialog_delete_info">삭제</string>
+    <string name="dialog_add_info_notice"><b>Info</b></string>
+    <string name="dialog_add_info_key"><b>Info</b></string>
+    <string name="dialog_add_info_value"><b>Value</b></string>
+    <string name="dialog_add_info_save"><b>Save</b></string>
+    <string name="dialog_add_info_cancel"><b>Cancel</b></string>
+    <string name="dialog_modify_info">Edit</string>
+    <string name="dialog_delete_info">Cancel</string>
 
     <!--  quiz  -->
-    <string name="quiz_start"><b>당신의 소중한 기억을 잊지마세요!😊</b></string>
-    <string name="quiz_no_person_error"><b>퀴즈 대상이 없습니다.\n 인물 먼저 추가해주세요!🙂</b></string>
-    <string name="quiz_btn_start"><b>시작</b></string>
-    <string name="quiz_btn_cancel"><b>취소</b></string>
+    <string name="quiz_start"><b>Don\'t forget your memory!✏️</b></string>
+    <string name="quiz_no_person_error"><b>No quiz targets.\n Add person first!🙂</b></string>
+    <string name="quiz_btn_start"><b>Start</b></string>
+    <string name="quiz_btn_cancel"><b>Stop</b></string>
     <string name="quiz_btn_before"><b>◀︎</b></string>
     <string name="quiz_btn_next"><b>▶︎</b></string>
-    <string name="quiz_info"><b>퀴즈！</b></string>
-    <string name="quiz_btn_answer"><b>정답 촬영</b></string>
-    <string name="quiz_btn_stop"><b>퀴즈 종료</b></string>
-    <string name="quiz_result_correct"><b>정답입니다!⭕️</b></string>
-    <string name="quiz_result_wrong"><b>오답입니다!❌</b></string>
-    <string name="quiz_answer_next"><b>다음</b></string>
+    <string name="quiz_info"><b>Quiz！</b></string>
+    <string name="quiz_btn_answer"><b>Shoot the answer</b></string>
+    <string name="quiz_btn_stop"><b>Quiz over</b></string>
+    <string name="quiz_result_correct"><b>Correct!⭕️</b></string>
+    <string name="quiz_result_wrong"><b>Wrong!❌</b></string>
+    <string name="quiz_answer_next"><b>Next</b></string>
     <string name="quiz_result_up"><b>▲</b></string>
     <string name="quiz_result_down"><b>▼</b></string>
-    <string name="quiz_result_info"><b>정보</b></string>
-    <string name="quiz_result_finish"><b>종료</b></string>
-    <string name="quiz_scoring">채점 중..👀</string>
-    <string name="quiz_scoring_step"><b>단계📝</b></string>
-    <string name="quiz_result"><b>결과👀</b></string>
+    <string name="quiz_result_info"><b>Info</b></string>
+    <string name="quiz_result_finish"><b>Finish</b></string>
+    <string name="quiz_scoring">Scoring now..👀</string>
+    <string name="quiz_scoring_step"><b>Step📝</b></string>
+    <string name="quiz_result"><b>Result👀</b></string>
 
 </resources>
