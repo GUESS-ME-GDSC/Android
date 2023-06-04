@@ -3,14 +3,15 @@
 <p align="center">
  <br>
  <div width="400" style="background: none;" align="center">
-  <img src='https://user-images.githubusercontent.com/65845941/229036268-f624d0cb-aa3a-425e-986f-04c79246fed2.png' alt="Guess me Logo" width="400" />
+  <img src='https://user-images.githubusercontent.com/86697585/243171405-2ac24af5-a4c3-422c-8712-b25e29eadd31.png' alt="Guess me Logo" width="700" />
  </div>
 </p>
-<p align="center"><a href="#">Demo Video</a>
+<p align="center"><a href="https://www.youtube.com/watch?v=ugiZ4gcbAow">Demo Video</a>
 </p>
 <p align="center">
- <img alt="GitHub language count" src="https://img.shields.io/github/contributors/GUESS-ME-GDSC/Android?style=for-the-badge&logo">
- <img alt="GitHub language count" src="https://img.shields.io/github/issues-closed/GUESS-ME-GDSC/Android?style=for-the-badge&logo">
+ <img alt="GitHub language count" src="https://img.shields.io/github/contributors/GUESS-ME-GDSC/Server?style=for-the-badge&logo">
+ <img alt="GitHub language count" src="https://img.shields.io/github/issues-closed/GUESS-ME-GDSC/Server?style=for-the-badge&logo">
+ <img alt="GitHub language count" src="https://img.shields.io/github/stars/GUESS-ME-GDSC/Server?style=for-the-badge&logo">
 </p>
 
 ## 👋 Project Overview
@@ -64,7 +65,7 @@ There is **Two key features** exist.
  
 <h2 id="stacks"> 🛠️  Tech Stacks </h2>
 
-<img width="500" alt="Guessme_project_architecture" src="https://user-images.githubusercontent.com/65845941/229057300-5074a74c-d4de-4222-a8ee-59ad32e63125.png">
+<img width="500" alt="Guessme_project_architecture" src="https://user-images.githubusercontent.com/86697585/243169504-cadfd2dc-7afd-4757-bace-34e4d96f650c.png">
 
 ### 🚉 Platform
 
