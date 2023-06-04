@@ -83,6 +83,12 @@ There is **Two key features** exist.
 - [Spring Security](https://spring.io/projects/spring-security)
 - [JWT](https://jwt.io/)
 
+### 😄 ML(Image Compare Server)
+- python 3.9.6
+- tensorflow
+- keras
+- torch
+
 ### 😎 Android
 
 - **Architecture**
